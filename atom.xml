@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xqaqyn.github.io/</id>
     <title>Gridea</title>
-    <updated>2022-01-24T13:04:07.589Z</updated>
+    <updated>2022-01-24T13:12:13.233Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xqaqyn.github.io/"/>
     <link rel="self" href="https://xqaqyn.github.io/atom.xml"/>
@@ -23,7 +23,7 @@
 <li>区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。比如，在不同的上下文中，一个相同的字节序列可能表示一个整数、浮点数、字符串或者机器指令。</li>
 </ul>
 <h3 id="12-程序被其它程序翻译成不同形式">1.2 程序被其它程序翻译成不同形式</h3>
-<figure data-type="image" tabindex="1"><img src="D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png" alt="编译系统" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://xqaqyn.github.io//post-images/1643029780442.png" alt="编译系统" loading="lazy"></figure>
 <ul>
 <li>预处理阶段：预处理器(cpp)根据#开头的命令修改原始C程序，得到另一个C程序xxx.i。</li>
 <li>编译阶段：编译器(ccl)将xx.i的C程序文本翻译为xx.s的汇编语言程序文本。</li>
@@ -32,7 +32,7 @@
 </ul>
 <h3 id="14-处理器读并解释储存在内存中的指令">1.4 处理器读并解释储存在内存中的指令</h3>
 <h4 id="141-系统的硬件组成">1.4.1 系统的硬件组成</h4>
-<figure data-type="image" tabindex="2"><img src="D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E7%A1%AC%E4%BB%B6.png" alt="硬件" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://xqaqyn.github.io//post-images/1643029807933.png" alt="硬件" loading="lazy"></figure>
 <h6 id="总线">总线</h6>
 <ul>
 <li>贯穿整个系统的一组电子管道，称作总线</li>
@@ -61,7 +61,7 @@
 <li>处理器执行程序</li>
 </ul>
 <h3 id="16-存储器层次结构">1.6 存储器层次结构</h3>
-<figure data-type="image" tabindex="3"><img src="D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png" alt="存储器层次结构" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://xqaqyn.github.io//post-images/1643029816008.png" alt="存储器层次结构" loading="lazy"></figure>
 <h3 id="17-操作系统管理硬件">1.7 操作系统管理硬件</h3>
 <ul>
 <li>操作系统的基本功能：
@@ -83,14 +83,14 @@
 <li>上下文：操作系统保持跟踪进程运行所需的所有状态信息，这种状态称为上下文。例如PC和寄存器文件的当前值、主存的内容。</li>
 <li>上下文切换：当操作系统决定要把控制权从当前进程转移到某个新进程时，就会进行上下文切换，即保存当前进程上下文、恢复新进程上下文，然后将控制权传递到新进程。</li>
 </ul>
-<figure data-type="image" tabindex="4"><img src="D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2.png" alt="上下文切换" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://xqaqyn.github.io//post-images/1643029822996.png" alt="上下文切换" loading="lazy"></figure>
 <h4 id="173-虚拟内存">1.7.3 虚拟内存</h4>
 <ul>
 <li><strong>虚拟内存</strong>为每个进程提供一个假象，即每个进程都在独占地使用主存。</li>
 <li>每个进程看到的内存都是一致的，称为<strong>虚拟地址空间</strong>。</li>
 <li>虚拟地址空间由大量准确定义的<strong>区</strong>构成，每个区都有专门的功能。</li>
 </ul>
-<figure data-type="image" tabindex="5"><img src="D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.png" alt="虚拟地址空间" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://xqaqyn.github.io//post-images/1643029828917.png" alt="虚拟地址空间" loading="lazy"></figure>
 <ol>
 <li><strong>程序代码和数据</strong>：对所有进程来说，代码是从同一固定地址开始，紧接着的是和C全局变量所对应的数据位置</li>
 <li><strong>堆</strong>：在调用malloc和free这样的函数时，堆的大小是动态地扩展和收缩的</li>
