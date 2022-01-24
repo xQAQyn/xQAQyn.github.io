@@ -1,101 +1,688 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="">
+<meta name="description" content="温故而知新">
+<meta name="theme-color" content="">
 <title>Gridea</title>
-<link rel="shortcut icon" href="https://xqaqyn.github.io//favicon.ico?v=1643026858672">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://xqaqyn.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Gridea - Atom Feed" href="https://xqaqyn.github.io//atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="shortcut icon" href="/favicon.ico?v=1643029432114">
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link
+  href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/github.css"
+  rel="stylesheet">
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
 
-    <meta name="description" content="温故而知新" />
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://xqaqyn.github.io/">
-  <img class="avatar" src="https://xqaqyn.github.io//images/avatar.png?v=1643026858672" alt="">
-  </a>
-  <h1 class="site-title">
-    Gridea
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
+  <meta name="description" content="温故而知新">
+</head>
 
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
     
+<div class="pisces">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Gridea</span>
+            </a>  
+          
+        </div>
         
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item nav-item-active">
+              
+              
+                <a href="/archives/" target="_self">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags/" target="_self">
+                  <i class="fa fa-tags"></i> 标签
+                </a>
+              
+            </li>
+          
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
 
-<div class="archives-container">
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
   
-    <h2 class="year">2022</h2>
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout  pisces">
+      <div class="section-layout-wrapper">
+        <div id="sidebarMeta" class="sidebar">
+    
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name"></p>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item" style="border-top: 1px dotted #ccc; margin-top: 10px;">
+      </div>
+    
+  
+  
+
+  
+
+
+</div>
+</div>
+<script>
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = '';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
+      }
+    });
+  }
+  </script>
+        <div class="section-box box-shadow-wrapper">
+          <section class="section archives-section bg-color posts-expand">
+            
+
+<div class="bg-color">
+  <div class="archive-timeline-box">
+    <div class="archive-timeline-title">
+      
+        <h2>非常好！目前共计1篇日志，继续努力！</h2>
+      
+    </div>
     
       
-        <a href="https://xqaqyn.github.io/post/csapp-di-yi-zhang-bi-ji/" class="post">
-          <h2 class="post-title">
-            CS:APP 第一章笔记
-          </h2>
-          <div class="time">2022-01-24</div>
-        </a>
+      
+        <div class="node-title">
+          <h2 class="tag-year">2022</h2>
+        </div>    
+        
+      
+      <a href="https://xqaqyn.github.io/post/csapp-di-yi-zhang-bi-ji/">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              01-24
+              <small>CS:APP 第一章笔记</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+  </div>
+  
+<div class="page bg-color">
+  <ul class="pagination-ul">
+    
+    
+      
+        <li class="pagination-li pagination-active">
+            <a href="/archives/page/../">
+              1
+            </a>
+        </li>
       
     
-  
-</div>
-
     
-        <div class="pagination-container">
-  
-  
+  </ul>
+</div>
 </div>
 
-    
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://xqaqyn.github.io//atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
-</div>
-
+          </section>
+        </div>
       </div>
     </div>
-  </body>
+    <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By <a href="https://github.com/hsxyhao/gridea-theme-next" target="_blank">HsxyHao</a>
+    </div>
+    <div class="poweredby">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+    <div class="bg-img">
+      <img src="" />
+    </div>
+  
+  
+  
+    
+
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 链接跳转
+  let newWindow = ''
+  if (newWindow === 'true') {
+    let links = document.querySelectorAll('.post-body a')
+    links.forEach(item => {
+      if (!item.classList.contains('btn')) {
+        item.setAttribute("target","_blank");
+      }
+    })
+  }
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+</script>
+  </div>
+</body>
+<input hidden id="copy" />
+<script>
+  //拿来主义(真香)^_^，Clipboard 实现摘自掘金 https://juejin.im/post/5aefeb6e6fb9a07aa43c20af
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        console.log('复制操作频率过高');
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+</script>
+<script src="/media/js/motion.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script>
+  var scroll = new SmoothScroll('a[href*="#"]', {
+    speed: 500
+  });
+</script>
+
+<!-- <div class="search-mask" id="search_mask">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input type="text" placeholder="搜索">
+      </div>
+      <i class="fa fa-times-circle"></i>
+    </div>
+    <div class="result">
+      
+      <div class="item">
+        <a class="result-title" href="https://xqaqyn.github.io/post/csapp-di-yi-zhang-bi-ji/"" data-c="
+          &lt;h1 id=&#34;1-计算机系统漫游&#34;&gt;1 计算机系统漫游&lt;/h1&gt;
+&lt;h3 id=&#34;11-信息就是位上下文&#34;&gt;1.1 信息就是位+上下文&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;计算机系统中所有的信息——包括磁盘文件、内存中的程序、内存中存放的用户数据及网络上传输的数据都是由一串比特表示的。&lt;/li&gt;
+&lt;li&gt;区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。比如，在不同的上下文中，一个相同的字节序列可能表示一个整数、浮点数、字符串或者机器指令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;12-程序被其它程序翻译成不同形式&#34;&gt;1.2 程序被其它程序翻译成不同形式&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png&#34; alt=&#34;编译系统&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;预处理阶段：预处理器(cpp)根据#开头的命令修改原始C程序，得到另一个C程序xxx.i。&lt;/li&gt;
+&lt;li&gt;编译阶段：编译器(ccl)将xx.i的C程序文本翻译为xx.s的汇编语言程序文本。&lt;/li&gt;
+&lt;li&gt;汇编阶段：汇编器(as)将xx.s翻译为机器语言指令，并将其打包成可重定位目标程序，保存在xx.o的二进制文件当中。&lt;/li&gt;
+&lt;li&gt;链接阶段：将程序调用的库函数合并到hello.o中，生成可执行的目标程序。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;14-处理器读并解释储存在内存中的指令&#34;&gt;1.4 处理器读并解释储存在内存中的指令&lt;/h3&gt;
+&lt;h4 id=&#34;141-系统的硬件组成&#34;&gt;1.4.1 系统的硬件组成&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E7%A1%AC%E4%BB%B6.png&#34; alt=&#34;硬件&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h6 id=&#34;总线&#34;&gt;总线&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;贯穿整个系统的一组电子管道，称作总线&lt;/li&gt;
+&lt;li&gt;通常总线被设计成传送定长的字节块，也就是字(word)。字中的字节数（即字长）是一个基本的系统参数，常见的有4字节(32位)，8字节(64位)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;io设备&#34;&gt;I/O设备&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;例子：鼠标、键盘、显示器、磁盘&lt;/li&gt;
+&lt;li&gt;每个I/O设备都通过一个控制器或适配器与I/O总线相连&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;主存&#34;&gt;主存&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;主存是临时存储设备，在处理器执行程序时，用来存放程序和程序处理的数据。&lt;/li&gt;
+&lt;li&gt;物理上来说，主存时一组动态随机存储器(DRAM)芯片组成的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;处理器&#34;&gt;处理器&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;中央处理单元(CPU)，简称处理器，是解释（或执行）存储在主存中指令的引擎&lt;/li&gt;
+&lt;li&gt;处理器的核心是一个大小为一个字的存储设备（或寄存器），成为程序计数器(PC)，PC始终指向主存中某条机器语言指令&lt;/li&gt;
+&lt;li&gt;处理器运行过程：执行程序计数器指向的指令&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\to&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.36687em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;更新程序计数器，使其指向下一条指令，如此反复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;142-运行hello程序&#34;&gt;1.4.2 运行hello程序&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;从键盘读取命令&lt;/li&gt;
+&lt;li&gt;从磁盘加载可执行文件到主存&lt;/li&gt;
+&lt;li&gt;处理器执行程序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;16-存储器层次结构&#34;&gt;1.6 存储器层次结构&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png&#34; alt=&#34;存储器层次结构&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;17-操作系统管理硬件&#34;&gt;1.7 操作系统管理硬件&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;操作系统的基本功能：
+&lt;ol&gt;
+&lt;li&gt;防止硬件被失控的应用程序滥用&lt;/li&gt;
+&lt;li&gt;向应用程序提供简单一致的机制来控制复杂而又通常大不相同的低级硬件设备&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;操作系统通过几个基本抽象概念实现这两个基本功能：
+&lt;ul&gt;
+&lt;li&gt;文件：对I/O设备的抽象表示&lt;/li&gt;
+&lt;li&gt;虚拟内存：对主存和磁盘I/O设备的抽象表示&lt;/li&gt;
+&lt;li&gt;进程：对处理器、主存和I/O设备的抽象表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;171-进程&#34;&gt;1.7.1 进程&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;上下文：操作系统保持跟踪进程运行所需的所有状态信息，这种状态称为上下文。例如PC和寄存器文件的当前值、主存的内容。&lt;/li&gt;
+&lt;li&gt;上下文切换：当操作系统决定要把控制权从当前进程转移到某个新进程时，就会进行上下文切换，即保存当前进程上下文、恢复新进程上下文，然后将控制权传递到新进程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2.png&#34; alt=&#34;上下文切换&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;173-虚拟内存&#34;&gt;1.7.3 虚拟内存&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;虚拟内存&lt;/strong&gt;为每个进程提供一个假象，即每个进程都在独占地使用主存。&lt;/li&gt;
+&lt;li&gt;每个进程看到的内存都是一致的，称为&lt;strong&gt;虚拟地址空间&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;虚拟地址空间由大量准确定义的&lt;strong&gt;区&lt;/strong&gt;构成，每个区都有专门的功能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.png&#34; alt=&#34;虚拟地址空间&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;程序代码和数据&lt;/strong&gt;：对所有进程来说，代码是从同一固定地址开始，紧接着的是和C全局变量所对应的数据位置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;堆&lt;/strong&gt;：在调用malloc和free这样的函数时，堆的大小是动态地扩展和收缩的&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享库&lt;/strong&gt;：用于存放类似C标准库和数学库这样的共享库的代码和数据的区域&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;栈&lt;/strong&gt;：用于实现函数调用，可以动态地扩展和收缩&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内核虚拟内存&lt;/strong&gt;：地址空间顶部的区域是为内核保留的。不允许应用程序读写这个区域的内容或者直接调用内核代码定义的函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;174-文件&#34;&gt;1.7.4 文件&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;文件就是字节序列&lt;/li&gt;
+&lt;li&gt;每个I/O设备都可以看成文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;18-系统之间利用网络通信&#34;&gt;1.8 系统之间利用网络通信&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;从一个单独的系统来看，网络可以视为一个I/O设备&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;19-重要主题&#34;&gt;1.9 重要主题&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;系统是硬件和系统软件互相交织的集合体，他们必须共同协作以达到运行应用程序的最终目的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;191-amdahl定律&#34;&gt;1.9.1 Amdahl定律&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;主要思想：当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若系统执行某应用需要的时间为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;T_{old}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.83333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。假设系统某部分所需执行时间与该时间的比例为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\alpha&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.43056em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.0037em;&#34;&gt;α&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，而该部分性能提升比例为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;k&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.69444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03148em;&#34;&gt;k&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。即该部分初始所需时间为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\alpha T_{old}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.83333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.0037em;&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，现在所需时间为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\alpha T_{old}/k&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.0037em;&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03148em;&#34;&gt;k&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。推出总的执行时间应为&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;[&lt;/mo&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo&gt;]&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;T_{new}= T_{old}[(1-\alpha)+\alpha /k]
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.83333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.02691em;&#34;&gt;w&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.0037em;&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.0037em;&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03148em;&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;由此计算出加速比&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;S = T_{old}/T_{new}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.02691em;&#34;&gt;w&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mfrac&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mrow&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;S = \frac{1}{(1-\alpha)+\alpha/k}
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:2.25744em;vertical-align:-0.936em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen nulldelimiter&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mfrac&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.32144em;&#34;&gt;&lt;span style=&#34;top:-2.314em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.0037em;&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.0037em;&#34;&gt;α&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03148em;&#34;&gt;k&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.23em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;frac-line&#34; style=&#34;border-bottom-width:0.04em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.677em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.936em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;主要观点：要想显著加速整个系统，必须提升全系统中相当大部分的速度&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;192-并发与并行&#34;&gt;1.9.2 并发与并行&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;并发：指一个同时具有多个活动的系统&lt;/li&gt;
+&lt;li&gt;并行：利用并发来使一个系统运行得更快&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;线程级并行&#34;&gt;线程级并行&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;多处理器组织结构&lt;/li&gt;
+&lt;li&gt;超线程：是一项允许一个CPU执行多个控制流的技术&lt;/li&gt;
+&lt;li&gt;多处理器提高系统性能：
+&lt;ul&gt;
+&lt;li&gt;减少执行多个任务时模拟并发的需要&lt;/li&gt;
+&lt;li&gt;可以使多线程方式书写的程序运行得更快&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;指令级并行&#34;&gt;指令级并行&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;指令级并行：现代处理器能同时执行多条指令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;单指令-多数据并行&#34;&gt;单指令、多数据并行&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;单指令多数据并行：允许一条指令产生多个可以并行执行的操作&lt;/li&gt;
+&lt;/ul&gt;
+">CS:APP 第一章笔记</a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script>
+  // var escape = "[{&#34;content&#34;:&#34;&lt;h1 id=\&#34;1-计算机系统漫游\&#34;&gt;1 计算机系统漫游&lt;/h1&gt;\n&lt;h3 id=\&#34;11-信息就是位上下文\&#34;&gt;1.1 信息就是位+上下文&lt;/h3&gt;\n&lt;ul&gt;\n&lt;li&gt;计算机系统中所有的信息——包括磁盘文件、内存中的程序、内存中存放的用户数据及网络上传输的数据都是由一串比特表示的。&lt;/li&gt;\n&lt;li&gt;区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。比如，在不同的上下文中，一个相同的字节序列可能表示一个整数、浮点数、字符串或者机器指令。&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h3 id=\&#34;12-程序被其它程序翻译成不同形式\&#34;&gt;1.2 程序被其它程序翻译成不同形式&lt;/h3&gt;\n&lt;figure data-type=\&#34;image\&#34; tabindex=\&#34;1\&#34;&gt;&lt;img src=\&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png\&#34; alt=\&#34;编译系统\&#34; loading=\&#34;lazy\&#34;&gt;&lt;/figure&gt;\n&lt;ul&gt;\n&lt;li&gt;预处理阶段：预处理器(cpp)根据#开头的命令修改原始C程序，得到另一个C程序xxx.i。&lt;/li&gt;\n&lt;li&gt;编译阶段：编译器(ccl)将xx.i的C程序文本翻译为xx.s的汇编语言程序文本。&lt;/li&gt;\n&lt;li&gt;汇编阶段：汇编器(as)将xx.s翻译为机器语言指令，并将其打包成可重定位目标程序，保存在xx.o的二进制文件当中。&lt;/li&gt;\n&lt;li&gt;链接阶段：将程序调用的库函数合并到hello.o中，生成可执行的目标程序。&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h3 id=\&#34;14-处理器读并解释储存在内存中的指令\&#34;&gt;1.4 处理器读并解释储存在内存中的指令&lt;/h3&gt;\n&lt;h4 id=\&#34;141-系统的硬件组成\&#34;&gt;1.4.1 系统的硬件组成&lt;/h4&gt;\n&lt;figure data-type=\&#34;image\&#34; tabindex=\&#34;2\&#34;&gt;&lt;img src=\&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E7%A1%AC%E4%BB%B6.png\&#34; alt=\&#34;硬件\&#34; loading=\&#34;lazy\&#34;&gt;&lt;/figure&gt;\n&lt;h6 id=\&#34;总线\&#34;&gt;总线&lt;/h6&gt;\n&lt;ul&gt;\n&lt;li&gt;贯穿整个系统的一组电子管道，称作总线&lt;/li&gt;\n&lt;li&gt;通常总线被设计成传送定长的字节块，也就是字(word)。字中的字节数（即字长）是一个基本的系统参数，常见的有4字节(32位)，8字节(64位)&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h6 id=\&#34;io设备\&#34;&gt;I/O设备&lt;/h6&gt;\n&lt;ul&gt;\n&lt;li&gt;例子：鼠标、键盘、显示器、磁盘&lt;/li&gt;\n&lt;li&gt;每个I/O设备都通过一个控制器或适配器与I/O总线相连&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h6 id=\&#34;主存\&#34;&gt;主存&lt;/h6&gt;\n&lt;ul&gt;\n&lt;li&gt;主存是临时存储设备，在处理器执行程序时，用来存放程序和程序处理的数据。&lt;/li&gt;\n&lt;li&gt;物理上来说，主存时一组动态随机存储器(DRAM)芯片组成的&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h6 id=\&#34;处理器\&#34;&gt;处理器&lt;/h6&gt;\n&lt;ul&gt;\n&lt;li&gt;中央处理单元(CPU)，简称处理器，是解释（或执行）存储在主存中指令的引擎&lt;/li&gt;\n&lt;li&gt;处理器的核心是一个大小为一个字的存储设备（或寄存器），成为程序计数器(PC)，PC始终指向主存中某条机器语言指令&lt;/li&gt;\n&lt;li&gt;处理器运行过程：执行程序计数器指向的指令&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;\\to&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.36687em;vertical-align:0em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mrel\&#34;&gt;→&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;更新程序计数器，使其指向下一条指令，如此反复。&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h4 id=\&#34;142-运行hello程序\&#34;&gt;1.4.2 运行hello程序&lt;/h4&gt;\n&lt;ul&gt;\n&lt;li&gt;从键盘读取命令&lt;/li&gt;\n&lt;li&gt;从磁盘加载可执行文件到主存&lt;/li&gt;\n&lt;li&gt;处理器执行程序&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h3 id=\&#34;16-存储器层次结构\&#34;&gt;1.6 存储器层次结构&lt;/h3&gt;\n&lt;figure data-type=\&#34;image\&#34; tabindex=\&#34;3\&#34;&gt;&lt;img src=\&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png\&#34; alt=\&#34;存储器层次结构\&#34; loading=\&#34;lazy\&#34;&gt;&lt;/figure&gt;\n&lt;h3 id=\&#34;17-操作系统管理硬件\&#34;&gt;1.7 操作系统管理硬件&lt;/h3&gt;\n&lt;ul&gt;\n&lt;li&gt;操作系统的基本功能：\n&lt;ol&gt;\n&lt;li&gt;防止硬件被失控的应用程序滥用&lt;/li&gt;\n&lt;li&gt;向应用程序提供简单一致的机制来控制复杂而又通常大不相同的低级硬件设备&lt;/li&gt;\n&lt;/ol&gt;\n&lt;/li&gt;\n&lt;li&gt;操作系统通过几个基本抽象概念实现这两个基本功能：\n&lt;ul&gt;\n&lt;li&gt;文件：对I/O设备的抽象表示&lt;/li&gt;\n&lt;li&gt;虚拟内存：对主存和磁盘I/O设备的抽象表示&lt;/li&gt;\n&lt;li&gt;进程：对处理器、主存和I/O设备的抽象表示&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h4 id=\&#34;171-进程\&#34;&gt;1.7.1 进程&lt;/h4&gt;\n&lt;ul&gt;\n&lt;li&gt;上下文：操作系统保持跟踪进程运行所需的所有状态信息，这种状态称为上下文。例如PC和寄存器文件的当前值、主存的内容。&lt;/li&gt;\n&lt;li&gt;上下文切换：当操作系统决定要把控制权从当前进程转移到某个新进程时，就会进行上下文切换，即保存当前进程上下文、恢复新进程上下文，然后将控制权传递到新进程。&lt;/li&gt;\n&lt;/ul&gt;\n&lt;figure data-type=\&#34;image\&#34; tabindex=\&#34;4\&#34;&gt;&lt;img src=\&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2.png\&#34; alt=\&#34;上下文切换\&#34; loading=\&#34;lazy\&#34;&gt;&lt;/figure&gt;\n&lt;h4 id=\&#34;173-虚拟内存\&#34;&gt;1.7.3 虚拟内存&lt;/h4&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;strong&gt;虚拟内存&lt;/strong&gt;为每个进程提供一个假象，即每个进程都在独占地使用主存。&lt;/li&gt;\n&lt;li&gt;每个进程看到的内存都是一致的，称为&lt;strong&gt;虚拟地址空间&lt;/strong&gt;。&lt;/li&gt;\n&lt;li&gt;虚拟地址空间由大量准确定义的&lt;strong&gt;区&lt;/strong&gt;构成，每个区都有专门的功能。&lt;/li&gt;\n&lt;/ul&gt;\n&lt;figure data-type=\&#34;image\&#34; tabindex=\&#34;5\&#34;&gt;&lt;img src=\&#34;D:%5C%E5%BA%93%5C%E6%96%87%E6%A1%A3%5CGridea%5Cpost-images%5C%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.png\&#34; alt=\&#34;虚拟地址空间\&#34; loading=\&#34;lazy\&#34;&gt;&lt;/figure&gt;\n&lt;ol&gt;\n&lt;li&gt;&lt;strong&gt;程序代码和数据&lt;/strong&gt;：对所有进程来说，代码是从同一固定地址开始，紧接着的是和C全局变量所对应的数据位置&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;堆&lt;/strong&gt;：在调用malloc和free这样的函数时，堆的大小是动态地扩展和收缩的&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;共享库&lt;/strong&gt;：用于存放类似C标准库和数学库这样的共享库的代码和数据的区域&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;栈&lt;/strong&gt;：用于实现函数调用，可以动态地扩展和收缩&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;内核虚拟内存&lt;/strong&gt;：地址空间顶部的区域是为内核保留的。不允许应用程序读写这个区域的内容或者直接调用内核代码定义的函数&lt;/li&gt;\n&lt;/ol&gt;\n&lt;h4 id=\&#34;174-文件\&#34;&gt;1.7.4 文件&lt;/h4&gt;\n&lt;ul&gt;\n&lt;li&gt;文件就是字节序列&lt;/li&gt;\n&lt;li&gt;每个I/O设备都可以看成文件&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h3 id=\&#34;18-系统之间利用网络通信\&#34;&gt;1.8 系统之间利用网络通信&lt;/h3&gt;\n&lt;ul&gt;\n&lt;li&gt;从一个单独的系统来看，网络可以视为一个I/O设备&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h3 id=\&#34;19-重要主题\&#34;&gt;1.9 重要主题&lt;/h3&gt;\n&lt;ul&gt;\n&lt;li&gt;系统是硬件和系统软件互相交织的集合体，他们必须共同协作以达到运行应用程序的最终目的&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h4 id=\&#34;191-amdahl定律\&#34;&gt;1.9.1 Amdahl定律&lt;/h4&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;p&gt;主要思想：当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度&lt;/p&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;p&gt;若系统执行某应用需要的时间为&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;T_{old}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.83333em;vertical-align:-0.15em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.13889em;\&#34;&gt;T&lt;/span&gt;&lt;span class=\&#34;msupsub\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.33610799999999996em;\&#34;&gt;&lt;span style=\&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:2.7em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;sizing reset-size6 size3 mtight\&#34;&gt;&lt;span class=\&#34;mord mtight\&#34;&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;o&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34; style=\&#34;margin-right:0.01968em;\&#34;&gt;l&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.15em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。假设系统某部分所需执行时间与该时间的比例为&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;\\alpha&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.43056em;vertical-align:0em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.0037em;\&#34;&gt;α&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，而该部分性能提升比例为&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;k&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.69444em;vertical-align:0em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.03148em;\&#34;&gt;k&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。即该部分初始所需时间为&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;\\alpha T_{old}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.83333em;vertical-align:-0.15em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.0037em;\&#34;&gt;α&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.13889em;\&#34;&gt;T&lt;/span&gt;&lt;span class=\&#34;msupsub\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.33610799999999996em;\&#34;&gt;&lt;span style=\&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:2.7em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;sizing reset-size6 size3 mtight\&#34;&gt;&lt;span class=\&#34;mord mtight\&#34;&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;o&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34; style=\&#34;margin-right:0.01968em;\&#34;&gt;l&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.15em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，现在所需时间为&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mi mathvariant=\&#34;normal\&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;\\alpha T_{old}/k&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:1em;vertical-align:-0.25em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.0037em;\&#34;&gt;α&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.13889em;\&#34;&gt;T&lt;/span&gt;&lt;span class=\&#34;msupsub\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.33610799999999996em;\&#34;&gt;&lt;span style=\&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:2.7em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;sizing reset-size6 size3 mtight\&#34;&gt;&lt;span class=\&#34;mord mtight\&#34;&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;o&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34; style=\&#34;margin-right:0.01968em;\&#34;&gt;l&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.15em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;/&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.03148em;\&#34;&gt;k&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。推出总的执行时间应为&lt;/p&gt;\n&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=\&#34;katex-display\&#34;&gt;&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;[&lt;/mo&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mi mathvariant=\&#34;normal\&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo&gt;]&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;T_{new}= T_{old}[(1-\\alpha)+\\alpha /k]\n&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.83333em;vertical-align:-0.15em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.13889em;\&#34;&gt;T&lt;/span&gt;&lt;span class=\&#34;msupsub\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.151392em;\&#34;&gt;&lt;span style=\&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:2.7em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;sizing reset-size6 size3 mtight\&#34;&gt;&lt;span class=\&#34;mord mtight\&#34;&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;n&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;e&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34; style=\&#34;margin-right:0.02691em;\&#34;&gt;w&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.15em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2777777777777778em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mrel\&#34;&gt;=&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2777777777777778em;\&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:1em;vertical-align:-0.25em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.13889em;\&#34;&gt;T&lt;/span&gt;&lt;span class=\&#34;msupsub\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.33610799999999996em;\&#34;&gt;&lt;span style=\&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:2.7em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;sizing reset-size6 size3 mtight\&#34;&gt;&lt;span class=\&#34;mord mtight\&#34;&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;o&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34; style=\&#34;margin-right:0.01968em;\&#34;&gt;l&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.15em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;mopen\&#34;&gt;[&lt;/span&gt;&lt;span class=\&#34;mopen\&#34;&gt;(&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;1&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mbin\&#34;&gt;−&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:1em;vertical-align:-0.25em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.0037em;\&#34;&gt;α&lt;/span&gt;&lt;span class=\&#34;mclose\&#34;&gt;)&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mbin\&#34;&gt;+&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:1em;vertical-align:-0.25em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.0037em;\&#34;&gt;α&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;/&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.03148em;\&#34;&gt;k&lt;/span&gt;&lt;span class=\&#34;mclose\&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;\n&lt;p&gt;由此计算出加速比&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mi mathvariant=\&#34;normal\&#34;&gt;/&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;S = T_{old}/T_{new}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.68333em;vertical-align:0em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.05764em;\&#34;&gt;S&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2777777777777778em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mrel\&#34;&gt;=&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2777777777777778em;\&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:1em;vertical-align:-0.25em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.13889em;\&#34;&gt;T&lt;/span&gt;&lt;span class=\&#34;msupsub\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.33610799999999996em;\&#34;&gt;&lt;span style=\&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:2.7em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;sizing reset-size6 size3 mtight\&#34;&gt;&lt;span class=\&#34;mord mtight\&#34;&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;o&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34; style=\&#34;margin-right:0.01968em;\&#34;&gt;l&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.15em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;/&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.13889em;\&#34;&gt;T&lt;/span&gt;&lt;span class=\&#34;msupsub\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.151392em;\&#34;&gt;&lt;span style=\&#34;top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:2.7em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;sizing reset-size6 size3 mtight\&#34;&gt;&lt;span class=\&#34;mord mtight\&#34;&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;n&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34;&gt;e&lt;/span&gt;&lt;span class=\&#34;mord mathdefault mtight\&#34; style=\&#34;margin-right:0.02691em;\&#34;&gt;w&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.15em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;\n&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=\&#34;katex-display\&#34;&gt;&lt;span class=\&#34;katex\&#34;&gt;&lt;span class=\&#34;katex-mathml\&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mfrac&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mrow&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;α&lt;/mi&gt;&lt;mi mathvariant=\&#34;normal\&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/mrow&gt;&lt;annotation encoding=\&#34;application/x-tex\&#34;&gt;S = \\frac{1}{(1-\\alpha)+\\alpha/k}\n&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=\&#34;katex-html\&#34; aria-hidden=\&#34;true\&#34;&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:0.68333em;vertical-align:0em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.05764em;\&#34;&gt;S&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2777777777777778em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mrel\&#34;&gt;=&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2777777777777778em;\&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;base\&#34;&gt;&lt;span class=\&#34;strut\&#34; style=\&#34;height:2.25744em;vertical-align:-0.936em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mopen nulldelimiter\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mfrac\&#34;&gt;&lt;span class=\&#34;vlist-t vlist-t2\&#34;&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:1.32144em;\&#34;&gt;&lt;span style=\&#34;top:-2.314em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:3em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mopen\&#34;&gt;(&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;1&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mbin\&#34;&gt;−&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.0037em;\&#34;&gt;α&lt;/span&gt;&lt;span class=\&#34;mclose\&#34;&gt;)&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mbin\&#34;&gt;+&lt;/span&gt;&lt;span class=\&#34;mspace\&#34; style=\&#34;margin-right:0.2222222222222222em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.0037em;\&#34;&gt;α&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;/&lt;/span&gt;&lt;span class=\&#34;mord mathdefault\&#34; style=\&#34;margin-right:0.03148em;\&#34;&gt;k&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=\&#34;top:-3.23em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:3em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;frac-line\&#34; style=\&#34;border-bottom-width:0.04em;\&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=\&#34;top:-3.677em;\&#34;&gt;&lt;span class=\&#34;pstrut\&#34; style=\&#34;height:3em;\&#34;&gt;&lt;/span&gt;&lt;span class=\&#34;mord\&#34;&gt;&lt;span class=\&#34;mord\&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-s\&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;vlist-r\&#34;&gt;&lt;span class=\&#34;vlist\&#34; style=\&#34;height:0.936em;\&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=\&#34;mclose nulldelimiter\&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;p&gt;主要观点：要想显著加速整个系统，必须提升全系统中相当大部分的速度&lt;/p&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h4 id=\&#34;192-并发与并行\&#34;&gt;1.9.2 并发与并行&lt;/h4&gt;\n&lt;ul&gt;\n&lt;li&gt;并发：指一个同时具有多个活动的系统&lt;/li&gt;\n&lt;li&gt;并行：利用并发来使一个系统运行得更快&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h6 id=\&#34;线程级并行\&#34;&gt;线程级并行&lt;/h6&gt;\n&lt;ul&gt;\n&lt;li&gt;多处理器组织结构&lt;/li&gt;\n&lt;li&gt;超线程：是一项允许一个CPU执行多个控制流的技术&lt;/li&gt;\n&lt;li&gt;多处理器提高系统性能：\n&lt;ul&gt;\n&lt;li&gt;减少执行多个任务时模拟并发的需要&lt;/li&gt;\n&lt;li&gt;可以使多线程方式书写的程序运行得更快&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h6 id=\&#34;指令级并行\&#34;&gt;指令级并行&lt;/h6&gt;\n&lt;ul&gt;\n&lt;li&gt;指令级并行：现代处理器能同时执行多条指令&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h6 id=\&#34;单指令-多数据并行\&#34;&gt;单指令、多数据并行&lt;/h6&gt;\n&lt;ul&gt;\n&lt;li&gt;单指令多数据并行：允许一条指令产生多个可以并行执行的操作&lt;/li&gt;\n&lt;/ul&gt;\n&#34;,&#34;fileName&#34;:&#34;csapp-di-yi-zhang-bi-ji&#34;,&#34;abstract&#34;:&#34;&#34;,&#34;title&#34;:&#34;CS:APP 第一章笔记&#34;,&#34;tags&#34;:[{&#34;index&#34;:-1,&#34;name&#34;:&#34;CS:APP&#34;,&#34;slug&#34;:&#34;4YStS5F5l&#34;,&#34;used&#34;:true,&#34;link&#34;:&#34;https://xqaqyn.github.io/tag/4YStS5F5l/&#34;},{&#34;index&#34;:-1,&#34;name&#34;:&#34;Note&#34;,&#34;slug&#34;:&#34;xftBhzgzW&#34;,&#34;used&#34;:true,&#34;link&#34;:&#34;https://xqaqyn.github.io/tag/xftBhzgzW/&#34;}],&#34;date&#34;:&#34;2022-01-24 20:11:27&#34;,&#34;dateFormat&#34;:&#34;2022-01-24&#34;,&#34;feature&#34;:&#34;&#34;,&#34;link&#34;:&#34;https://xqaqyn.github.io/post/csapp-di-yi-zhang-bi-ji/&#34;,&#34;hideInList&#34;:false,&#34;isTop&#34;:false,&#34;stats&#34;:{&#34;text&#34;:&#34;7 min read&#34;,&#34;time&#34;:363000,&#34;words&#34;:1689,&#34;minutes&#34;:7},&#34;description&#34;:&#34;1 计算机系统漫游\n1.1 信息就是位+上下文\n\n计算机系统中所有的信息——包括磁盘文件、内存中的程序、内存中存放的用户数据及网络上传输的数据都是由一串比特表示的。\n区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。比如，在不同的...&#34;,&#34;toc&#34;:&#34;&lt;ul class=\&#34;markdownIt-TOC\&#34;&gt;\n&lt;li&gt;&lt;a href=\&#34;#1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8\&#34;&gt;1 计算机系统漫游&lt;/a&gt;&lt;br&gt;\n*\n&lt;ul&gt;\n&lt;li&gt;&lt;a href=\&#34;#11-%E4%BF%A1%E6%81%AF%E5%B0%B1%E6%98%AF%E4%BD%8D%E4%B8%8A%E4%B8%8B%E6%96%87\&#34;&gt;1.1 信息就是位+上下文&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#12-%E7%A8%8B%E5%BA%8F%E8%A2%AB%E5%85%B6%E5%AE%83%E7%A8%8B%E5%BA%8F%E7%BF%BB%E8%AF%91%E6%88%90%E4%B8%8D%E5%90%8C%E5%BD%A2%E5%BC%8F\&#34;&gt;1.2 程序被其它程序翻译成不同形式&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#14-%E5%A4%84%E7%90%86%E5%99%A8%E8%AF%BB%E5%B9%B6%E8%A7%A3%E9%87%8A%E5%82%A8%E5%AD%98%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E6%8C%87%E4%BB%A4\&#34;&gt;1.4 处理器读并解释储存在内存中的指令&lt;/a&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;a href=\&#34;#141-%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90\&#34;&gt;1.4.1 系统的硬件组成&lt;/a&gt;&lt;br&gt;\n*\n&lt;ul&gt;\n&lt;li&gt;&lt;a href=\&#34;#%E6%80%BB%E7%BA%BF\&#34;&gt;总线&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#io%E8%AE%BE%E5%A4%87\&#34;&gt;I/O设备&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#%E4%B8%BB%E5%AD%98\&#34;&gt;主存&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#%E5%A4%84%E7%90%86%E5%99%A8\&#34;&gt;处理器&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#142-%E8%BF%90%E8%A1%8Chello%E7%A8%8B%E5%BA%8F\&#34;&gt;1.4.2 运行hello程序&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#16-%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84\&#34;&gt;1.6 存储器层次结构&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#17-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E7%A1%AC%E4%BB%B6\&#34;&gt;1.7 操作系统管理硬件&lt;/a&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;a href=\&#34;#171-%E8%BF%9B%E7%A8%8B\&#34;&gt;1.7.1 进程&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#173-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98\&#34;&gt;1.7.3 虚拟内存&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#174-%E6%96%87%E4%BB%B6\&#34;&gt;1.7.4 文件&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#18-%E7%B3%BB%E7%BB%9F%E4%B9%8B%E9%97%B4%E5%88%A9%E7%94%A8%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1\&#34;&gt;1.8 系统之间利用网络通信&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#19-%E9%87%8D%E8%A6%81%E4%B8%BB%E9%A2%98\&#34;&gt;1.9 重要主题&lt;/a&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;a href=\&#34;#191-amdahl%E5%AE%9A%E5%BE%8B\&#34;&gt;1.9.1 Amdahl定律&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#192-%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C\&#34;&gt;1.9.2 并发与并行&lt;/a&gt;&lt;br&gt;\n*\n&lt;ul&gt;\n&lt;li&gt;&lt;a href=\&#34;#%E7%BA%BF%E7%A8%8B%E7%BA%A7%E5%B9%B6%E8%A1%8C\&#34;&gt;线程级并行&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C\&#34;&gt;指令级并行&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\&#34;#%E5%8D%95%E6%8C%87%E4%BB%A4-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C\&#34;&gt;单指令、多数据并行&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&#34;}]";
+  // var json = escape.substr(1, escape.length - 2);
+  // var datas = json.split(',');
+  // for (let i=0; i < datas.length; i++) {
+  //   let item = datas[i];
+  //   let attrs = item.split('34;:&#34')
+  //   debugger
+  //   console.log(datas[i])
+  // }
+  let escapeMap = new Map();
+  escapeMap.set('&#34;', '"');
+  escapeMap.set('&gt;', '>');
+  escapeMap.set('&#39;', "'");
+  escapeMap.set('&lt;', '<');
+  escapeMap.set('&quot;', '"');
+  escapeMap.set('&amp;', '&');
+</script> -->
+
+
+
 </html>
