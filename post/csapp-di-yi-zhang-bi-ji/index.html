@@ -1,0 +1,334 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CS:APP 第一章笔记 | Gridea</title>
+<link rel="shortcut icon" href="https://xqaqyn.github.io//favicon.ico?v=1643026593111">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://xqaqyn.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="CS:APP 第一章笔记 | Gridea - Atom Feed" href="https://xqaqyn.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="1 计算机系统漫游
+1.1 信息就是位+上下文
+
+计算机系统中所有的信息——包括磁盘文件、内存中的程序、内存中存放的用户数据及网络上传输的数据都是由一串比特表示的。
+区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。比如，在不同的..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://xqaqyn.github.io/">
+  <img class="avatar" src="https://xqaqyn.github.io//images/avatar.png?v=1643026593111" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              CS:APP 第一章笔记
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-01-24
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="1-计算机系统漫游">1 计算机系统漫游</h1>
+<h3 id="11-信息就是位上下文">1.1 信息就是位+上下文</h3>
+<ul>
+<li>计算机系统中所有的信息——包括磁盘文件、内存中的程序、内存中存放的用户数据及网络上传输的数据都是由一串比特表示的。</li>
+<li>区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。比如，在不同的上下文中，一个相同的字节序列可能表示一个整数、浮点数、字符串或者机器指令。</li>
+</ul>
+<h3 id="12-程序被其它程序翻译成不同形式">1.2 程序被其它程序翻译成不同形式</h3>
+<figure data-type="image" tabindex="1"><img src="image/%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png" alt="编译系统" loading="lazy"></figure>
+<ul>
+<li>预处理阶段：预处理器(cpp)根据#开头的命令修改原始C程序，得到另一个C程序xxx.i。</li>
+<li>编译阶段：编译器(ccl)将xx.i的C程序文本翻译为xx.s的汇编语言程序文本。</li>
+<li>汇编阶段：汇编器(as)将xx.s翻译为机器语言指令，并将其打包成可重定位目标程序，保存在xx.o的二进制文件当中。</li>
+<li>链接阶段：将程序调用的库函数合并到hello.o中，生成可执行的目标程序。</li>
+</ul>
+<h3 id="14-处理器读并解释储存在内存中的指令">1.4 处理器读并解释储存在内存中的指令</h3>
+<h4 id="141-系统的硬件组成">1.4.1 系统的硬件组成</h4>
+<figure data-type="image" tabindex="2"><img src="image/%E7%A1%AC%E4%BB%B6.png" alt="硬件" loading="lazy"></figure>
+<h6 id="总线">总线</h6>
+<ul>
+<li>贯穿整个系统的一组电子管道，称作总线</li>
+<li>通常总线被设计成传送定长的字节块，也就是字(word)。字中的字节数（即字长）是一个基本的系统参数，常见的有4字节(32位)，8字节(64位)</li>
+</ul>
+<h6 id="io设备">I/O设备</h6>
+<ul>
+<li>例子：鼠标、键盘、显示器、磁盘</li>
+<li>每个I/O设备都通过一个控制器或适配器与I/O总线相连</li>
+</ul>
+<h6 id="主存">主存</h6>
+<ul>
+<li>主存是临时存储设备，在处理器执行程序时，用来存放程序和程序处理的数据。</li>
+<li>物理上来说，主存时一组动态随机存储器(DRAM)芯片组成的</li>
+</ul>
+<h6 id="处理器">处理器</h6>
+<ul>
+<li>中央处理单元(CPU)，简称处理器，是解释（或执行）存储在主存中指令的引擎</li>
+<li>处理器的核心是一个大小为一个字的存储设备（或寄存器），成为程序计数器(PC)，PC始终指向主存中某条机器语言指令</li>
+<li>处理器运行过程：执行程序计数器指向的指令<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span>更新程序计数器，使其指向下一条指令，如此反复。</li>
+</ul>
+<h4 id="142-运行hello程序">1.4.2 运行hello程序</h4>
+<ul>
+<li>从键盘读取命令</li>
+<li>从磁盘加载可执行文件到主存</li>
+<li>处理器执行程序</li>
+</ul>
+<h3 id="16-存储器层次结构">1.6 存储器层次结构</h3>
+<figure data-type="image" tabindex="3"><img src="image/%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png" alt="存储器层次结构" loading="lazy"></figure>
+<h3 id="17-操作系统管理硬件">1.7 操作系统管理硬件</h3>
+<ul>
+<li>操作系统的基本功能：
+<ol>
+<li>防止硬件被失控的应用程序滥用</li>
+<li>向应用程序提供简单一致的机制来控制复杂而又通常大不相同的低级硬件设备</li>
+</ol>
+</li>
+<li>操作系统通过几个基本抽象概念实现这两个基本功能：
+<ul>
+<li>文件：对I/O设备的抽象表示</li>
+<li>虚拟内存：对主存和磁盘I/O设备的抽象表示</li>
+<li>进程：对处理器、主存和I/O设备的抽象表示</li>
+</ul>
+</li>
+</ul>
+<h4 id="171-进程">1.7.1 进程</h4>
+<ul>
+<li>上下文：操作系统保持跟踪进程运行所需的所有状态信息，这种状态称为上下文。例如PC和寄存器文件的当前值、主存的内容。</li>
+<li>上下文切换：当操作系统决定要把控制权从当前进程转移到某个新进程时，就会进行上下文切换，即保存当前进程上下文、恢复新进程上下文，然后将控制权传递到新进程。</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2.png" alt="上下文切换" loading="lazy"></figure>
+<h4 id="173-虚拟内存">1.7.3 虚拟内存</h4>
+<ul>
+<li><strong>虚拟内存</strong>为每个进程提供一个假象，即每个进程都在独占地使用主存。</li>
+<li>每个进程看到的内存都是一致的，称为<strong>虚拟地址空间</strong>。</li>
+<li>虚拟地址空间由大量准确定义的<strong>区</strong>构成，每个区都有专门的功能。</li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="image/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.png" alt="虚拟地址空间" loading="lazy"></figure>
+<ol>
+<li><strong>程序代码和数据</strong>：对所有进程来说，代码是从同一固定地址开始，紧接着的是和C全局变量所对应的数据位置</li>
+<li><strong>堆</strong>：在调用malloc和free这样的函数时，堆的大小是动态地扩展和收缩的</li>
+<li><strong>共享库</strong>：用于存放类似C标准库和数学库这样的共享库的代码和数据的区域</li>
+<li><strong>栈</strong>：用于实现函数调用，可以动态地扩展和收缩</li>
+<li><strong>内核虚拟内存</strong>：地址空间顶部的区域是为内核保留的。不允许应用程序读写这个区域的内容或者直接调用内核代码定义的函数</li>
+</ol>
+<h4 id="174-文件">1.7.4 文件</h4>
+<ul>
+<li>文件就是字节序列</li>
+<li>每个I/O设备都可以看成文件</li>
+</ul>
+<h3 id="18-系统之间利用网络通信">1.8 系统之间利用网络通信</h3>
+<ul>
+<li>从一个单独的系统来看，网络可以视为一个I/O设备</li>
+</ul>
+<h3 id="19-重要主题">1.9 重要主题</h3>
+<ul>
+<li>系统是硬件和系统软件互相交织的集合体，他们必须共同协作以达到运行应用程序的最终目的</li>
+</ul>
+<h4 id="191-amdahl定律">1.9.1 Amdahl定律</h4>
+<ul>
+<li>
+<p>主要思想：当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度</p>
+</li>
+<li>
+<p>若系统执行某应用需要的时间为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mrow><mi>o</mi><mi>l</mi><mi>d</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{old}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。假设系统某部分所需执行时间与该时间的比例为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span>，而该部分性能提升比例为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span>。即该部分初始所需时间为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi><msub><mi>T</mi><mrow><mi>o</mi><mi>l</mi><mi>d</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\alpha T_{old}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，现在所需时间为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi><msub><mi>T</mi><mrow><mi>o</mi><mi>l</mi><mi>d</mi></mrow></msub><mi mathvariant="normal">/</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">\alpha T_{old}/k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span>。推出总的执行时间应为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mrow><mi>n</mi><mi>e</mi><mi>w</mi></mrow></msub><mo>=</mo><msub><mi>T</mi><mrow><mi>o</mi><mi>l</mi><mi>d</mi></mrow></msub><mo>[</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><mo>+</mo><mi>α</mi><mi mathvariant="normal">/</mi><mi>k</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">T_{new}= T_{old}[(1-\alpha)+\alpha /k]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">]</span></span></span></span></span></p>
+<p>由此计算出加速比<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>=</mo><msub><mi>T</mi><mrow><mi>o</mi><mi>l</mi><mi>d</mi></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>T</mi><mrow><mi>n</mi><mi>e</mi><mi>w</mi></mrow></msub></mrow><annotation encoding="application/x-tex">S = T_{old}/T_{new}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><mo>+</mo><mi>α</mi><mi mathvariant="normal">/</mi><mi>k</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">S = \frac{1}{(1-\alpha)+\alpha/k}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.25744em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</li>
+<li>
+<p>主要观点：要想显著加速整个系统，必须提升全系统中相当大部分的速度</p>
+</li>
+</ul>
+<h4 id="192-并发与并行">1.9.2 并发与并行</h4>
+<ul>
+<li>并发：指一个同时具有多个活动的系统</li>
+<li>并行：利用并发来使一个系统运行得更快</li>
+</ul>
+<h6 id="线程级并行">线程级并行</h6>
+<ul>
+<li>多处理器组织结构</li>
+<li>超线程：是一项允许一个CPU执行多个控制流的技术</li>
+<li>多处理器提高系统性能：
+<ul>
+<li>减少执行多个任务时模拟并发的需要</li>
+<li>可以使多线程方式书写的程序运行得更快</li>
+</ul>
+</li>
+</ul>
+<h6 id="指令级并行">指令级并行</h6>
+<ul>
+<li>指令级并行：现代处理器能同时执行多条指令</li>
+</ul>
+<h6 id="单指令-多数据并行">单指令、多数据并行</h6>
+<ul>
+<li>单指令多数据并行：允许一条指令产生多个可以并行执行的操作</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8">1 计算机系统漫游</a><br>
+*
+<ul>
+<li><a href="#11-%E4%BF%A1%E6%81%AF%E5%B0%B1%E6%98%AF%E4%BD%8D%E4%B8%8A%E4%B8%8B%E6%96%87">1.1 信息就是位+上下文</a></li>
+<li><a href="#12-%E7%A8%8B%E5%BA%8F%E8%A2%AB%E5%85%B6%E5%AE%83%E7%A8%8B%E5%BA%8F%E7%BF%BB%E8%AF%91%E6%88%90%E4%B8%8D%E5%90%8C%E5%BD%A2%E5%BC%8F">1.2 程序被其它程序翻译成不同形式</a></li>
+<li><a href="#14-%E5%A4%84%E7%90%86%E5%99%A8%E8%AF%BB%E5%B9%B6%E8%A7%A3%E9%87%8A%E5%82%A8%E5%AD%98%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E6%8C%87%E4%BB%A4">1.4 处理器读并解释储存在内存中的指令</a>
+<ul>
+<li><a href="#141-%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90">1.4.1 系统的硬件组成</a><br>
+*
+<ul>
+<li><a href="#%E6%80%BB%E7%BA%BF">总线</a></li>
+<li><a href="#io%E8%AE%BE%E5%A4%87">I/O设备</a></li>
+<li><a href="#%E4%B8%BB%E5%AD%98">主存</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E5%99%A8">处理器</a></li>
+</ul>
+</li>
+<li><a href="#142-%E8%BF%90%E8%A1%8Chello%E7%A8%8B%E5%BA%8F">1.4.2 运行hello程序</a></li>
+</ul>
+</li>
+<li><a href="#16-%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">1.6 存储器层次结构</a></li>
+<li><a href="#17-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E7%A1%AC%E4%BB%B6">1.7 操作系统管理硬件</a>
+<ul>
+<li><a href="#171-%E8%BF%9B%E7%A8%8B">1.7.1 进程</a></li>
+<li><a href="#173-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98">1.7.3 虚拟内存</a></li>
+<li><a href="#174-%E6%96%87%E4%BB%B6">1.7.4 文件</a></li>
+</ul>
+</li>
+<li><a href="#18-%E7%B3%BB%E7%BB%9F%E4%B9%8B%E9%97%B4%E5%88%A9%E7%94%A8%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1">1.8 系统之间利用网络通信</a></li>
+<li><a href="#19-%E9%87%8D%E8%A6%81%E4%B8%BB%E9%A2%98">1.9 重要主题</a>
+<ul>
+<li><a href="#191-amdahl%E5%AE%9A%E5%BE%8B">1.9.1 Amdahl定律</a></li>
+<li><a href="#192-%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C">1.9.2 并发与并行</a><br>
+*
+<ul>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E7%BA%A7%E5%B9%B6%E8%A1%8C">线程级并行</a></li>
+<li><a href="#%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C">指令级并行</a></li>
+<li><a href="#%E5%8D%95%E6%8C%87%E4%BB%A4-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C">单指令、多数据并行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://xqaqyn.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
