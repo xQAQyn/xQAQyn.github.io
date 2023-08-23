@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/project/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/project/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/project/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/project/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/project/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xqaqyn.github.io","root":"/project/","images":"/project/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/project/js/config.js"></script>
+
+    <meta name="description" content="based on Operating Systems: Three Easy Pieces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Operating System: Virtualization">
+<meta property="og:url" content="https://xqaqyn.github.io/project/2023/08/20/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Virtualization/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="based on Operating Systems: Three Easy Pieces">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20230821135604500.png">
+<meta property="article:published_time" content="2023-08-20T07:13:50.000Z">
+<meta property="article:modified_time" content="2023-08-21T17:40:43.004Z">
+<meta property="article:author" content="xQAQyn">
+<meta property="article:tag" content="Lecture Note">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20230821135604500.png">
+
+
+<link rel="canonical" href="https://xqaqyn.github.io/project/2023/08/20/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Virtualization/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xqaqyn.github.io/project/2023/08/20/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Virtualization/","path":"2023/08/20/Operating System - Three Easy Pieces/Operating System - Virtualization/","title":"Operating System: Virtualization"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Operating System: Virtualization | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/project/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/project/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/project/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/project/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/project/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/project/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/project/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">进程创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-number">1.2.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UNIX%E8%BF%9B%E7%A8%8BAPI"><span class="nav-number">2.</span> <span class="nav-text">UNIX进程API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fork"><span class="nav-number">2.1.</span> <span class="nav-text">fork</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/project/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/project/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/project/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xqaqyn.github.io/project/2023/08/20/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Virtualization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Operating System: Virtualization | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Operating System: Virtualization
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-08-20 15:13:50" itemprop="dateCreated datePublished" datetime="2023-08-20T15:13:50+08:00">2023-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-08-22 01:40:43" itemprop="dateModified" datetime="2023-08-22T01:40:43+08:00">2023-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/project/categories/LectureNote/" itemprop="url" rel="index"><span itemprop="name">LectureNote</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/project/categories/LectureNote/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><em>based on <a target="_blank" rel="noopener" href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a></em></p>
+<span id="more"></span>
+
+<p>我们总是需要在一个CPU上运行很多个程序。为了使系统更加的好用，我们不应该让程序关心当前是否有可用的CPU，而是给程序一个总是有充足的CPU可用的“假象”。</p>
+<p>操作系统实现这一假象的方式就是 <strong>虚拟化(virtualization)</strong> ，让程序能“看到”比物理CPU数量更多的虚拟CPU。实现这一功能的基本方法就是 <strong>分时(time sharing)</strong> ，即运行一个程序一段时间，然后将其停止后运行另一个程序，如此反复。这个方案的代价是性能的降低，CPU被多个程序共享时运行速度会变慢。</p>
+<p>为了实现CPU的虚拟化，操作系统既需要需要实现底层的操作机制，又需要实现一些上层的逻辑。底层的机制(mechanism)包括一系列的底层方法(methods)和协议(protocols)，实现所需要的功能，例如上下文切换(context switch)支持了分时的实现。而上层的逻辑以策略(policies)的形式赋予了操作系统一定的智能，其是一系列的算法用于做出操作系统内的某些决策，例如调度策略(scheduling policy)可以决定当前等待运行的所有程序中，谁被放入CPU运行。</p>
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>在操作系统中，我们将正在运行的程序抽象为 <strong>进程(process)</strong> 。一个进程需要包含这个程序的 <strong>机器状态(machine state)</strong> ，即所有程序能够读写的部分。机器状态主要有以下部分：用于存储指令和数据的 <strong>地址空间(address space)<strong>、</strong>寄存器(registers)</strong> 、<strong>I&#x2F;O信息(I&#x2F;O information)</strong> </p>
+<p>进程有一些必须提供的API，如下所示（下面所有API在现代操作系统上均被支持）：</p>
+<ul>
+<li>Create：创建进程</li>
+<li>Destroy：强制关闭进程</li>
+<li>Wait：暂停进程</li>
+<li>Miscellaneous Control：除了Destroy和Wait以外，还有一系列的控制进程的方法，例如暂停(suspend)和重新启动(resume)一个进程</li>
+<li>Status：用于查看进程的状态</li>
+</ul>
+<h2 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h2><p>进程的创建过程即将一个程序转化为进程的过程，包含以下几个步骤</p>
+<ol>
+<li>操作系统从磁盘或硬盘等介质中读取指令和静态数据到内存中。在早期的操作系统中，这个操作会在程序运行前一次性完成；但在现代操作系统中，常常会使用lazy loading的方法，即只在需要的时候读取程序和数据，这主要与页表和交换有关，将在后面深入讨论。</li>
+<li>操作系统进行初始化操作：包括分配内存给运行时栈(run-time stack)和堆(heap)、准备进程所使用的文件描述符(file descriptors)</li>
+<li>从main函数开始执行程序</li>
+</ol>
+<h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><p>简单来说，进程的状态至少可以分为三种：</p>
+<ul>
+<li>运行(Running)：代表CPU正在执行该进程的指令</li>
+<li>就绪(Ready)：进程已经准备好运行，但当前操作系统并没有选择该进程在CPU上运行</li>
+<li>阻塞(Blocked)：对正在运行的进程，触发了某些行为会导致其进入阻塞状态，在这个状态下，进程需要等待一些其它事件的发生才能重新回到就绪状态。例如进程请求I&#x2F;O操作就会进入阻塞状态，直到完成I&#x2F;O后回到就绪状态。</li>
+</ul>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20230821135604500.png" alt="image-20230821135604500"></p>
+<p>上图展示了这些状态直接的转换关系。运行和就绪之间可以相互转换，就绪状态跳转至运行状态代表这个进程被调度(Scheduled)，运行状态到就绪状态代表该进程被取消调度(Descheduled)。如果一个进程被阻塞，操作系统会将其保持在这个状态直到某个事件的发生（例如I&#x2F;O完成）。</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>操作系统也是一个程序，所以和其它程序一样，我们需要一些数据结构存储信息。对进程来说，操作系统需要跟踪进程的很多信息，例如下面给出xv6所跟踪的进程信息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// the registers xv6 will save and restore</span></span><br><span class="line"><span class="comment">// to stop and subsequently restart a process</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">context</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> eip;</span><br><span class="line">    <span class="type">int</span> esp;</span><br><span class="line">    <span class="type">int</span> ebx;</span><br><span class="line">    <span class="type">int</span> ecx;</span><br><span class="line">    <span class="type">int</span> edx;</span><br><span class="line">    <span class="type">int</span> esi;</span><br><span class="line">    <span class="type">int</span> edi;</span><br><span class="line">    <span class="type">int</span> ebp;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// the different states a process can be in</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">proc_state</span> &#123;</span> UNUSED, EMBRYO, SLEEPING,</span><br><span class="line">                  RUNNABLE, RUNNING, ZOMBIE &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// the information xv6 tracks about each process</span></span><br><span class="line"><span class="comment">// including its register context and state</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> *mem;				<span class="comment">// Start of process memory</span></span><br><span class="line">    uint sz;				<span class="comment">// Size of process memory</span></span><br><span class="line">    <span class="type">char</span> *kstack;			<span class="comment">// Bottom of kernel stack for this process</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">proc_state</span> <span class="title">state</span>;</span>		<span class="comment">// Process state</span></span><br><span class="line">    <span class="type">int</span> pid;				<span class="comment">// Process ID</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">parent</span>;</span>		<span class="comment">// Parent Process</span></span><br><span class="line">    <span class="type">void</span> *chan;				<span class="comment">// if !zero, sleeping on chan</span></span><br><span class="line">    <span class="type">int</span> killed;				<span class="comment">// if !zero, has been killed</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">ofile</span>[<span class="title">NOFILE</span>];</span>		<span class="comment">// Open files</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">inode</span> *<span class="title">cwd</span>;</span>			<span class="comment">// Current directory</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">context</span> <span class="title">context</span>;</span>		<span class="comment">// Switch here to run process</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">trapframe</span> *<span class="title">tf</span>;</span>		<span class="comment">// Trap Frame for the current interrupt</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这一份代码中可以看到，xv6的进程状态定义与之前并不相同，例如ZOMBIE状态，代表程序已经退出但进程还未被清理的一个状态。在UNIX系统中，这一状态十分的有用，在这个状态下，其它进程可以根据返回值判断这一进程是否运行成功，并告诉操作系统可以清理与之相关的所有数据结构。</p>
+<h1 id="UNIX进程API"><a href="#UNIX进程API" class="headerlink" title="UNIX进程API"></a>UNIX进程API</h1><h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/project/tags/Lecture-Note/" rel="tag"># Lecture Note</a>
+              <a href="/project/tags/OS/" rel="tag"># OS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/project/2023/08/20/IELTS/IELTS-Writing-Task1-1/" rel="next" title="IELTS: Writing Task1">
+                  IELTS: Writing Task1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/project/js/comments.js"></script><script src="/project/js/utils.js"></script><script src="/project/js/motion.js"></script><script src="/project/js/schemes/muse.js"></script><script src="/project/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/project/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
