@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20230821135604500.png">
 <meta property="article:published_time" content="2023-08-21T07:13:50.000Z">
-<meta property="article:modified_time" content="2023-08-27T16:26:06.000Z">
+<meta property="article:modified_time" content="2023-08-28T09:58:22.000Z">
 <meta property="article:author" content="xQAQyn">
 <meta property="article:tag" content="Lecture Note">
 <meta property="article:tag" content="OS">
@@ -212,7 +212,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-08-28 00:26:06" itemprop="dateModified" datetime="2023-08-28T00:26:06+08:00">2023-08-28</time>
+      <time title="Modified: 2023-08-28 17:58:22" itemprop="dateModified" datetime="2023-08-28T17:58:22+08:00">2023-08-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -309,7 +309,9 @@
 <h2 id="问题1·受限操作-Restricted-Operations"><a href="#问题1·受限操作-Restricted-Operations" class="headerlink" title="问题1·受限操作(Restricted Operations)"></a>问题1·受限操作(Restricted Operations)</h2><p>直接执行的一个问题是无法完成对受限操作的控制，即进程可以自由地进行一些受限操作（例如访问磁盘、获得其它资源的访问权）。为了解决这个问题，我们不能让用户进程直接进行受限操作，而应该交由操作系统，并由操作系统决定是否完成该操作。</p>
 <p>为了实现这一功能，操作系统引入了两种CPU的模式(mode)，分别是 <strong>用户模式(user mode)</strong> 和 <strong>内核模式(kernel mode)</strong> 。在用户模式下，程序只被允许执行有限的操作（一般只允许计算操作），而类似于IO请求这样的特权操作是不被允许的，如果程序尝试执行这样的操作，将会引起一个异常，操作系统会杀死这样的一个进程。但在内核模式下，程序可以执行一切操作。</p>
 <p>但用户程序经常需要执行一些受限的操作，所以现代处理器几乎都支持用户程序进行 <strong>系统调用(system call)</strong> ，系统调用允许内核向用户程序暴露一些关键功能，例如访问文件系统、创建和销毁进程、与其它进程通信、分配更多的内存等。用户程序可以通过运行一个特殊的 <strong>中断(trap)</strong> 指令，该指令会进入内核并提升特权等级到内核模式。在内核模式下，操作系统判断用户程序是否被允许完成这些操作，如果允许，则完成用户程序所需的操作。完成后，操作系统使用中断返回指令(return-from-trap)回到调用的用户进程中，并降低特权等级回到用户模式。</p>
-<p>还需解决的一个问题是，中断如何知道运行系统中哪一部分的代码？显然不能够由发起系统调用的进程指定跳转地址，因为这样程序便有权力跳转到内核任一位置，不利于权限的控制。所以，内核在机器启动时便会设置 <strong>中断表(trap table)</strong> ，内核通过指令设置中断表，中断表保存了每一种中断发生时所应该运行的代码的位置。下面这张表说明了这一协议的时间线。</p>
+<p>还需解决的一个问题是，中断如何知道运行系统中哪一部分的代码？显然不能够由发起系统调用的进程指定跳转地址，因为这样程序便有权力跳转到内核任一位置，不利于权限的控制。所以，内核在机器启动时便会设置 <strong>中断表(trap table)</strong> ，内核通过指令设置中断表，中断表保存了每一种中断发生时所应该运行的代码的位置。用户程序想要引起中断，将中断编号放入系统一个特定的位置，然后调用系统调用。由操作系统检验中断编号合法后，运行对应的代码。</p>
+<p>这样的间接执行方式给了操作系统一层保护，它让用户代码无法直接决定跳转的地址，而是通过给出一个编号来向操作系统请求服务。</p>
+<p>下面这张表说明了受限直接执行协议(LDE)的时间线，其包括两部分，第一部分为系统引导时内核初始化中断表；第二部分为进程运行时内核的操作。</p>
 <table>
 <thead>
 <tr>
