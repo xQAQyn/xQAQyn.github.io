@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="论文链接：区块链的数据管理技术综述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blockchain Storage(0): Blockchain System">
+<meta property="og:url" content="http://example.com/2023/09/12/Blockchain%20Storage/Blockchain-Storage-0-Blockchain-System/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="论文链接：区块链的数据管理技术综述">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20230914081740649.png">
+<meta property="article:published_time" content="2023-09-12T13:06:11.000Z">
+<meta property="article:modified_time" content="2023-09-14T14:37:28.000Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20230914081740649.png">
+
+
+<link rel="canonical" href="http://example.com/2023/09/12/Blockchain%20Storage/Blockchain-Storage-0-Blockchain-System/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/09/12/Blockchain%20Storage/Blockchain-Storage-0-Blockchain-System/","path":"2023/09/12/Blockchain Storage/Blockchain-Storage-0-Blockchain-System/","title":"Blockchain Storage(0): Blockchain System"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Blockchain Storage(0): Blockchain System | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%84%E6%88%90"><span class="nav-number">1.</span> <span class="nav-text"> 区块链的核心构成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BB%93%E6%9E%84%E4%B8%8E%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text"> 区块链结构与事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text"> 共识机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#utxo%E4%B8%8Eaccount%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text"> UTXO与Account模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6"><span class="nav-number">1.4.</span> <span class="nav-text"> 智能合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text"> 区块链类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-number">2.</span> <span class="nav-text"> 区块链的数据存储</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%94%AE%E5%80%BC%E5%AF%B9%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text"> 基于键值对的数据存储模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 分布式存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E4%B8%8B%E5%AD%98%E5%82%A8"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 链下存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 历史版本的存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text"> 基于关系型数据的存储模式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/12/Blockchain%20Storage/Blockchain-Storage-0-Blockchain-System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Blockchain Storage(0): Blockchain System | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Blockchain Storage(0): Blockchain System
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-09-12 21:06:11" itemprop="dateCreated datePublished" datetime="2023-09-12T21:06:11+08:00">2023-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-14 22:37:28" itemprop="dateModified" datetime="2023-09-14T22:37:28+08:00">2023-09-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>论文链接：<a target="_blank" rel="noopener" href="https://www.jos.org.cn/jos/article/abstract/6091">区块链的数据管理技术综述</a></p>
+<span id="more"></span>
+<h1 id="区块链的核心构成"><a class="markdownIt-Anchor" href="#区块链的核心构成"></a> 区块链的核心构成</h1>
+<p>区块链网络中包含互不信任的多个节点，节点间无法确定某个节点是否为恶意节点。区块链网络假定某些节点可能产生恶意攻击，但网络中大多数节点是诚实节点。区块链中的节点大致可以分为三类：</p>
+<ul>
+<li>全节点：同步区块链上的全部数据，包括各个区块的哈希值、事务列表等</li>
+<li>轻节点：不保存区块链上的所有数据，往往只存储区块头部的的哈希值。有时会提交针对区块链上的数据的查询，并利用返回的结果以及自身储存的哈希值对结果进行验证</li>
+<li>矿工节点：特殊的全节点，不仅存储区块链上的所有数据，而且参与区块链的共识过程</li>
+</ul>
+<h2 id="区块链结构与事务"><a class="markdownIt-Anchor" href="#区块链结构与事务"></a> 区块链结构与事务</h2>
+<p>区块链网络节点存储整个区块链系统的数据以及事务的日志，数据以区块的形式进行存储并链接。区块链的结构如下图所示，区块链包括前一个区块的哈希值(PreHash)、共识验证字段(ConsProof)、默克尔哈希树根的哈希值(MerkleRoot)以及事务日志所构造的所构成的默克尔哈希树。</p>
+<p>默克尔哈希树是一种二叉树，其叶子节点保存事务，非叶子节点保存子节点内容的哈希值，其特点为：改变任意一个对任何数据的变动，都会影响从叶子节点到根节点路径上的所有节点的哈希值，因此该结构可以用于验证数据是否被篡改。</p>
+<p>区块链不允许数据修改现有区块，而是只允许在区块尾部添加新的区块。这使得区块链会记录所有对数据的更改操作。</p>
+<p>区块链中一个事务对应一次智能合约的完成，其需要保证ACID：原子性(Atomicity), 一致性(Consistency), 隔离性(Isolation), 持久性(Durability)。</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20230914081740649.png" alt="image-20230914081740649" /></p>
+<h2 id="共识机制"><a class="markdownIt-Anchor" href="#共识机制"></a> 共识机制</h2>
+<p>由于区块链网络中节点不可信且要求所有节点均存储数据的相同状态。当其中一个节点的数据准备更新时，所有节点需对更新操作达成共识。共识协议往往基于两种思路：基于计算的共识协议和基于通信的共识协议。</p>
+<p>基于计算的共识协议代表是比特币所使用的工作量证明(PoW, Proof of Work)，其原理为：节点通过工作量证明确定下一个有权力将生成的区块添加到链中的节点。挖矿节点根据区块内信息计算出该区块的共识验证字段ConsProof，使得其满足<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mi>a</mi><mi>s</mi><mi>h</mi><mo stretchy="false">(</mo><mi>P</mi><mi>r</mi><mi>e</mi><mi>v</mi><mi>B</mi><mi>K</mi><mi>h</mi><mi>a</mi><mi>s</mi><mi>h</mi><mi mathvariant="normal">∣</mi><mi>C</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>P</mi><mi>r</mi><mi>o</mi><mi>o</mi><mi>f</mi><mi mathvariant="normal">∣</mi><mi>M</mi><mi>e</mi><mi>r</mi><mi>k</mi><mi>l</mi><mi>e</mi><mi>R</mi><mi>o</mi><mi>o</mi><mi>t</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">hash(PrevBKhash|ConsProof|MerkleRoot)\le Z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal">h</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">o</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">o</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span></span></span></span>是一个控制工作量大小的参数。最先计算出公式验证字段的挖矿节点将其结果全网广播，其它挖矿节点验证收到的验证字段是否满足条件，若满足，则将区块添加到已有区块链的尾部，并给最先计算出结果的节点相应的奖励。工作量证明可以很好的用于公有链网络中，可以抵御女巫攻击。</p>
+<p>基于通讯的共识协议将投票权分配给网络中的节点，并利用多轮通讯达成共识。代表为使用拜占庭容错协议(PBFT)。PBFT共识协议需要经过三个过程</p>
+<ol>
+<li>pre-prepare: 用户提交请求时，一个主节点会在该阶段广播其请求</li>
+<li>prepare：所有节点收到请求后判断是否执行该操作，同意执行则将自己的签名添加在信息中并广播，否则不发送信息。节点收到其他节点发送的执行操作信息达到一定数量后，则说明执行达成共识。</li>
+<li>commit：节点执行相应请求，并将执行结果返回主节点。</li>
+</ol>
+<p>现在有其它的协议在两种思路下完成取舍，如Elastico、RapidChain、Byzcoin、Tendermint等结合了两种方式。</p>
+<p>基于计算的工作量证明共识并不能确定网络中的事务均合法，当恶意节点控制全网33%的算力时，则恶意节点有可能控制这个网络。而PBFT共识是确定性的，但其网络开销达到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，网络产生的额外开销会超过增加算力所节省的实践，是的系统的性能随算力增加而降低，降低了网络的可扩展性。</p>
+<h2 id="utxo与account模型"><a class="markdownIt-Anchor" href="#utxo与account模型"></a> UTXO与Account模型</h2>
+<p>区块链系统中，典型的数据模式是比特币所基于的Unspent Transactions Outputs(UTXO)结构，在UTXO模型中，不存在一个账户记录一个用户所拥有的所有比特币，而是使用UTXO包含比特币，交易是通过已有的UTXO生成新的UTXO完成，一个用户所拥有的UTXO是其拥有的所有UTXO之和。每个UTXO只会被用于一次交易，交易完后会生成包含等量比特币的新UTXO，所以大多数交易只需要判断一个UTXO是否被多次交易即可，因而交易是否进行可以很快的被验证，且具有很高的隐私性。但由于不存在账户的概念且交易基于UTXO，编程复杂度较高。</p>
+<p>另一种数据模式是Ethereum所采用的Account模型，该模型保存一个用户所拥有的账户的所有可用电子货币。当一个交易被提交时，相应的事务首先判断账户内电子货币是否足以完成该交易，如果可以则执行。Account模型节省了大量的存储空间，而UTXO模型可以更好的保护用户隐私。</p>
+<h2 id="智能合约"><a class="markdownIt-Anchor" href="#智能合约"></a> 智能合约</h2>
+<p>智能合约是一段区块链所有节点都认可的代码，并存储在区块中（防止被篡改），当智能合约的条件被满足时，合约会被自动激活并执行相应代码。例如执行转账的智能合约会先判断其激活条件是否被满足激活条件，然后判断事务是否可执行，包括是否被篡改，账户金额是否足够等；验证合法后自动执行转账的事务。</p>
+<h2 id="区块链类型"><a class="markdownIt-Anchor" href="#区块链类型"></a> 区块链类型</h2>
+<p>根据节点加入或退出区块链系统的方式，可以分为三类</p>
+<ul>
+<li>公有链系统：也称非许可链，允许任何节点参与区块链数据维护和读取；同时，节点也可以随时加入或离开该网络。公有链系统是一个完全的去中心化系统，典型的有比特币、以太坊等。公有链的共识机制一般是PoW，理论上恶意节点需占有网络中51%的算力才可以控制该区块链。</li>
+<li>联盟链：也称许可链，新加入节点需要获得许可的区块链，联盟链限制可参与的成员节点，且节点的读写权限以及所负责的计算由联盟链的设计规则确定。典型的有Hyperledger Fabric。联盟链由所有节点共同维护，且假定网络中部分节点是可信的，节点的加入以及共识的过程一般通过可信的节点控制。联盟链多采用PBFT等基于通讯的共识算法。</li>
+<li>私有链：仅限信任的个体使用，且不完全能够解决信任问题。网络节点间彼此透明，但不对外公开。</li>
+</ul>
+<h1 id="区块链的数据存储"><a class="markdownIt-Anchor" href="#区块链的数据存储"></a> 区块链的数据存储</h1>
+<p>针对区块链的存储模式主要集中在两个方向，一个是基于键值对的存储模式，另一个是关系型数据的存储模式。</p>
+<h2 id="基于键值对的数据存储模式"><a class="markdownIt-Anchor" href="#基于键值对的数据存储模式"></a> 基于键值对的数据存储模式</h2>
+<p>许多区块链系统采用基于键值对的文件系统存储其数据状态，这样的存储方式往往具有较高的查询性能，Hyperledger Fabric均采用键值对数据库存储数据。</p>
+<p>在典型的区块链系统中，各个节点均要存储区块链内数据的备份，这会导致数据在链上存储的代价极高；同时，考虑到部分共识协议需要大量网络开销，在数据规模极大的情况下，直接将所有数据存储在区块链中将产生巨大的存储开销和网络通讯代价。因此，部分工作旨在以较小的代价提高数据存储规模，包括分布式存储和链下存储等技术。</p>
+<h3 id="分布式存储"><a class="markdownIt-Anchor" href="#分布式存储"></a> 分布式存储</h3>
+<p>文献：<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3284764.3284766">Off-Chaining models and approaches to off-chain computations</a></p>
+<p>实现思路：将区块链的节点分为多个区域，并且保证每个区域内所有节点数据可以通过整合生成整个区块链的数据。这样的情况下，单一节点就不需要再保存整个区块链内数据副本，降低了节点的存储开销，具有更好的拓展性。</p>
+<p>实现方式：将数据分割为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 个不同的块，并将其分配到一个区域的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> 个节点中。可以利用分布式存储的编码技术（如MDS编码）生成分配方案，使得再 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> 个节点中任意获取 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 个节点，即可获得所有原始数据。</p>
+<p>一致性保证：只要不存在超过 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 个恶意节点在同一个区域内，就仍可保持数据一致性。</p>
+<p>数据隐私保护：通过Shanmir’s secret sharing技术加密，并将密钥分配给一个区域内的各个节点。各个节点密钥均不相同，当需要完整数据时，系统可通过各个节点的密钥计算出原始密钥，再对数据进行解密。</p>
+<p>额外开销：因为需要对数据进行编码，当数据为动态时，由额外的编码计算开销</p>
+<h3 id="链下存储"><a class="markdownIt-Anchor" href="#链下存储"></a> 链下存储</h3>
+<p>文献：<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/8424682">Decentralized iot data management using blockchain and trusted execution environment.</a>, <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/8029796">Blockchain based data integrity service framework for iot data.</a></p>
+<p>实现：</p>
+<ul>
+<li>将数据以键值对 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo separator="true">,</mo><mi>v</mi><mi>a</mi><mi>l</mi><mi>u</mi><mi>e</mi><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&lt;key,value&gt;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">u</span><span class="mord mathnormal">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span></span></span> 的方式存储，原始数据往往直接存储在相应的云服务器中，云服务器中的数据不在区块链中，即在链下。而区块链中只需要存储相应数据的哈希值，即 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo><mi>k</mi><mi>e</mi><mi>y</mi><mo separator="true">,</mo><mi>h</mi><mi>a</mi><mi>s</mi><mi>h</mi><mo stretchy="false">(</mo><mi>v</mi><mi>a</mi><mi>l</mi><mi>u</mi><mi>e</mi><mo stretchy="false">)</mo><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&lt;key,hash(value)&gt;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">h</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">u</span><span class="mord mathnormal">e</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span></span></span> 。当用户通过云服务器获得数据时，即可利用哈希值进行验证，保证数据的完整性和一致性。</li>
+<li>由于从链上存储数据以及部署智能合约均需要存储开销，文献还提出了多种基于链下存储的优化技术。在计算方面可以将状态检查等计算采用链下验证的方式，而不需要采用链上的智能合约，降低存储开销。同时有文献提出智能合约在有需要的情况下也可以存储在链下。为了保证安全性，链下的执行环境需为可信环境；同时，区块链存储相应的智能合约状态的哈希值。在这样的结构下，网络同时存在计算节点和共识节点，计算节点负责智能合约的状态改变以及计算等工作，共识节点只负责对智能合约的状态哈希形成共识。</li>
+</ul>
+<h3 id="历史版本的存储"><a class="markdownIt-Anchor" href="#历史版本的存储"></a> 历史版本的存储</h3>
+<p>文献：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1802.04949">Forkbase: An efficient storage engine for blockchain and forkable applications.</a></p>
+<p>部分区块链操作需获取不同历史版本的数据，Forkbase设计了支持数据版本查询的数据存储系统，其将数据拆分为块，并在块的级别减少重复的数据冗余存储。其利用POS-Tree(pattern-oriented-split tree)这一索引快速确定重复数据。</p>
+<p>POS-Tree的每个叶子节点包含对应的数据，而非叶子节点则保存其子树的键值；同时，利用默克尔树的特性，对每个节点计算其哈希签名，内部节点签名由其子节点签名决定。因此，当一个分支的根节点没有变化时，可以确定该节点的所有子节点均未更新版本。所以查找不同的数据时，只需要从签名不同的根节点开始，搜索其子树中带有不同签名的节点即可。</p>
+<h2 id="基于关系型数据的存储模式"><a class="markdownIt-Anchor" href="#基于关系型数据的存储模式"></a> 基于关系型数据的存储模式</h2>
+<p>文献：<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3299869.3320237">Blockchaindb— Towards a shared database on blockchains.</a>, <a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.14778/3342263.3342636">Blockchaindb—A shared database on blockchains.  </a></p>
+<p>BlockchainDB针对共享表类型数据，并在多个用户均需要对共享表进行操作的情况下，支持对表进行数据验证。该系统采用联盟链的设计方式并假定节点不可信，区块链作为数据的存储层，保证数据在不可信的环境下的一致性。节点间存在多个分块，每一块独立地维护一个区块链并存储共享表的部分数据，每一块独立的区块链保证了分块内的数据一致性。</p>
+<p>在每一块的区块链存储层上构造BlockchainDB数据库层，负责</p>
+<ul>
+<li>数据库层记录表记录任意一条存储记录在哪一些分块中</li>
+<li>提供用户可直接调用的API</li>
+<li>保证用户提交的事务处理一致性：当需要进行读写操作时，用户提交数据所在分片ID，BlockchainDB会在相应的分片中执行读写操作并返回结果给用户。用户获得数据后，需要验证所得到的数据是否被恶意篡改及其完整性。作者提供了两种验证方法
+<ul>
+<li>online验证：用户获得数据后广播所读数据并要求所有存储该数据的节点进行验证，如果大部分节点返回消息表示需要验证的数据与本地相符，则认为数据已经被验证</li>
+<li>offline验证：延迟验证，当用户提交验证请求且验证请求达到系统设定的参数e时，BlockchainDB开始验证</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20CPU%20Virtualization/" rel="prev" title="Operating System: CPU Virtualization">
+                  <i class="fa fa-angle-left"></i> Operating System: CPU Virtualization
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>
