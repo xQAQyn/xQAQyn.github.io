@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="应用层协议原理  应用层体系结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network(1):Application">
+<meta property="og:url" content="http://example.com/2023/10/29/Computer%20Network/ComputerNetwork-1-Application/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="应用层协议原理  应用层体系结构">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120151436315.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120154943505.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120160452744.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120162005010.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120163810636.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120201830149.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120203621402.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121132251532.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121132527860.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121132536977.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121140542450.png">
+<meta property="article:published_time" content="2023-10-29T02:38:50.000Z">
+<meta property="article:modified_time" content="2023-11-23T12:27:00.000Z">
+<meta property="article:author" content="xQAQyn">
+<meta property="article:tag" content="Lecture Note">
+<meta property="article:tag" content="Computer Network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120151436315.png">
+
+
+<link rel="canonical" href="http://example.com/2023/10/29/Computer%20Network/ComputerNetwork-1-Application/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/10/29/Computer%20Network/ComputerNetwork-1-Application/","path":"2023/10/29/Computer Network/ComputerNetwork-1-Application/","title":"Computer Network(1):Application"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Computer Network(1):Application | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text"> 应用层协议原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text"> 应用层体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="nav-number">1.2.</span> <span class="nav-text"> 进程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BE%9B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E8%BF%90%E8%BE%93%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text"> 可供应用程序使用的运输服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.4.</span> <span class="nav-text"> 应用层协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E5%92%8Chttp"><span class="nav-number">2.</span> <span class="nav-text"> Web和HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#http%E6%A6%82%E5%86%B5"><span class="nav-number">2.1.</span> <span class="nav-text"> HTTP概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text"> 非持续连接和持续连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http%E6%8A%A5%E6%96%87"><span class="nav-number">2.3.</span> <span class="nav-text"> HTTP报文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">2.3.1.</span> <span class="nav-text"> HTTP请求报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">2.3.2.</span> <span class="nav-text"> HTTP响应报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BA%A4%E4%BA%92cookie"><span class="nav-number">2.4.</span> <span class="nav-text"> 用户与服务器的交互：Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E7%BC%93%E5%AD%98"><span class="nav-number">2.5.</span> <span class="nav-text"> Web缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text"> 电子邮件相关协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#smtp"><span class="nav-number">3.1.</span> <span class="nav-text"> SMTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.2.</span> <span class="nav-text"> 邮件访问协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pop3"><span class="nav-number">3.2.1.</span> <span class="nav-text"> POP3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imap"><span class="nav-number">3.2.2.</span> <span class="nav-text"> IMAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Eweb%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text"> 基于Web的电子邮件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dns%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text"> DNS：因特网的目录服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dns%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.1.</span> <span class="nav-text"> DNS设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p2p%E4%BC%A0%E8%BE%93"><span class="nav-number">5.</span> <span class="nav-text"> P2P传输</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bittorrent"><span class="nav-number">5.1.</span> <span class="nav-text"> BitTorrent</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/Computer%20Network/ComputerNetwork-1-Application/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Computer Network(1):Application | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Computer Network(1):Application
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-29 10:38:50" itemprop="dateCreated datePublished" datetime="2023-10-29T10:38:50+08:00">2023-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-23 20:27:00" itemprop="dateModified" datetime="2023-11-23T20:27:00+08:00">2023-11-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="应用层协议原理"><a class="markdownIt-Anchor" href="#应用层协议原理"></a> 应用层协议原理</h1>
+<h2 id="应用层体系结构"><a class="markdownIt-Anchor" href="#应用层体系结构"></a> 应用层体系结构</h2>
+<span id="more"></span>
+<p><strong>网络应用程序体系结构</strong>为应用程序研发者设计，规定了如何在各种端系统上组织该应用程序。当前主流的结构有以下两种：</p>
+<ul>
+<li>
+<p>客户-服务器体系结构：有一个总是打开的主机称为服务器，它服务于其它称为客户的主机的请求。这一结构的一个显著特征是服务器具有固定的、周知的IP地址，且总是打开，客户总能通过该IP地址与服务器进行联系。</p>
+<p>这一体系下单独的服务器往往不堪重负，所以对流行应用，往往会使用数据中心创建强大的虚拟服务器</p>
+</li>
+<li>
+<p>P2P体系结构：应用程序在间断连接的主机对之间使用直接通信，这些主机对被称为对等方，由用户所有，不需要通过专门的服务器。目前许多流行的流量密集型应用都是P2P体系结构的，例如BitTorrent、迅雷、Skype，某些这类应用也采用了P2P和客户-服务器体系混合结构。</p>
+<p>P2P体系结构具有自拓展性（应用中，对等方增加会带来请求数增加，但服务能力也会同步增加）、成本低。缺点为非集中式带来的安全性、性能和可靠性挑战。</p>
+</li>
+</ul>
+<h2 id="进程通信"><a class="markdownIt-Anchor" href="#进程通信"></a> 进程通信</h2>
+<p>定义：在一对进程之间的通信会话场景中，发起通信的进程被标识为<strong>客户</strong>，开始时等待联系的进程称为<strong>服务器</strong></p>
+<p>进程通过名为<strong>套接字</strong>(socket)的软件接口向网络发送报文和从网络接收报文，套接字可以被用于控制应用层端的一切，但对运输层的控制极为有限（只有选择运输层协议和设置几个运输层参数）</p>
+<p>进程之间想要通信必需定义地址，地址至少包含两部分信息：主机地址、主机中接收进程的标识符。在因特网中使用IP地址和目的地端口号表示。</p>
+<h2 id="可供应用程序使用的运输服务"><a class="markdownIt-Anchor" href="#可供应用程序使用的运输服务"></a> 可供应用程序使用的运输服务</h2>
+<p>运输层往往会提供多种协议供应用层使用，选择所考虑的指标主要有：可靠数据传输、吞吐量、定时和安全性。</p>
+<ul>
+<li>可靠数据传输：分组在计算机网络中是可能丢失的。但可以通过协议确保数据的交付。部分协议提供了可靠数据传输。对没有提供的协议来说，它们也可能被能容忍丢失的应用所接受。</li>
+<li>吞吐量：可用吞吐量为发送进程能够向接收进程交付比特的速率，一般情况下该值是波动的。但有部分运输层协议提供了服务确保可用吞吐量的下限，这对带宽敏感应用（例如多媒体应用）是至关重要的。</li>
+<li>定时：部分运输层协议提供定时保证，即保证发送方注入进套接字的每个比特到达接收方套接字的时延不超过一个固定值。</li>
+<li>安全性：运输协议能提供多种安全性服务，例如在传输过程中加密、数据完整性鉴别、端点鉴别等。</li>
+</ul>
+<p>因特网中提供了TCP和UDP两种运输层协议</p>
+<h2 id="应用层协议"><a class="markdownIt-Anchor" href="#应用层协议"></a> 应用层协议</h2>
+<p>应用层协议规定了运行在不同端系统上的应用程序进程如何相互传递报文，主要包括：</p>
+<ul>
+<li>交换报文的类型，例如请求报文和响应报文</li>
+<li>各种报文类型的语法，即报文中各个字段如何描述</li>
+<li>字段的语义，即这些字段中信息的含义</li>
+<li>确定一个进程何时以及如何发送报文，对报文进行响应的规则</li>
+</ul>
+<p>有些应用层协议是RFC文档定义的，位于公共域中，如HTTP；有些是专用的应用层协议，不为公共域使用，如软件内一些专用协议。</p>
+<h1 id="web和http"><a class="markdownIt-Anchor" href="#web和http"></a> Web和HTTP</h1>
+<h2 id="http概况"><a class="markdownIt-Anchor" href="#http概况"></a> HTTP概况</h2>
+<p>Web页面是由对象组成的，一个对象是一个文件(html、图片、程序等)。多数Web页面含义一个HTML基本文件。Web浏览器实现了HTTP的服务端，Web服务器实现了HTTP的服务器端，用于存储对象，通过URL寻址对象。</p>
+<p>Web的应用层协议是<strong>超文本传输协议</strong>(HyperText Transfer Protocol, HTTP)，其由两个程序实现：一个客户程序和一个服务器程序，在不同的端系统实现，通过HTTP报文进行会话。HTTP规定了报文结构、客户与服务器交换报文的方式。</p>
+<p>HTTP所定义的交互方式如下图所示，客户请求一个Web页面时，浏览器向服务器发送对页面对象的请求，服务器接收到请求后发送对该页面所包含对象的HTTP响应报文进行响应。</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120151436315.png" alt="image-20231120151436315" /></p>
+<p>HTTP使用TCP作为它的支撑运输协议。</p>
+<p>HTTP是一个无状态协议，服务器向客户发送被请求的文件，而不存储任何关于该客户的状态信息。</p>
+<h2 id="非持续连接和持续连接"><a class="markdownIt-Anchor" href="#非持续连接和持续连接"></a> 非持续连接和持续连接</h2>
+<p>HTTP所实现的客户-服务器交互通过TCP进行，所以程序的研制者需要决定采用非持续连接（每个请求/响应对通过一个单独的TCP连接发送）还是连续连接（所有请求/响应对通过同一个TCP连接发送。默认情况下HTTP使用持续连接。</p>
+<p>非持续连接执行流程（客户向服务器请求一个Web页面）：</p>
+<ol>
+<li>HTTP客户进程在端口号80（默认端口）发起一个到服务器的TCP连接</li>
+<li>HTTP客户端经它的套接字向服务器发送一个HTTP请求报文，其中包含请求对象的路径</li>
+<li>HTTP服务器经它的套接字接收请求报文，从其存储器中根据路径检索出对应对象，在HTTP响应报文中封装对应对象，然后通过套接字向客户发送响应报文。</li>
+<li>HTTP服务器进程通知TCP断开TCP连接（此时还未实际断开，在5中才实际断开）</li>
+<li>HTTP客户接收响应报文，完整接收后TCP连接断开。然后通过解析报文提取出对应对象。</li>
+</ol>
+<p>我可以根据这个过程流程估算客户请求到客户收到整个文件所花费的时间。这里引入<strong>往返时间</strong>(Round-Trip Time, RTT)，指一个短分组从客户到服务器然后返回客户所需时间。RTT包括分组传播时延、分组在路由器和交换机上的排队时延和分组处理时延。</p>
+<p>客户点击链接后，会经历一次“三次握手”的过程，客户端向服务器发送一个小的TCP报文段，服务器用一个小的TCP报文段做出确认和响应，最后，客户向服务器返回确认。前两次握手会使用一个RTT，第三次握手的同时向TCP连接发送一个HTTP请求报文。请求到达后服务器进行响应，请求/响应再花掉一个RTT。粗略估算，总响应时间是两个RTT加上文件传输时间。</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120154943505.png" alt="image-20231120154943505" /></p>
+<p>非持续的连接有一些缺点：</p>
+<ul>
+<li>必须为每一个请求对象建立和维护一个全新的连接，这会大量消耗服务器资源（缓冲区、相关变量）</li>
+<li>每一个对象需要经受两倍RTT的交付时延</li>
+</ul>
+<p>连续连接（HTTP1.1引入）则在这个基础上，响应后维持TCP连接打开，（往往）在一段时间未被使用后才关闭。且可以采用流水机制（不必等待回复就发出下一个请求）可以进一步提高性能。</p>
+<h2 id="http报文"><a class="markdownIt-Anchor" href="#http报文"></a> HTTP报文</h2>
+<h3 id="http请求报文"><a class="markdownIt-Anchor" href="#http请求报文"></a> HTTP请求报文</h3>
+<p>HTTP请求报文具有通用格式如下</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120160452744.png" alt="image-20231120160452744" /></p>
+<ul>
+<li>请求行：为第一行，有三个字段
+<ul>
+<li>方法：包括GET、POST、HEAD、PUT和DELETE，根据语义进行使用</li>
+<li>URL：指定请求对象的路径</li>
+<li>版本：例如HTTP/1.1，指定版本</li>
+</ul>
+</li>
+<li>首部行：从第二行开始的若干行，一行指定一个字段的值</li>
+<li>实体体：首部行结束后空一行。实体体可以为空，有时也需要填充内容，例如通过POST向服务器提交表单时，表单内容便可以放在实体体内。</li>
+</ul>
+<h3 id="http响应报文"><a class="markdownIt-Anchor" href="#http响应报文"></a> HTTP响应报文</h3>
+<p>下面是HTTP响应报文的通用格式：</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120162005010.png" alt="image-20231120162005010" /></p>
+<ul>
+<li>状态行：第一行，由版本、状态码、短语组成
+<ul>
+<li>版本：与请求报文相同</li>
+<li>状态码和短语：常见的有<code>200 OK</code>（请求成功）、<code>301 Moved Permanently</code>（请求对象被永久转移）、<code>400 Bad Request</code>（通用差错代码，代表服务器无法理解请求）、<code>404 Not Found</code>（被请求文档不在服务器上）、<code>505 HTTP Version Not Supported</code>（服务器不支持请求的HTTP版本）</li>
+</ul>
+</li>
+<li>首部行：与请求报文类似</li>
+<li>实体体：与请求报文类似</li>
+</ul>
+<h2 id="用户与服务器的交互cookie"><a class="markdownIt-Anchor" href="#用户与服务器的交互cookie"></a> 用户与服务器的交互：Cookie</h2>
+<p>HTTP本身是无状态的，这简化了服务器的设计，提高了其性能。但服务器有时需要识别用户（用于限制访问或辨别内容来源等），为此使用了Cookie实现用户跟踪。</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120163810636.png" alt="image-20231120163810636" /></p>
+<p>上面是Cookie工作流程的一个示意图，cookie技术主要有4个组件：</p>
+<ul>
+<li>HTTP响应报文中的cookie首部行</li>
+<li>HTTP请求报文中的cookie首部行</li>
+<li>用户端系统中保留的cookie文件，由浏览器管理</li>
+<li>位于Web站点服务器后的后端数据库</li>
+</ul>
+<p>在响应报文给用户设置了cookie后，用户给该站点发送的所有请求都将带上cookie，这样便实现了标识用户。</p>
+<h2 id="web缓存"><a class="markdownIt-Anchor" href="#web缓存"></a> Web缓存</h2>
+<p>Web缓存器也叫代理服务器，它能代表初始Web服务器响应HTTP请求的网络实体。其由自己的存储空间，存储最近被请求过的对象。可以配置用户的浏览器使得用户所有的HTTP请求首先指向Web缓存器，之后会发生：</p>
+<ol>
+<li>浏览器创建一个到Web缓存器的TCP连接，并发送HTTP请求</li>
+<li>Web缓存器进行检查，检查本地是否存储了该对象的副本，如果有，直接响应并返回该对象</li>
+<li>如果Web缓存器中没有该对象，Web缓存器就向对应的初始服务器建立TCP连接请求该对象，得到后存储在本地，再对用户进行响应。</li>
+</ol>
+<p>Web服务器能够降低请求的响应时间，且能减少因特网的通信量。</p>
+<p>通过<strong>内容分发网络</strong>(Content Distribution Network, CDN)发展，Web缓存器愈发重要。CDN公司在因特网上安装了很多地理上分散的缓存器，实现了大量流量的本地化。</p>
+<p>但Web缓存会引入新问题，即得到的对象在服务器上已经修改但在缓存器中还存储着陈旧版本。HTTP协议通过条件GET方法的机制来解决这一问题。</p>
+<p>条件GET方法是指满足以下条件的方法：</p>
+<ul>
+<li>请求报文使用GET方法</li>
+<li>请求报文包含&quot;If-Modified-Since:&quot;首部行</li>
+</ul>
+<p>工作方式：</p>
+<ul>
+<li>
+<p>代理缓存器向服务器请求时，服务器返回的数据带有一个标识最后修改日期的首部行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Last-Modified: Wed, 9 Sep 2020 18:24:15</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>过了一段时间后，有用户向缓存器请求该对象时，缓存器需要先使用条件GET检查是否为最新版本，只需要GET方法加上下面一个首部行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Modified-Since: Wed, 9 Sep 2020 18:24:15</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>这样，如果没有在这个时间之后发生变换，服务器会返回304 Not Modified的空body响应报文，否则服务器会返回该对象</p>
+</li>
+</ul>
+<h1 id="电子邮件相关协议"><a class="markdownIt-Anchor" href="#电子邮件相关协议"></a> 电子邮件相关协议</h1>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120201830149.png" alt="image-20231120201830149" /></p>
+<p>因特网电子邮件系统主要由三部分组成：用户代理、邮件服务器和简单邮件传输协议(Simple Mail Transfer Protocol, SMTP)。</p>
+<p>邮件服务器是电子邮件体系结构的核心。每个接收方（用户）都在服务器上有一个邮箱，邮箱管理和维护着发送给他的报文。邮件还应该能够处理其它邮箱故障的情况，如果发送的邮件交付失败，会将其保存在报文队列里，定期重新尝试（一般是30分钟），如果较长时间（一般是几天）仍不能成功，则删除该邮箱并电子邮件通知发送方。</p>
+<p>SMTP是因特网电子邮件中主要的应用层协议，使用了TCP可靠数据传输。每个邮件服务器既是SMTP的服务器端，也是客户端，取决于其行为是发送还是接收。</p>
+<h2 id="smtp"><a class="markdownIt-Anchor" href="#smtp"></a> SMTP</h2>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231120203621402.png" alt="image-20231120203621402" /></p>
+<p>一个简单的发送邮件过程如上图所示。SMTP的一个重要特点是，一般不会使用中间邮件服务器发送邮件，总是直接相连，即使连接尝试失败，也是尝试重新直连。</p>
+<p>SMTP要求报文必须被编码为7bit的ASCII码</p>
+<p>报文以<code>CRLF.CRLF</code>结束。与之对应的，这个组合不能出现在正文中，需重新编码</p>
+<p>SMTP与HTTP的异：</p>
+<ul>
+<li>HTTP为拉协议（用户使用HTTP从服务器拉取信息），SMTP为推协议（发送邮件服务器把文件推向接收邮件服务器），TCP均为先发送方发起</li>
+<li>HTTP对报文数据不受限制，SMTP必须编码为7bit的ASCII码</li>
+<li>。HTTP封装单个对象到报文中，而SMTP会编码所有对象到一个报文中</li>
+</ul>
+<p>SMTP的报文格式由两部分组成：</p>
+<ul>
+<li>首部行：与HTTP格式一致，但要求必须包含<code>From: xxx</code>和<code>To: xxx</code>两个首部行</li>
+<li>报文体：首部行后空一行开始，要求全部使用7bit的ASCII码</li>
+</ul>
+<h2 id="邮件访问协议"><a class="markdownIt-Anchor" href="#邮件访问协议"></a> 邮件访问协议</h2>
+<p>一般情况下，用户不会在自己的设备上运行邮件服务器，所以通过运行代理程序来收发邮件。但之间通过SMTP连接会导致问题（重发的机制不适用于会关机的用户），所以采用了邮件访问协议，包括第三版邮局协议(Post Office Protocol-Version 3, POP3)、IMAP协议</p>
+<h3 id="pop3"><a class="markdownIt-Anchor" href="#pop3"></a> POP3</h3>
+<p>POP3的工作流程如下：</p>
+<ul>
+<li>
+<p>用户代理到邮件服务器的110端口建立TCP连接后，POP3同时启动</p>
+</li>
+<li>
+<p>特许阶段：支持两个主要命令<code>user &lt;user name&gt;</code>和<code>pass &lt;password&gt;</code>分别为输入用户名和密码</p>
+<ul>
+<li>服务器会回答<code>+OK</code>或<code>-ERR</code>表示命令是否正确被执行</li>
+</ul>
+</li>
+<li>
+<p>事务处理：主要有<code>list</code>,<code>retr</code>和<code>dele</code>三种指令</p>
+<ul>
+<li>
+<p><code>list</code>会列出所有邮件的列表和其对应的长度，一个返回的例子为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C: list</span><br><span class="line">S: 1 498</span><br><span class="line">S: 2 912</span><br><span class="line">S: .</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>retr &lt;number&gt;</code>为从服务器请求一封邮件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C: retr 1</span><br><span class="line">S: (content...)</span><br><span class="line">S: (content...)</span><br><span class="line">S: .</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>dele &lt;number&gt;</code>为从服务器删除邮件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C: dele 1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>退出：客户发出<code>quit</code>指令，POP3退出，断开连接</p>
+</li>
+</ul>
+<h3 id="imap"><a class="markdownIt-Anchor" href="#imap"></a> IMAP</h3>
+<p>POP3会从服务器下载邮件到本地，然后在本地查看，但移动用户往往希望直接访问服务器上的报文，所以产生了IMAP协议</p>
+<p>IMAP协议把每个报文与一个文件夹相关联。</p>
+<ul>
+<li>当报文第一次到达服务器时，与收件人的INBOX文件夹相关联，此后用户可以通过命令继续移动该报文到其它文件夹。</li>
+<li>IMAP提供命令支持查询指定文件夹内的邮件</li>
+<li>IMAP维护了用户的状态信息，例如文件夹与报文的关联信息</li>
+<li>IMAP支持获取报文某些部分的命令，可以降低带宽的要求</li>
+</ul>
+<h3 id="基于web的电子邮件"><a class="markdownIt-Anchor" href="#基于web的电子邮件"></a> 基于Web的电子邮件</h3>
+<p>用户使用HTTP接收</p>
+<h1 id="dns因特网的目录服务"><a class="markdownIt-Anchor" href="#dns因特网的目录服务"></a> DNS：因特网的目录服务</h1>
+<p>识别主机有两种方式：主机名(host name)和IP地址。但人类一般更喜欢记忆主机名，所以需要一个域名系统(Domain Name System, DNS)将其转换为IP地址。DNS是</p>
+<ul>
+<li>一个由分层DNS服务器实现的分布式数据库</li>
+<li>一个使得主机能够查询分布式数据库的应用层协议（运行在UDP上53号端口）</li>
+</ul>
+<p>一次DNS解析流程如下</p>
+<ol>
+<li>在浏览器中输入网址（例如<a target="_blank" rel="noopener" href="http://www.hust.edu.cn/index.html">www.hust.edu.cn/index.html</a>），提取出<a target="_blank" rel="noopener" href="http://www.hust.edu.cn">www.hust.edu.cn</a>，发送给DNS客户机</li>
+<li>DNS客户机将网址封装，发送请求报文给DNS服务器</li>
+<li>DNS服务器返回带有解析后的IP地址的响应报文给DNS客户机</li>
+<li>DNS客户机将IP地址发送回浏览器</li>
+<li>浏览器根据IP地址发起TCP连接</li>
+</ol>
+<h2 id="dns设计"><a class="markdownIt-Anchor" href="#dns设计"></a> DNS设计</h2>
+<p>DNS一种简单的设计是在因特网上只使用一个DNS服务器，其存储所有的映射关系，但存在如下问题</p>
+<ul>
+<li>单点故障：如果该DNS服务器崩溃，整个因特网随之崩溃</li>
+<li>通信容量：单个DNS服务器需要处理整个因特网所有DNS查询</li>
+<li>远距离：单个DNS服务器只能放在一个地理位置上，必定存在客户需要极远距离的查询</li>
+<li>维护：单个DNS服务器导致中央数据库庞大，且需要给每个新加入的主机更新，更新极为频繁</li>
+</ul>
+<p>为了解决这些问题，DNS使用了分布式、层次数据库，将映射关系分布在了所有的DNS服务器上。</p>
+<p>为了理解这类DNS工作方式，需要先了解域名的结构，现在使用的域名为一个层次结构，其表示为<code>...三级域名.二级域名.顶级域名</code>的形式，我们根据此形式组织DNS服务器：</p>
+<ul>
+<li>根DNS服务器：有400多个，由13个不同组织进行管理，它根据顶级域名提供TLD服务器的IP地址</li>
+<li>顶级域(Top-Level Domain, TLD)DNS服务器：对每个顶级域(如com, org, gov, cn, uk)都要TLD服务器，TLD根据域名提供权威DNS服务器的IP地址</li>
+<li>权威DNS服务器：因特网上公共可访问主机的每个组织机构提供公共可访问的DNS记录，将域名映射为IP地址。</li>
+</ul>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121132251532.png" alt="image-20231121132251532" /></p>
+<p>在层次结构以外还有本地DNS服务器（也称默认DNS服务器），当主机需要DNS查询时，请求首先被发送至本地DNS服务器。其行为类似于代理，提供进一步查询并减少延时。加上本地DNS后完整查询流程如下图所示。</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121132527860.png" alt="image-20231121132527860" /></p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121132536977.png" alt="image-20231121132536977" /></p>
+<p>DNS可以提供的服务包括：</p>
+<ul>
+<li>域名到IP地址的转换</li>
+<li>为不好记的域名提供好记的别名</li>
+<li>负载均衡：一个域名对应多个IP地址，DNS服务器在多个之间进行轮转</li>
+</ul>
+<p>DNS记录的格式：<code>(name, value, type, ttl)</code>，ttl为</p>
+<ul>
+<li>type为A：设置主机名name对应IP地址为value</li>
+<li>type为NS：设置域名为name对应域权威DNS服务器的主机名为value</li>
+<li>type为CNAME：设置value对应的别名为name</li>
+<li>type为MX：设置name相关的邮件服务器域名为value</li>
+</ul>
+<p>攻击DNS服务器：</p>
+<ul>
+<li>DDoS攻击：通过ICMP Ping攻击根服务器（难以成功），通过DNS请求报文泛洪攻击TLD服务器（难以过滤）</li>
+<li>重定向攻击：
+<ul>
+<li>中间人攻击：攻击者截获用户请求并伪造回答</li>
+<li>DNS毒害攻击：攻击者向一台DNS服务器发送伪造回答，诱使其在缓存中接收伪造记录</li>
+</ul>
+</li>
+</ul>
+<h1 id="p2p传输"><a class="markdownIt-Anchor" href="#p2p传输"></a> P2P传输</h1>
+<p>一次P2P的传输如下：</p>
+<ol>
+<li>A运行P2P客户端，告诉客户端其需要的资源，应用显示出拥有这个资源的其它计算机</li>
+<li>A从中选择B，然后资源通过网络从B传输给A</li>
+<li>在A使用P2P客户端时，其它用户也在向A上传/下载其它资源</li>
+</ol>
+<p>所有的计算机都是服务器，带来高扩展性，这里可以计算出文件分发所需要的时间：假设服务器上传速度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>u</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">u_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，用户上传速度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>u</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>u</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">u_1,u_2,...</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span></span></span></span> ，下载速度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>d</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">d_1,d_2,...</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span></span></span></span>，如果要分发给 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> 个用户一个大小为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span></span></span> 的文件，那么所需时间为：</p>
+<ul>
+<li>对客户-服务器模型：理论最快时间 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mrow><mi>c</mi><mi>s</mi></mrow></msub><mo>=</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">{</mo><mfrac><mrow><mi>N</mi><mi>F</mi></mrow><msub><mi>u</mi><mi>s</mi></msub></mfrac><mo separator="true">,</mo><mfrac><mi>F</mi><msub><mi>d</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mfrac><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">D_{cs}=\max\{\frac{NF}{u_s},\frac{F}{d_{min}} \}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.317431em;vertical-align:-0.44509999999999994em;"></span><span class="mop">max</span><span class="mopen">{</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">}</span></span></span></span></li>
+<li>对P2P模型：P2P由于过于复杂，难以准确估计，这里只估计其下限，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mrow><mi>P</mi><mn>2</mn><mi>P</mi></mrow></msub><mo>≥</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">{</mo><mfrac><mi>F</mi><msub><mi>u</mi><mi>s</mi></msub></mfrac><mo separator="true">,</mo><mfrac><mi>F</mi><msub><mi>d</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mfrac><mo separator="true">,</mo><mfrac><mrow><mi>N</mi><mi>F</mi></mrow><mrow><msub><mi>u</mi><mi>s</mi></msub><mo>+</mo><mo>∑</mo><msub><mi>u</mi><mi>i</mi></msub></mrow></mfrac><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">D_{P2P}\ge \max\{\frac{F}{u_s},\frac{F}{d_{min}},\frac{NF}{u_s+\sum u_i} \}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="mord mtight">2</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.392338em;vertical-align:-0.520007em;"></span><span class="mop">max</span><span class="mopen">{</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.520007em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">}</span></span></span></span></li>
+</ul>
+<p>分发时间随用户数的变化如图所示</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121140542450.png" alt="image-20231121140542450" /></p>
+<h2 id="bittorrent"><a class="markdownIt-Anchor" href="#bittorrent"></a> BitTorrent</h2>
+<p>洪流(torrent)：某个特定文件分发的所有对等方</p>
+<p>文件块：等长度(一般为256KB)的文件单位</p>
+<p>每个洪流具有一个基础设施节点称为追踪器，每个对等方的加入需要向追踪器注册自己，并周期性通知追踪器自己仍在洪流内。</p>
+<p>基本工作机制：</p>
+<ul>
+<li>最稀缺优先：针对一个对等方缺少的块，先在它邻居中请求最稀缺的块（即统计所有邻居保存某个块的副本数量，选最少的一个），这样可以均衡块在洪流中的副本数量</li>
+<li>对换算法：决定对等方优先响应哪一个请求
+<ul>
+<li>每10s计算一次自己接收速率最高的对应的邻居</li>
+<li>每30s随机选择一个新邻居进行发送</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Lecture-Note/" rel="tag"># Lecture Note</a>
+              <a href="/tags/Computer-Network/" rel="tag"># Computer Network</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/21/Computer%20Network/ComputerNetwork-0-Intro/" rel="prev" title="Computer Network(0):Intro">
+                  <i class="fa fa-angle-left"></i> Computer Network(0):Intro
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/29/Computer%20Network/ComputerNetwork-2-Transport/" rel="next" title="Computer Network(2):Transport">
+                  Computer Network(2):Transport <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>

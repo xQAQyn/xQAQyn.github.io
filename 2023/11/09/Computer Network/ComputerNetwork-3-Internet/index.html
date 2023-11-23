@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="网络层可以分解为两个相互作用的部分：数据平面和控制平面。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network(3):Network">
+<meta property="og:url" content="http://example.com/2023/11/09/Computer%20Network/ComputerNetwork-3-Internet/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="网络层可以分解为两个相互作用的部分：数据平面和控制平面。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109212856778.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109221320961.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109222431367.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109222914117.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109224250248.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231110102944004.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122161051755.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122161520854.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122173441116.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122213930415.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122214617497.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122212616166.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122213746888.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231123193001000.png">
+<meta property="article:published_time" content="2023-11-09T01:48:33.000Z">
+<meta property="article:modified_time" content="2023-11-23T12:27:46.000Z">
+<meta property="article:author" content="xQAQyn">
+<meta property="article:tag" content="Lecture Note">
+<meta property="article:tag" content="Computer Network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109212856778.png">
+
+
+<link rel="canonical" href="http://example.com/2023/11/09/Computer%20Network/ComputerNetwork-3-Internet/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/09/Computer%20Network/ComputerNetwork-3-Internet/","path":"2023/11/09/Computer Network/ComputerNetwork-3-Internet/","title":"Computer Network(3):Network"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Computer Network(3):Network | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text"> 网络层数据平面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text"> 路由器工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86%E5%92%8C%E5%9F%BA%E4%BA%8E%E7%9B%AE%E7%9A%84%E5%9C%B0%E7%9A%84%E8%BD%AC%E5%8F%91"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 输入端口处理和基于目的地的转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86"><span class="nav-number">1.1.3.</span> <span class="nav-text"> 输出端口处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E9%98%9F"><span class="nav-number">1.1.4.</span> <span class="nav-text"> 排队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%B0%83%E5%BA%A6"><span class="nav-number">1.1.5.</span> <span class="nav-text"> 分组调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEipv4-%E5%AF%BB%E5%9D%80-ipv6"><span class="nav-number">1.2.</span> <span class="nav-text"> 网际协议：IPv4、寻址、IPv6</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text"> IPv4数据报格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%88%86%E7%89%87"><span class="nav-number">1.2.2.</span> <span class="nav-text"> IPv4数据报分片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E7%BC%96%E5%9D%80"><span class="nav-number">1.2.3.</span> <span class="nav-text"> IPv4编址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E5%9C%B0%E5%9D%80%E8%8E%B7%E5%8F%96dhcp"><span class="nav-number">1.2.4.</span> <span class="nav-text"> IPv4地址获取：DHCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2nat"><span class="nav-number">1.2.5.</span> <span class="nav-text"> 网络地址转换：NAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv6"><span class="nav-number">1.2.6.</span> <span class="nav-text"> IPv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E5%88%B0ipv6%E7%9A%84%E8%BF%81%E7%A7%BB"><span class="nav-number">1.2.7.</span> <span class="nav-text"> IPv4到IPv6的迁移</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text"> 网络层控制平面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 路由选择算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 链路状态算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 距离向量路由选择算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A0%E7%89%B9%E7%BD%91%E4%B8%AD%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E5%86%85%E9%83%A8%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.</span> <span class="nav-text"> 因特网中自治系统内部路由选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rip"><span class="nav-number">2.2.1.</span> <span class="nav-text"> RIP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ospf"><span class="nav-number">2.2.2.</span> <span class="nav-text"> OSPF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isp%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9bgp"><span class="nav-number">2.3.</span> <span class="nav-text"> ISP之间的路由选择：BGP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bgp%E5%8F%91%E8%A8%80%E4%BA%BA%E8%BE%B9%E7%95%8C%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">2.3.1.</span> <span class="nav-text"> BGP发言人（边界路由器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AD%96%E7%95%A5"><span class="nav-number">2.3.2.</span> <span class="nav-text"> 路由选择策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A0%E7%89%B9%E7%BD%91%E6%8E%A7%E5%88%B6%E6%8A%A5%E6%96%87%E5%8D%8F%E8%AE%AEicmp"><span class="nav-number">2.4.</span> <span class="nav-text"> 因特网控制报文协议：ICMP</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/09/Computer%20Network/ComputerNetwork-3-Internet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Computer Network(3):Network | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Computer Network(3):Network
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-09 09:48:33" itemprop="dateCreated datePublished" datetime="2023-11-09T09:48:33+08:00">2023-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-23 20:27:46" itemprop="dateModified" datetime="2023-11-23T20:27:46+08:00">2023-11-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>网络层可以分解为两个相互作用的部分：数据平面和控制平面。</p>
+<span id="more"></span>
+<ul>
+<li>数据平面主要实现了网络层中每台路由器的功能，它决定了到达路由器输入链路之一的数据报，如何转发到路由器输出链路之一；</li>
+<li>控制平面设计网络范围的逻辑，其功能为控制数据报沿着源主机到目标主机的端到端路径中路由器之间的路由方式。</li>
+</ul>
+<p>网络层主要有有两大功能：</p>
+<ul>
+<li>转发：数据平面实现（数据平面唯一功能），实现一个分组从路由器一条输入链路移动至适当的输出链路。时间较短（通常为几纳秒），一般为硬件实现。</li>
+<li>路由选择：分组从发送方流向接收方时，网络层决定分组所采用的路由或路径。时间较长（通常为几秒），通常为软件实现。</li>
+</ul>
+<p>网络层提供了单一的服务，被称为尽力而为服务(best-effort service)。这一服务不保证传送分组以发送顺序被接收，也不保证他们最终交付、端到端时延和最小带宽。</p>
+<h1 id="网络层数据平面"><a class="markdownIt-Anchor" href="#网络层数据平面"></a> 网络层数据平面</h1>
+<h2 id="路由器工作原理"><a class="markdownIt-Anchor" href="#路由器工作原理"></a> 路由器工作原理</h2>
+<p>下图展式了一个通用路由器体系结构</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109212856778.png" alt="image-20231109212856778" /></p>
+<p>路由器由四类组件构成：</p>
+<ul>
+<li>输入端口：输入端口的功能分为三段，上图中用三个逻辑方框表示。左侧方框终结物理层功能；中间方框与链路层进行交互来执行链路层功能；右侧方框则要执行查找功能，即通过查找转发表决定输出端口。</li>
+<li>交换结构：将输入端口连接到对应输出端口</li>
+<li>输出端口：与输入端口结构类似。其从交换结构接收分组，并通过执行必要的链路层和物理层功能在输出链路上传输这些分组。</li>
+<li>路由选择处理器：路由选择控制器实现控制平面功能。在传统路由器中，其负责执行路由选择协议，维护路由选择表与关联链路状态信息，并为路由器计算出转发表。在SDN路由器中，路由选择处理器负责与远程控制器通信，接收转发表并安装。</li>
+</ul>
+<h3 id="输入端口处理和基于目的地的转发"><a class="markdownIt-Anchor" href="#输入端口处理和基于目的地的转发"></a> 输入端口处理和基于目的地的转发</h3>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109221320961.png" alt="image-20231109221320961" /></p>
+<p>我们重点关注转发表的实现。最简单的情况下，我们给所有可能的ip地址都分配一个表项，这样会有40多亿个表项，是不可行的。但实际中我们并不需要存储所有的表项，例如下面的转发方式：</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109222431367.png" alt="image-20231109222431367" /></p>
+<p>对于这个例子，我们只需要对其匹配前缀，即可知道其链路接口，得到转发表</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109222914117.png" alt="image-20231109222914117" /></p>
+<p>对接口1、2可以看出，他们具有共同的一个前缀，此时为了正确匹配，需要采用<strong>最长前缀匹配原则</strong>。</p>
+<p>根据转发表我们得到了分组的输出端口，这样分组便可以进入交换结构了。在某些设计中，如果交换结构正在被使用，那么即将进入的分组便会被暂时阻塞，具体表现为在输入端口出排队，等待被调度。</p>
+<h3 id="交换"><a class="markdownIt-Anchor" href="#交换"></a> 交换</h3>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231109224250248.png" alt="image-20231109224250248" /></p>
+<p>上图所示的为三类常见交换方式：</p>
+<ul>
+<li>经内存交换：交换结构为一个常规的I/O设备。一个分组到达交换结构的输入端口时，该端口向路由选择处理器发送中断，然后被复制进入处理器内存中；处理器从其首部提取目标地址，在转发表中找到适当输出端口后，将分组复制到输出端口缓存中。由于该结构不能同时转发两个及以上的分组，所以若内存读写性能为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> 个分组每秒，则转发吞吐量一定小于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>B</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{B}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>。</li>
+<li>经总线交换：输入端口经一根共享总线直接送至输出端口，不需要路由选择处理器干预。通常的流程为：输入端口为分组预先计划一个交换机内部标签（首部），指示本地输出端口。分组在总线上传输到所有输出端口，但输出端口只接收标签匹配的分组。该结构下，交换结构中也只能存在一个分组，其余分组需要等待。</li>
+<li>经互联网络交换：如上图所示，只需要控制交叉点的连通性，就可以实现非阻塞的交换。</li>
+</ul>
+<h3 id="输出端口处理"><a class="markdownIt-Anchor" href="#输出端口处理"></a> 输出端口处理</h3>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231110102944004.png" alt="image-20231110102944004" /></p>
+<p>输出端口执行两步操作，选择并去除缓存中的分组、进行传输，分别由链路层和物理层实现。</p>
+<h3 id="排队"><a class="markdownIt-Anchor" href="#排队"></a> 排队</h3>
+<p>假设路由器有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> 个输入端口和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> 个输出端口，速率均相同为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>l</mi><mi>i</mi><mi>n</mi><mi>e</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{line}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 个分组每秒（假设分组长度相同）。分组以同步的方式到达端口。在这样的假设下，每个时间间隔内端口到达0或1个分组。定义交换结构速率 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>s</mi><mi>w</mi><mi>i</mi><mi>t</mi><mi>c</mi><mi>h</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{switch}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">h</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 为输入端口到输出端口的移动分组速率。只要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>s</mi><mi>w</mi><mi>i</mi><mi>t</mi><mi>c</mi><mi>h</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{switch}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">h</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 比 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>l</mi><mi>i</mi><mi>n</mi><mi>e</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{line}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 快 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> 倍就几乎不会出现排队。</p>
+<p>如果 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>s</mi><mi>w</mi><mi>i</mi><mi>t</mi><mi>c</mi><mi>h</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{switch}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">h</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 达不到这样的速度，那么输入端口就会陷入排队。假设在纵横式交换结构中，输出端口不同时多个分组可以并行传送，同一输出端口则会阻塞其中一个。当出现多个输入端口需要到同一个输出端口时，就会发生<strong>线路前部阻塞</strong>，也叫<strong>线头阻塞</strong>。这可能会带来很多的丢包。</p>
+<p>在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>s</mi><mi>w</mi><mi>i</mi><mi>t</mi><mi>c</mi><mi>h</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{switch}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">h</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 足够大时，输出端口也可能出现排队。例如，一个时间间隔内交换结构可能向同一个端口传送了 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> 个分组，而输出端口只有能力输出1个分组，剩余的便会保存在输出端口的缓存中，直到耗尽内存。</p>
+<p>内存耗尽后，若到达一个新的分组，输出端口需要做出决定：要么丢弃新到达的分组，要么删除一个或若干个排队中的分组。某些情况下也会在填满之前便丢弃分组，以达到给发送方提供拥塞信号的作用，这些策略称为主动队列管理(Active Queue Management, AQM)</p>
+<p>为了吸收流量负载波动，缓存的量需要被设计。现在主要有如下经验公式计算所需缓存数量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> ：</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mi>R</mi><mi>T</mi><mi>T</mi><mo>⋅</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">B=RTT\cdot C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span> 为链路容量，例如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>G</mi><mi>b</mi><mi>p</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">10Gbps</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord mathnormal">G</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mord mathnormal">s</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mfrac><mrow><mi>R</mi><mi>T</mi><mi>T</mi><mo>⋅</mo><mi>C</mi></mrow><msqrt><mi>N</mi></msqrt></mfrac></mrow><annotation encoding="application/x-tex">B=\frac{RTT\cdot C}{\sqrt N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.410331em;vertical-align:-0.538em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.537397em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord sqrt mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9322900000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal mtight" style="margin-right:0.10903em;padding-left:0.833em;">N</span></span><span style="top:-2.89229em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail mtight" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.10770999999999997em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mbin mtight">⋅</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.538em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> 为经过TCP流的数量</li>
+</ul>
+<h3 id="分组调度"><a class="markdownIt-Anchor" href="#分组调度"></a> 分组调度</h3>
+<ul>
+<li>
+<p>先到先服务(FCFS)：也叫先进先出(FIFO)，使用队列进行维护</p>
+</li>
+<li>
+<p>优先权排队(priority queuing)：根据优先级将分组放入不同队列，优先处理高优先级队列，但不打断正在传输的低优先级（非抢占式优先权排队）</p>
+</li>
+<li>
+<p>循环排队(RR)：将分组分类放入不同队列中，然后循环各取出各个队列第一个进行传输</p>
+</li>
+<li>
+<p>加权公平排队：在RR的基础上，每个类有优先权 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">w_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，保证分到的服务等于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><msub><mi>w</mi><mi>i</mi></msub><mrow><mo>∑</mo><mi>w</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{w_i}{\sum w}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.231499em;vertical-align:-0.520007em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7114919999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4101em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.02691em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.520007em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> ，其代码如下</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122161051755.png" alt="image-20231122161051755" /></p>
+</li>
+</ul>
+<h2 id="网际协议ipv4-寻址-ipv6"><a class="markdownIt-Anchor" href="#网际协议ipv4-寻址-ipv6"></a> 网际协议：IPv4、寻址、IPv6</h2>
+<h3 id="ipv4数据报格式"><a class="markdownIt-Anchor" href="#ipv4数据报格式"></a> IPv4数据报格式</h3>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122161520854.png" alt="image-20231122161520854" /></p>
+<p>关键字段有：</p>
+<ul>
+<li>版本号：4bit，规定IP协议版本</li>
+<li>首部长度：4bit，在没有选项首部的情况下首部长度为20字节，按字进行标记为5</li>
+<li>服务类型（TOS）：8bit，区分不同类型的数据报（例如要求低时延/高吞吐量/可靠性的数据报）</li>
+<li>数据报长度：16bit，标识整个数据报（首部+数据）一共的字节数</li>
+<li>标识、标志、片偏移：与IP分片有关，IPv6中不再分片</li>
+<li>寿命(TTL, Time-To-Live)：8bit，确保数据报不会永远在网络中循环。没经过一台路由器该值会减一，减至0后丢弃</li>
+<li>上层协议：标识在到达后，该数据报应当交给哪一个运输层协议，例如6代表TCP、17代表UDP</li>
+<li>首部校验和：用于检测比特错误</li>
+<li>源IP地址和目的IP地址</li>
+<li>选项：可选的首部，IPv6中不再支持</li>
+<li>数据：一般为运输层报文段</li>
+</ul>
+<h3 id="ipv4数据报分片"><a class="markdownIt-Anchor" href="#ipv4数据报分片"></a> IPv4数据报分片</h3>
+<p>链路层协议所能承受的网络层分组长度是不一样的，这受最大传送单元MTU（即一个链路层帧能承载的最大长度），一条传输路径上MTU可能不同。在一个路由器接收到一个大的链路层帧，但需要发送到一个MTU较小的链路上时，就需要对其进行分片，即将其封装成多个较小的数据报。最后在端系统上重新组装数据。</p>
+<p>为了分片之后能够重新组装，IPv4设置了标识、标志、片偏移字段。</p>
+<ul>
+<li>标识号为发送主机设置，分片后与原来使用同一标识号，接收主机便可以识别这来源于同一个数据报。</li>
+<li>标志比特：分片后将最后一片的标志比特设为0，其它片设为1，便于接受主机确认收到了所有数据报</li>
+<li>片偏移：指定了分片后数据报的位置，便于接受主机拼接数据报和确认完整性</li>
+</ul>
+<h3 id="ipv4编址"><a class="markdownIt-Anchor" href="#ipv4编址"></a> IPv4编址</h3>
+<p>IP地址结构为</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122173441116.png" alt="image-20231122173441116" /></p>
+<p>互联网中的IP地址，通常需要使用子网进行IP分配，子网的表示方式是<code>xxx.xxx.xxx.xxx/xx</code>最后两位标识了网络号的长度，子网内网络号相同，而此后的主机号表示各个主机。</p>
+<p>机构拿到一个可分配的子网后，为了方便管理，往往会对其进一步划分，将主机号的一部分用于子网编号，结构变为<code>网络号+子网号+主机号</code>。</p>
+<p>子网掩码：将主机号部分置0，其余置1。作用是对外隐藏子网的存在，对内指示网络号和子网号的位置</p>
+<p>IPv4仅有40亿地址，远不够当今互联网使用，CIDR(Classless InterDomain Routing,无类别域间路由选择)技术解决了地址空间利用率低的问题。它将子网概念一般化，解决了IP地址分配的问题。</p>
+<p>在CIDR提出前，往往使用分类编址方案，使用ABC类的网络进行分配，即只支持8、16、24位的前缀，容易造成大量浪费。</p>
+<p>形式为<code>a.b.c.d/x</code>的地址中高 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span> 比特构成了IP地址的网络部分，称为前缀。一个组织通常被分配一块连续的地址，具有相同的前缀。组织内部的设备IP地址有共同前缀，路由时就只需要路由器考虑地址前缀即可。</p>
+<h3 id="ipv4地址获取dhcp"><a class="markdownIt-Anchor" href="#ipv4地址获取dhcp"></a> IPv4地址获取：DHCP</h3>
+<p>主机的IP地址往往是自动配置，其基于动态主机配置协议(Dynamic Host Configuration, DHCP)。网络管理员能配置DHCP，以使给定主机能够总是得到相同的IP，或得到一个临时的IP。同时DHCP会让主机得到其它信息，例如子网掩码、默认网关（第一跳路由器地址）、本地DNS服务器。</p>
+<p>DHCP有即插即用的功能，因此被广泛应用。它是一个客户-服务器协议：客户是新到达的主机，获取网络配置信息。服务器可以是子网中的DHCP服务器，也可以用路由器作为DHCP中继代理。</p>
+<p>DHCP工作流程如下：</p>
+<ul>
+<li>DHCP服务器发现：一台新到达的主机通过DHCP发现报文，向UDP分组中的67号端口发送给255.255.255.255（广播地址），此时主机源地址使用0.0.0.0</li>
+<li>DHCP服务器提供：DHCP服务器收到DHCP报文后，使用DHCP提供报文做出响应，仍然是发向255.255.255.255广播。该报文包括发现报文的事务ID、推荐的IP地址、网络掩码和IP地址租用期（几小时或几天）</li>
+<li>DHCP请求：客户从一个或多个DHCP服务器提供的IP中选择一个，并向对应的DHCP服务器提供DHCP请求报文进行响应，回显配置的参数。</li>
+<li>DHCP ACK：服务器最后使用DHCP ACK报文对请求报文响应，证实其所要求的参数。</li>
+</ul>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122213930415.png" alt="image-20231122213930415" /></p>
+<h3 id="网络地址转换nat"><a class="markdownIt-Anchor" href="#网络地址转换nat"></a> 网络地址转换：NAT</h3>
+<p>网络地址转换用于解决子网内IP地址不够的情况。</p>
+<p>NAT将子网内的主机通过端口号进行标识，对WAN只暴露单个IP地址，而LAN内部可以使用不同的IP地址，并通过NAT转换表转换为IP地址相同、端口号不同的IP地址。</p>
+<p>NAT减少了IP地址的需求量，简介扩大了IP地址的数量。</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122214617497.png" alt="image-20231122214617497" /></p>
+<p>NAT映射方式：</p>
+<ul>
+<li>静态NAT：一个本地地址对应一个全球地址</li>
+<li>动态NAT：一个全球地址对应多个本地地址</li>
+<li>端口NAT：一个本地地址的端口对应一个全球地址的端口</li>
+</ul>
+<p>需要注意的是，相比于无NAT网络，NAT网络的外网主机无法主动访问内网主机，如果想要通信需要通过以下方案：</p>
+<ul>
+<li>端口映射：采用端口NAT，在路由器中静态配置</li>
+<li>通用即插即用UPnP(用于P2P)：内部主机通过IGD协议了解公共IP地址，然后向浏览器注册映射<code>(内部IP，内部端口)-&gt;(公共IP,公共端口)</code>，然后就可以公开内部主机的公共IP和端口了</li>
+<li>建立中继</li>
+</ul>
+<h3 id="ipv6"><a class="markdownIt-Anchor" href="#ipv6"></a> IPv6</h3>
+<p>IPv6的地址有128位，16字节</p>
+<p>表示方法位冒号表示法：地址分为8段，每段16位，：分隔</p>
+<ul>
+<li>正常形式：<code>2001:0410:0000:0001:0000:0000:0000:45FF</code></li>
+<li>压缩表示：连续0可以用<code>::</code>一个IP内只能用一个简写，<code>2001:0410:0000:0001::45FF</code></li>
+</ul>
+<p>IPv6数据报格式如下</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122212616166.png" alt="image-20231122212616166" /></p>
+<p>比起IPv4，主要区别有：</p>
+<ul>
+<li>IP地址更长：128bit</li>
+<li>首部固定为40字节，没有选项和首部校验和</li>
+<li>流标签：用于给特殊流分组加上标签，例如音频传输和视频传输，由发送方定义</li>
+<li>版本：固定为6</li>
+<li>流量类型：与IPv4中TOS字段类似</li>
+<li>有效载荷长度：16bit无符号整数</li>
+<li>下一个首部：标识交付给TCP还是UDP</li>
+<li>跳限制：没经过一个路由器就减一，为0后丢弃</li>
+</ul>
+<h3 id="ipv4到ipv6的迁移"><a class="markdownIt-Anchor" href="#ipv4到ipv6的迁移"></a> IPv4到IPv6的迁移</h3>
+<ul>
+<li>
+<p>标志日：选定一个时间，所有设备同时迁移（不可行）0</p>
+</li>
+<li>
+<p>建隧道：对于IPv6设备之间的通信，若路径上存在IPv4的路由器，则将其封装在IPv4的数据报中在中间传输</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122213746888.png" alt="image-20231122213746888" /></p>
+</li>
+<li>
+<p>双栈技术：新加入的设备同时支持IPv4/IPv6双协议栈。对链路两端均支持IPv6的使用IPv6，否则使用IPv4</p>
+</li>
+</ul>
+<h1 id="网络层控制平面"><a class="markdownIt-Anchor" href="#网络层控制平面"></a> 网络层控制平面</h1>
+<h2 id="路由选择算法"><a class="markdownIt-Anchor" href="#路由选择算法"></a> 路由选择算法</h2>
+<p>分为两类：</p>
+<ul>
+<li>集中式路由选择算法：也成为链路状态算法(Link State, LS)用完整的、全局性的网络知识计算出源到目的地之间的最低开销路径。该算法需要先得到所有节点之间的连通性以及所有链路的开销。</li>
+<li>分散式路由选择算法：路由器以迭代、分布式的方式计算出最低开销路径，没有节点拥有关于所有网络链路开销的完整信息。</li>
+</ul>
+<p>也可以以另一种方式分类：</p>
+<ul>
+<li>静态路由选择算法：路由随时间变化缓慢，通常是人工进行调整</li>
+<li>动态路由选择算法：随网络流量负载变化或拓扑结构变化而动态改变路由路径</li>
+</ul>
+<p>第三种分类；</p>
+<ul>
+<li>负载敏感算法：链路开销会动态变化，反映底层链路当前拥塞水平</li>
+<li>负载迟钝：链路开销不反映拥塞水平</li>
+</ul>
+<h3 id="链路状态算法"><a class="markdownIt-Anchor" href="#链路状态算法"></a> 链路状态算法</h3>
+<p>Dijkstra算法构建最短路径树，构造转发表，复杂度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> ，可优化为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>m</mi><mi>log</mi><mo>⁡</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(m\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Initialization:</span><br><span class="line">	N&#x27; = &#123;u&#125;</span><br><span class="line">	for all nodes v:</span><br><span class="line">		if v is a neighbor of u:</span><br><span class="line">			D(v) = c(u,v)</span><br><span class="line">		else D(v) = infinity</span><br><span class="line"></span><br><span class="line">Loop:</span><br><span class="line">	find w not in N&#x27; that D(w) is a minimum</span><br><span class="line">	add w to N&#x27;</span><br><span class="line">	update D(v) for each neighbor v of w and not in N&#x27;</span><br><span class="line">		D(v) = min&#123;D(v), D(w)+c(w,v)&#125;</span><br><span class="line">until N&#x27; = N</span><br></pre></td></tr></table></figure>
+<p>但在链路开销与负载相关的情况下，由于链路开销的变化，可能导致最优路径的变化，以致于报文在几个路由器之间振荡而没有接近目的地。解决思路主要有以下：</p>
+<ul>
+<li>使链路开销与负载无关：不可接受，无法解决高拥塞问题</li>
+<li>确保所有路由器不同时运行LS算法</li>
+</ul>
+<h3 id="距离向量路由选择算法"><a class="markdownIt-Anchor" href="#距离向量路由选择算法"></a> 距离向量路由选择算法</h3>
+<p>距离向量(Distance Vector, DV)算法是一种迭代的、异步的和分布式的算法。其分布式体现在，每个节点都需要从直接连接的邻居那接收信息、执行计算，然后将计算结果分发给邻居。其迭代体现在这一过程会持续直到没有更多信息需要交换。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Initialization:</span><br><span class="line">	for all destinations y in N:</span><br><span class="line">		D(x,y) = c(x,y)</span><br><span class="line">	for each neighbor w:</span><br><span class="line">		send distance vector D(x) to w</span><br><span class="line">	</span><br><span class="line">loop:</span><br><span class="line">	wait data</span><br><span class="line">	for each y in N:</span><br><span class="line">		D(x,y) = min&#123;c(x,v)+D(v,y)&#125;</span><br><span class="line">		</span><br><span class="line">	if D(x,y) changed:</span><br><span class="line">		send D(x) to all neighbors</span><br><span class="line">forever</span><br></pre></td></tr></table></figure>
+<p>注意与原始bellman-ford不同的是第10行是对所有邻居取最小值，而不考虑原来存在本地的最小值。</p>
+<p>这样的设计可能遇到路由选择环路的问题：当某条路距离变长时，可能出现较长时间的迭代才能更新出正确值的情况。上面这种问题可以通过毒性逆转技术解决，其思路为：如果 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span> 的邻居 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span> 的最短路径经过 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span> ， 则它发送时发送 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">D(y,z)=\infin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span> ，这样就能防止产生两个节点构成的环路，但还是无法检测到更多节点构成的环路。</p>
+<h2 id="因特网中自治系统内部路由选择"><a class="markdownIt-Anchor" href="#因特网中自治系统内部路由选择"></a> 因特网中自治系统内部路由选择</h2>
+<h3 id="rip"><a class="markdownIt-Anchor" href="#rip"></a> RIP</h3>
+<p>将每条链路的代价设为1，其它与DV类似</p>
+<ul>
+<li>跳数（即经过的链路数）大于15时认为不可达</li>
+</ul>
+<h3 id="ospf"><a class="markdownIt-Anchor" href="#ospf"></a> OSPF</h3>
+<p>前面的路由选择算法都将所有路由器视为平等的，但在实践中很少采用这样的处理，主要原因如下</p>
+<ul>
+<li>规模：因特网中路由器数目巨大，涉及路由选择的通信、计算和存储开销也变得巨大</li>
+<li>管理自治：因特网是ISP的网络，每个ISP有它自己的路由器网络，ISP通常希望按自己的意愿运行路由器，甚至对外隐藏内部组织。</li>
+</ul>
+<p>OSPF是一种链路状态协议，使用泛洪链路状态信息和Dijkstra算法。每个路由器构建一个关于整个自治系统的完整拓扑图，运行Dijkstra算法得到最短路径树。各条链路开销由网络管理员配置，可根据需要进行灵活配置。使用OSPF的路由器需要向自治系统内所有其它路由器广播路由选择消息（泛洪法）（不再是只向邻居广播），每当一条链路状态发生变化时都会广播链路信息，间隔指定周期后也会进行一次广播（增强健壮性）。</p>
+<p>OSPF让路由器之间频繁交换链路状态信息，所有路由器借此建立链路状态数据库，即全网的拓扑结构图（这一结构在AS内部是一致的）。OSPF的更新收敛快是一个重要优点。</p>
+<p>此外，OSPF的优点还有：</p>
+<ul>
+<li>安全性：报文会经过认证</li>
+<li>多条相同开销的路径：当出现到达目的地有多条路径开销相同时，OSPF允许使用多条路径，实现负载均衡</li>
+<li>对单播和多播的路由选择的综合支持</li>
+<li>支持在单个AS内的层次结构：可以进一步分为area区域，实现分层次的区域。（存在一个backbone area连接所有area）</li>
+</ul>
+<h2 id="isp之间的路由选择bgp"><a class="markdownIt-Anchor" href="#isp之间的路由选择bgp"></a> ISP之间的路由选择：BGP</h2>
+<p>OSPF是一个AS内部路由选择协议，所以我们还需要一个AS之间的路由选择协议，称为边界网关协议(Broder Gateway Protocol, BGP)</p>
+<p>为了立即BGP工作方式，假设一个场景，在AS1内的一个设备1a需要访问一个子网x：</p>
+<ul>
+<li>情况1：只有一条路可达(假设为经过AS3的一条路)。
+<ul>
+<li>AS1到AS3需要经过AS1内的网关1c</li>
+<li>AS1内部广播可达信息，1a知道了需要通过1c才能到x</li>
+<li>假设1a到1c的最低费用路径对应1a的端口I，则1a将(x,I)放入其转发表</li>
+</ul>
+</li>
+<li>情况2：有多个网关可以到达
+<ul>
+<li>在情况1的流程基础上，选择在AS内到达费用更低的网关（通告IGP），设置路由表（热土豆）</li>
+</ul>
+</li>
+</ul>
+<h3 id="bgp发言人边界路由器"><a class="markdownIt-Anchor" href="#bgp发言人边界路由器"></a> BGP发言人（边界路由器）</h3>
+<p>每个AS需要一个路由器作为BGP发言人，两个不同AS的BGP发言人通过一个共享网络连接</p>
+<p>在AS之间进行的BGP会话称为eBGP，在AS内部进行的BGP会话称为iBGP</p>
+<p>BGP发言人负责将AS内的前缀进行整合，然后进行通告，一个典型的BGP通告部分如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Prefix: 138.16.64.0/22</span><br><span class="line">AS-PATH: AS3 AS131</span><br><span class="line">NEXT-HOP: 201.44.13.125</span><br></pre></td></tr></table></figure>
+<p>这一通告发送了以下信息：</p>
+<ul>
+<li>前缀：代表这一个通告指向的子网前缀</li>
+<li>AS-PATH：代表前往的路径，需要经过<code>-&gt;AS3-&gt;AS131</code></li>
+<li>NEXT-HOP: 代表前往这个子网，下一跳的目标地址</li>
+</ul>
+<h3 id="路由选择策略"><a class="markdownIt-Anchor" href="#路由选择策略"></a> 路由选择策略</h3>
+<p>BGP规则中，策略优先级从高到低一次如下：</p>
+<ol>
+<li>本地偏好：它由管理员直接设置</li>
+<li>距离：在偏好等级相同时，选择AS-PATH最短的路由</li>
+<li>热土豆：在上两个相同时，选择最靠近NEXT-HOP的路由</li>
+<li>最后使用BGP标识符选择</li>
+</ol>
+<h2 id="因特网控制报文协议icmp"><a class="markdownIt-Anchor" href="#因特网控制报文协议icmp"></a> 因特网控制报文协议：ICMP</h2>
+<p>ICMP协议负责处理差错报告、控制和请求/应答，其报文格式如下</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231123193001000.png" alt="image-20231123193001000" /></p>
+<p>ICMP报文会被封装在IP组的数据部分</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Lecture-Note/" rel="tag"># Lecture Note</a>
+              <a href="/tags/Computer-Network/" rel="tag"># Computer Network</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/29/Computer%20Network/ComputerNetwork-2-Transport/" rel="prev" title="Computer Network(2):Transport">
+                  <i class="fa fa-angle-left"></i> Computer Network(2):Transport
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/09/Computer%20Network/ComputerNetwork-4-Link/" rel="next" title="Computer Network(4):Link">
+                  Computer Network(4):Link <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>
