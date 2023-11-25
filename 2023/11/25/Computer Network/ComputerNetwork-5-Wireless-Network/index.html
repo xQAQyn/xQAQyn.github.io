@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="无线网络概述 无线网络基本构件  无线主机：本身可能是固定的或移动的，能运行程序，例如便携手机 无线链路：用于连接无线主机和基站，使用多址访问协议 基站：用于连接无线网络，负责向覆盖范围内的主机发送和接收分组  分为两种模式：  基础设施模式：使用预先建立的、能覆盖一定地理范围的一批固定基站，主机通过基站接入有线网络。  关联：无线主机位于某个基站的无线通信覆盖范围内时，该主机使用该基站中继它与">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network(5):Wireless Network">
+<meta property="og:url" content="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="无线网络概述 无线网络基本构件  无线主机：本身可能是固定的或移动的，能运行程序，例如便携手机 无线链路：用于连接无线主机和基站，使用多址访问协议 基站：用于连接无线网络，负责向覆盖范围内的主机发送和接收分组  分为两种模式：  基础设施模式：使用预先建立的、能覆盖一定地理范围的一批固定基站，主机通过基站接入有线网络。  关联：无线主机位于某个基站的无线通信覆盖范围内时，该主机使用该基站中继它与">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125163157168.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125163237599.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125163112310.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125164323990.png">
+<meta property="article:published_time" content="2023-11-25T02:58:00.000Z">
+<meta property="article:modified_time" content="2023-11-25T08:43:30.000Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125163157168.png">
+
+
+<link rel="canonical" href="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/","path":"2023/11/25/Computer Network/ComputerNetwork-5-Wireless-Network/","title":"Computer Network(5):Wireless Network"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Computer Network(5):Wireless Network | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> 无线网络概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E9%93%BE%E8%B7%AF%E5%92%8C%E7%BD%91%E7%BB%9C%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text"> 无线链路和网络特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E5%A4%84%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text"> 差错处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%81%E5%88%86%E5%A4%9A%E5%9D%80cdma"><span class="nav-number">2.2.</span> <span class="nav-text"> 码分多址(CDMA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#80211-wlan"><span class="nav-number">2.3.</span> <span class="nav-text"> 802.11 WLAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#80211b"><span class="nav-number">2.3.1.</span> <span class="nav-text"> 802.11b</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#80211mac%E5%8D%8F%E8%AE%AEcsmaca"><span class="nav-number">2.3.2.</span> <span class="nav-text"> 802.11MAC协议：CSMA&#x2F;CA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9F%E7%8E%87%E8%87%AA%E9%80%82%E5%BA%94"><span class="nav-number">2.3.3.</span> <span class="nav-text"> 速率自适应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text"> 移动管理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Computer Network(5):Wireless Network | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Computer Network(5):Wireless Network
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-11-25 10:58:00 / Modified: 16:43:30" itemprop="dateCreated datePublished" datetime="2023-11-25T10:58:00+08:00">2023-11-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="无线网络概述"><a class="markdownIt-Anchor" href="#无线网络概述"></a> 无线网络概述</h1>
+<p>无线网络基本构件</p>
+<ul>
+<li>无线主机：本身可能是固定的或移动的，能运行程序，例如便携手机</li>
+<li>无线链路：用于连接无线主机和基站，使用多址访问协议</li>
+<li>基站：用于连接无线网络，负责向覆盖范围内的主机发送和接收分组</li>
+</ul>
+<p>分为两种模式：</p>
+<ul>
+<li>基础设施模式：使用预先建立的、能覆盖一定地理范围的一批固定基站，主机通过基站接入有线网络。
+<ul>
+<li>关联：无线主机位于某个基站的无线通信覆盖范围内时，该主机使用该基站中继它与更大网络之间的数据</li>
+<li>切换：当移动主机移动范围超出了一个基站的覆盖范围而到达另一个基站的覆盖范围后，它将改变其接入更大网络的连接点</li>
+</ul>
+</li>
+<li>Ad hoc网络：没有固定基础设施的自组网络。无基站，节点仅仅能在其覆盖范围内向其它节点传送数据，节点之间的通信组成临时网络，在内部进行选路和地址分配</li>
+</ul>
+<h1 id="无线链路和网络特性"><a class="markdownIt-Anchor" href="#无线链路和网络特性"></a> 无线链路和网络特性</h1>
+<p>无线链路特征：</p>
+<ul>
+<li>信号强度衰减</li>
+<li>有来自其它源的干扰</li>
+<li>多径传播</li>
+<li>比特差错比有线链路更常见</li>
+</ul>
+<p>无线网络引入的新问题：</p>
+<ul>
+<li>隐藏终端问题：由于信号衰减和障碍物的存在会导致终端之间不可见。例如A和B可见，B和C可见，但A和C有可能不可见，这样如果AC在B处发生碰撞，AC无法检测到该碰撞</li>
+</ul>
+<h2 id="差错处理"><a class="markdownIt-Anchor" href="#差错处理"></a> 差错处理</h2>
+<p>无线链路中的差错处理方案：</p>
+<ul>
+<li>使用CRC进行帧校验</li>
+<li>使用ARQ协议进行重传</li>
+</ul>
+<p>描述无线链路的质量：信噪比(SNR)、比特差错率(BER)</p>
+<ul>
+<li>对给定的调制方案，SNR越高，BER越低</li>
+<li>对固定的SNR，具有较高比特传输率的调制方案有较高的BER</li>
+</ul>
+<h2 id="码分多址cdma"><a class="markdownIt-Anchor" href="#码分多址cdma"></a> 码分多址(CDMA)</h2>
+<p>CDMA是一个信道划分协议，在WLAN和蜂窝技术中应用广泛。</p>
+<p>CDMA允许每个用户在同样的时间内用相同的频带进行通信，但每个用户使用精心挑选的不同码型，互不干扰。</p>
+<p>工作流程：</p>
+<ul>
+<li>每个用户获得唯一的一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> bit码片，不同用户的码片正交</li>
+<li>发送比特1时，发送这一码片；发送比特0时，发送码片的反码</li>
+</ul>
+<h2 id="80211-wlan"><a class="markdownIt-Anchor" href="#80211-wlan"></a> 802.11 WLAN</h2>
+<p>802.11协议簇：</p>
+<ul>
+<li>802.11b：工作在2.4-2.485GHz频段上，最高速率11Mbps</li>
+<li>802.11a：工作在5.1-5.8GHz频段上，最高速率54Mbps</li>
+<li>802.11g：工作在2.4-2.485GHz频段上，最高速率54Mbps</li>
+<li>802.11n：2.4-2.485GHz、5.1-5.8GHz，多天线，单流最高速率150Mbps，多流最高速率600Mbps</li>
+<li>802.11ac：5.1-5.8GHz，单流最高433Mbps@80MHz、866Mbps@160MHz，多流1.73Gbps、3.47Gbps</li>
+<li>802.11ax（第六代WiFi）：单流速率提升至1.2Gbps， <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>×</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">8\times 8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span> 模式下提供高达9.6Gbps传输速率
+<ul>
+<li>支持较窄的子载波间隔以及增加的符号持续时间，有利于确保信号的健壮性，能覆盖更远范围</li>
+<li>引入正交频分多址(OFDMA)，同时支持2.4GHz和5GHz频段，创造出更多可用数据通道，解决拥堵</li>
+<li>引入LTE领域组网特性，让信号抗干扰能力大幅提升</li>
+</ul>
+</li>
+</ul>
+<p>802.11体系结构：</p>
+<ul>
+<li>无线终端通过基站(AP)进行通信，一个基站的服务范围为一个基本服务集(BSS)</li>
+<li>一个BSS包括：基站(Ad hoc模式下没有)、无线终端</li>
+</ul>
+<h3 id="80211b"><a class="markdownIt-Anchor" href="#80211b"></a> 802.11b</h3>
+<p>802.11b信道划分：2.4GHz-2.485GHz，供85MHz，划分为11个部分重叠的信道。当两个信道中间相隔4个及以上的信道时，信道无重叠，可同时工作</p>
+<p>主机关联AP的过程：</p>
+<ol>
+<li>每个AP周期性发送信标帧，包括AP的SSID(服务集标识)和MAC</li>
+<li>主机对11个信道进行扫描，获取所有可用的AP信标帧</li>
+<li>主机选择一个进行关联，加入其子网</li>
+<li>主机向关联AP发送DHCP发现报文，获取IP地址</li>
+<li>可能需要身份鉴别</li>
+</ol>
+<h3 id="80211mac协议csmaca"><a class="markdownIt-Anchor" href="#80211mac协议csmaca"></a> 802.11MAC协议：CSMA/CA</h3>
+<p>发送方流程：</p>
+<ol>
+<li>侦听信道，直到信道闲置了 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>I</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">DIFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> 秒，直接传输整个帧，不做冲突检测</li>
+<li>如果侦听到信道忙，选择一个随机的退避值(二进制指数退避)，等待对应时间</li>
+<li>等待结束后如果信道空闲就发送数据</li>
+<li>如果收到确认，该次发送结束；如果没有收到确认，再次选择随机的退避值(二进制指数退避)，回到第二步</li>
+</ol>
+<p>接收方：收到帧后等待 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>I</mi><mi>F</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">SIFS</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> 秒后返回ACK</p>
+<p>不采用冲突检测的原因：</p>
+<ul>
+<li>碰撞检测要求站点同时具有发送和接收的能力</li>
+<li>802.11适配器，接收信号的强度远小于发送信号的强度，会被淹没无法检测到</li>
+<li>如果一定要实现，硬件代价巨大</li>
+<li>由于隐蔽终端问题和信号衰减，无法检测到所有的碰撞</li>
+</ul>
+<p>为了避免长的数据帧冲突，可以使用冲突避免，“预约”信道进行发送：</p>
+<ol>
+<li>发送方在发送前使用CSMA协议发送一个短请求RTS(request-to-send)帧给AP</li>
+<li>AP广播一个允许发送CTS(clear-to-send)帧响应RTS</li>
+<li>所有节点侦听到CTS，推迟发送</li>
+<li>发送结束后，AP广播ACK，其它节点结束推迟发送的状态</li>
+</ol>
+<h3 id="速率自适应"><a class="markdownIt-Anchor" href="#速率自适应"></a> 速率自适应</h3>
+<p>基站和终端之间的传输速率会随终端移动和SNR的变化而智能调整</p>
+<ul>
+<li>当终端原理基站时，SNR减小、BER增大</li>
+<li>BER增大到一定程度时，将速率切换到一个较低水平，保障较低的BER</li>
+</ul>
+<h1 id="移动管理"><a class="markdownIt-Anchor" href="#移动管理"></a> 移动管理</h1>
+<p>移动节点需要保持一个不变的地址，这样才能让上层对移动性不可见。</p>
+<p>定义：</p>
+<ul>
+<li>永久地址(MA)：移动设备保持不变的IP地址</li>
+<li>归属网络：移动设备永远的“家”，不变的网络。永久地址属于归属网络中</li>
+<li>归属代理(HA)：当移动用户在远程时，代表移动节点执行移动管理功能的实体</li>
+<li>被访问网络：移动设备当前所在网络</li>
+<li>转交地址(COA)：在被访问网络中，移动设备的地址</li>
+<li>外部代理：在被访问网络中帮助移动节点</li>
+</ul>
+<p>移动性的两种解决方法：</p>
+<ul>
+<li>
+<p>让路由器处理：路由器直接通过路由表交换方式向邻居通告移动节点的永久地址</p>
+<ul>
+<li>缺点：可扩展性差</li>
+</ul>
+</li>
+<li>
+<p>让终端处理：</p>
+<ul>
+<li>
+<p>间接路由：通信者如果需要与移动用户通信，归属代理截获这些数据报，然后通过COA转发给外部代理，外部代理转发给移动用户</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125163157168.png" alt="image-20231125163157168" /></p>
+</li>
+<li>
+<p>直接路由：通信者通过归属代理获得移动用户的外部地址，然后直接发送给移动用户</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125163237599.png" alt="image-20231125163237599" /></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>移动组件注册：移动节点移动到一个新的被访问网络后，需要先向归属代理注册，流程如下</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125163112310.png" alt="image-20231125163112310" /></p>
+<p>直接路由引入了新问题：</p>
+<ul>
+<li>需要一个移动用户定位协议，一遍通信这向归属代理查询COA</li>
+<li>移动用户移动到一个新的外部网络后，之前的COA没有被及时更新</li>
+</ul>
+<p>锚外部代理解决了这一问题，其修改为：</p>
+<ul>
+<li>当移动节点到达一个信外部网络后，移动节点向新的外部代理注册，并且新的外部代理向锚外部代理提供移动节点的新COA</li>
+<li>如果锚外部代理收到一个发往已经离开的移动节点的数据报，它可以使用新的COA重新封装发送</li>
+</ul>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231125164323990.png" alt="image-20231125164323990" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/09/Computer%20Network/ComputerNetwork-4-Link/" rel="prev" title="Computer Network(4):Link">
+                  <i class="fa fa-angle-left"></i> Computer Network(4):Link
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>
