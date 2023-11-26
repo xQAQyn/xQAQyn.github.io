@@ -21,23 +21,37 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="xQAQyn&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="计算机网络与因特网 网络接入点(NAP)，互联网交换点(IXP) 服务数据单元(SDU)，协议数据单元(PDU) 传播时延和传输时延：  传播时延：信息在链路上传播的时间 传输时延：信息从路由器进入链路的时间，公式为 LR\frac{L}{R}RL​   应用层协议 邮件系统构成：用户代理、邮件服务器、SMTP协议 SMTP要求正文只能使用7bit ASCII码 MIME扩展了SMTP，可以接受">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network(6):Review">
+<meta property="og:url" content="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/index.html">
 <meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="计算机网络与因特网 网络接入点(NAP)，互联网交换点(IXP) 服务数据单元(SDU)，协议数据单元(PDU) 传播时延和传输时延：  传播时延：信息在链路上传播的时间 传输时延：信息从路由器进入链路的时间，公式为 LR\frac{L}{R}RL​   应用层协议 邮件系统构成：用户代理、邮件服务器、SMTP协议 SMTP要求正文只能使用7bit ASCII码 MIME扩展了SMTP，可以接受">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231029142306264.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121153525806.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122161520854.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122212616166.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122173441116.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122213930415.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122214617497.png">
+<meta property="article:published_time" content="2023-11-25T11:29:35.000Z">
+<meta property="article:modified_time" content="2023-11-26T03:27:34.000Z">
 <meta property="article:author" content="xQAQyn">
+<meta property="article:tag" content="Lecture Note">
+<meta property="article:tag" content="Computer Network">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231029142306264.png">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/","path":"2023/11/25/Computer Network/ComputerNetwork-6-Review/","title":"Computer Network(6):Review"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>xQAQyn's Blog</title>
+<title>Computer Network(6):Review | xQAQyn's Blog</title>
   
 
 
@@ -70,7 +84,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">xQAQyn's Blog</h1>
+      <p class="site-title">xQAQyn's Blog</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -96,7 +110,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -109,6 +123,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="nav-number">1.</span> <span class="nav-text"> 计算机网络与因特网</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text"> 应用层协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text"> 运输层协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">4.</span> <span class="nav-text"> 网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text"> 路由器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip"><span class="nav-number">4.2.</span> <span class="nav-text"> IP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">5.</span> <span class="nav-text"> 链路层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E9%A1%B5%E9%9D%A2%E8%AF%B7%E6%B1%82%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text"> Web页面请求全流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C"><span class="nav-number">7.</span> <span class="nav-text"> 无线网络</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,16 +171,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -179,13 +195,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
+      <meta itemprop="name" content="Computer Network(6):Review | xQAQyn's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/" class="post-title-link" itemprop="url">Computer Network(6):Review</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Computer Network(6):Review
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -214,8 +230,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="计算机网络与因特网"><a class="markdownIt-Anchor" href="#计算机网络与因特网"></a> 计算机网络与因特网</h1>
+    <div class="post-body" itemprop="articleBody"><h1 id="计算机网络与因特网"><a class="markdownIt-Anchor" href="#计算机网络与因特网"></a> 计算机网络与因特网</h1>
 <p>网络接入点(NAP)，互联网交换点(IXP)</p>
 <p>服务数据单元(SDU)，协议数据单元(PDU)</p>
 <p>传播时延和传输时延：</p>
@@ -375,7 +390,6 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <p>CSMA/CA</p>
 <p>移动节点lu’you’x</p>
 
-      
     </div>
 
     
@@ -383,259 +397,22 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          <div class="post-tags">
+              <a href="/tags/Lecture-Note/" rel="tag"># Lecture Note</a>
+              <a href="/tags/Computer-Network/" rel="tag"># Computer Network</a>
+          </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/" class="post-title-link" itemprop="url">Computer Network(5):Wireless Network</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-11-25 10:58:00" itemprop="dateCreated datePublished" datetime="2023-11-25T10:58:00+08:00">2023-11-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-26 02:06:10" itemprop="dateModified" datetime="2023-11-26T02:06:10+08:00">2023-11-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="无线网络概述"><a class="markdownIt-Anchor" href="#无线网络概述"></a> 无线网络概述</h1>
-<p>无线网络基本构件</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/09/Computer%20Network/ComputerNetwork-4-Link/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/09/Computer%20Network/ComputerNetwork-4-Link/" class="post-title-link" itemprop="url">Computer Network(4):Link</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-11-09 09:51:17" itemprop="dateCreated datePublished" datetime="2023-11-09T09:51:17+08:00">2023-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-25 10:30:16" itemprop="dateModified" datetime="2023-11-25T10:30:16+08:00">2023-11-25</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="链路层概述"><a class="markdownIt-Anchor" href="#链路层概述"></a> 链路层概述</h1>
-<p>链路层提供的服务包括：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/09/Computer%20Network/ComputerNetwork-4-Link/#more" rel="contents">
-                Read more &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/25/Computer%20Network/ComputerNetwork-5-Wireless-Network/" rel="prev" title="Computer Network(5):Wireless Network">
+                  <i class="fa fa-angle-left"></i> Computer Network(5):Wireless Network
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/09/Computer%20Network/ComputerNetwork-3-Internet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/09/Computer%20Network/ComputerNetwork-3-Internet/" class="post-title-link" itemprop="url">Computer Network(3):Network</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-11-09 09:48:33" itemprop="dateCreated datePublished" datetime="2023-11-09T09:48:33+08:00">2023-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-23 20:27:46" itemprop="dateModified" datetime="2023-11-23T20:27:46+08:00">2023-11-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>网络层可以分解为两个相互作用的部分：数据平面和控制平面。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/09/Computer%20Network/ComputerNetwork-3-Internet/#more" rel="contents">
-                Read more &raquo;
-              </a>
+            <div class="post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          </div>
     </footer>
   </article>
 </div>
@@ -643,536 +420,7 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 
 
 
-    
 
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/Computer%20Network/ComputerNetwork-2-Transport/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/29/Computer%20Network/ComputerNetwork-2-Transport/" class="post-title-link" itemprop="url">Computer Network(2):Transport</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-10-29 10:39:51" itemprop="dateCreated datePublished" datetime="2023-10-29T10:39:51+08:00">2023-10-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-24 11:54:10" itemprop="dateModified" datetime="2023-11-24T11:54:10+08:00">2023-11-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="运输层概述"><a class="markdownIt-Anchor" href="#运输层概述"></a> 运输层概述</h1>
-<p>运输层为运行在不同主机上的应用进程之间提供了<strong>逻辑通信</strong>(logic communication)功能。从应用的角度来看，应用可以直接使用运输层提供的逻辑通信功能来发送报文，而无需考虑承载这些报文的物理基础设施的细节。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/10/29/Computer%20Network/ComputerNetwork-2-Transport/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/Computer%20Network/ComputerNetwork-1-Application/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/29/Computer%20Network/ComputerNetwork-1-Application/" class="post-title-link" itemprop="url">Computer Network(1):Application</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-10-29 10:38:50" itemprop="dateCreated datePublished" datetime="2023-10-29T10:38:50+08:00">2023-10-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-23 20:27:00" itemprop="dateModified" datetime="2023-11-23T20:27:00+08:00">2023-11-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="应用层协议原理"><a class="markdownIt-Anchor" href="#应用层协议原理"></a> 应用层协议原理</h1>
-<h2 id="应用层体系结构"><a class="markdownIt-Anchor" href="#应用层体系结构"></a> 应用层体系结构</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/10/29/Computer%20Network/ComputerNetwork-1-Application/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/21/Computer%20Network/ComputerNetwork-0-Intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/21/Computer%20Network/ComputerNetwork-0-Intro/" class="post-title-link" itemprop="url">Computer Network(0):Intro</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-10-21 14:45:35" itemprop="dateCreated datePublished" datetime="2023-10-21T14:45:35+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-23 20:27:06" itemprop="dateModified" datetime="2023-11-23T20:27:06+08:00">2023-11-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="网络基本概念"><a class="markdownIt-Anchor" href="#网络基本概念"></a> 网络基本概念</h1>
-<p>从构成的角度看，网络分为：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/10/21/Computer%20Network/ComputerNetwork-0-Intro/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/12/Blockchain%20Storage/Blockchain-Storage-0-Blockchain-System/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/12/Blockchain%20Storage/Blockchain-Storage-0-Blockchain-System/" class="post-title-link" itemprop="url">Blockchain Storage(0): Blockchain System</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-12 21:06:11" itemprop="dateCreated datePublished" datetime="2023-09-12T21:06:11+08:00">2023-09-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-21 20:23:32" itemprop="dateModified" datetime="2023-09-21T20:23:32+08:00">2023-09-21</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>论文链接：<a target="_blank" rel="noopener" href="https://www.jos.org.cn/jos/article/abstract/6091">区块链的数据管理技术综述</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/12/Blockchain%20Storage/Blockchain-Storage-0-Blockchain-System/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Persistence/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Persistence/" class="post-title-link" itemprop="url">Operating System: Persistence</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-08-21 23:19:00" itemprop="dateCreated datePublished" datetime="2023-08-21T23:19:00+08:00">2023-08-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-26 23:23:06" itemprop="dateModified" datetime="2023-09-26T23:23:06+08:00">2023-09-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LectureNote/" itemprop="url" rel="index"><span itemprop="name">LectureNote</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LectureNote/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><em>based on <a target="_blank" rel="noopener" href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a></em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Persistence/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Concurrency/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Concurrency/" class="post-title-link" itemprop="url">Operating System: Concurrency</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-08-21 23:18:52" itemprop="dateCreated datePublished" datetime="2023-08-21T23:18:52+08:00">2023-08-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-31 19:18:24" itemprop="dateModified" datetime="2023-10-31T19:18:24+08:00">2023-10-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LectureNote/" itemprop="url" rel="index"><span itemprop="name">LectureNote</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LectureNote/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><em>based on <a target="_blank" rel="noopener" href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a></em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Concurrency/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
 </div>
   </main>
