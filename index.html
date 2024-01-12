@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -196,7 +196,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-01-12 21:21:54 / Modified: 22:45:54" itemprop="dateCreated datePublished" datetime="2024-01-12T21:21:54+08:00">2024-01-12</time>
+      <time title="Created: 2024-01-12 21:21:54 / Modified: 22:47:49" itemprop="dateCreated datePublished" datetime="2024-01-12T21:21:54+08:00">2024-01-12</time>
     </span>
 
   
@@ -210,327 +210,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>实验概述：使用位运算实现各类计算</p>
-<h1 id="bitxor"><a class="markdownIt-Anchor" href="#bitxor"></a> bitXor</h1>
-<p>函数原型：<code>int bitXor(int x,int y)</code></p>
-<p>题目要求：使用<code>~ &amp;</code>实现异或运算</p>
-<p>思路：直接使用逻辑运算得到<code>x ^ y = (x &amp; ~y) | (~x &amp; y)=~(~(~x &amp; y) &amp; ~(x &amp; ~y)) </code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">bitXor</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ~(~(~x &amp; y) &amp; ~(x &amp; ~y));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="tmin"><a class="markdownIt-Anchor" href="#tmin"></a> tmin</h1>
-<p>函数原型：<code>int tmin()</code></p>
-<p>题目要求：返回32位补码能够表示的最小整数</p>
-<p>思路：由补码的定义可知，最高位权重为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">-2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ，其余位权重均为正 。所以最小整数的二进制表示即为<code>0x80000000</code>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">tmin</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="istmax"><a class="markdownIt-Anchor" href="#istmax"></a> isTmax</h1>
-<p>函数原型：<code>int isTmax(int x)</code></p>
-<p>题目要求：判断一个数是否为32位补码所能表示的最大整数，如果是则返回1，否则返回0</p>
-<p>思路：32位补码所能表示的最大整数为<code>0x7fffffff</code>，即最高位为0，其余位为1。由于不能直接使用大常数进行判断，所以我寻找了其特点：其满足<code>~(x^(x+1))=0</code>。但注意到满足这一条件的数还有<code>0xffffffff</code>，所以我再添加了一个条件<code>~x != 0</code>排除了它。最终实现如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isTmax</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> !(~(x ^ (x + <span class="number">1</span>))) &amp; !!(~x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="alloddbits"><a class="markdownIt-Anchor" href="#alloddbits"></a> allOddBits</h1>
-<p>函数原型：<code>int allOddBits(int x)</code></p>
-<p>题目要求：判断所有奇数位是否均为1，若是则返回1，否则返回0</p>
-<p>思路：不难想到可以将所有的奇数位取出并做与运算得到最后结果。但题目要求只能使用12个运算符，这样会超出题目的限制。可以使用二分的思路进行计算，每次将前半段和后半段数字相与，大大减少了运算次数。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">allOddBits</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> x16 = x &amp; (x &gt;&gt; <span class="number">16</span>);</span><br><span class="line">  <span class="type">int</span> x8 = x16 &amp; (x16 &gt;&gt; <span class="number">8</span>);</span><br><span class="line">  <span class="type">int</span> x4 = x8 &amp; (x8 &gt;&gt; <span class="number">4</span>);</span><br><span class="line">  <span class="type">int</span> x2 = x4 &amp; (x4 &gt;&gt; <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> (x2 &amp; <span class="number">3</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="negate"><a class="markdownIt-Anchor" href="#negate"></a> negate</h1>
-<p>函数原型：<code>int negate(int x)</code></p>
-<p>题目要求：返回-x的补码</p>
-<p>思路：根据补码定义有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><msub><mo stretchy="false">)</mo><mtext>补</mtext></msub><mo>=</mo><mtext>～</mtext><msub><mi>x</mi><mtext>补</mtext></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">(-x)_补=～x_{补}+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">～</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，直接实现即可</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">negate</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ~x + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="isasciidigit"><a class="markdownIt-Anchor" href="#isasciidigit"></a> isAsciiDigit</h1>
-<p>函数原型：<code>int isAsciiDigit(int x)</code></p>
-<p>题目要求：判断x是否为数字<code>'0'-'9'</code>的ASCII码（范围为<code>[0x30,0x39]</code>）</p>
-<p>思路：我将这一判断拆分为两部分：</p>
-<ul>
-<li>判断高28位：高28位的值应等于<code>0x3</code>，通过异或运算判断相等</li>
-<li>判断低4位：第4位的取值范围为<code>0x0-0x9</code>，即不超过<code>0x9</code>，从0开始对二进制位进行编号，则该命题可以等效为第3位不可以和第2位或第1位同时出现。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isAsciiDigit</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> a1 = (x &gt;&gt; <span class="number">4</span>) ^ <span class="number">0x3</span>; <span class="comment">// check high 28bits should be 0x3. a1 should be 0</span></span><br><span class="line">  <span class="type">int</span> a2 = (x &gt;&gt; <span class="number">3</span>) &amp; ((x &gt;&gt; <span class="number">2</span>) | (x &gt;&gt; <span class="number">1</span>)) &amp; <span class="number">1</span>; <span class="comment">// check low 4bits is less than 0xa, should be 0</span></span><br><span class="line">  <span class="keyword">return</span> !a1 &amp; !a2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="conditional"><a class="markdownIt-Anchor" href="#conditional"></a> conditional</h1>
-<p>函数原型：<code>int conditional(int x,int y,int z)</code></p>
-<p>题目要求：实现C语言三元运算符<code>x ? y : z</code>的功能</p>
-<p>思路：设计类似掩码的方式进行计算。当<code>x!=0</code>时，<code>cond1=0xffffffff, cond2=0x0</code>，当<code>x==0</code>时，<code>cond1=0x0, cond2=0xffffffff</code>。最后只需返回<code>(cond1 &amp; y) | (cond2 &amp; z)</code>即可。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">conditional</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> &#123;</span><br><span class="line">  <span class="type">int</span> cond2 = ((!x) &lt;&lt; <span class="number">31</span>) &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  <span class="type">int</span> cond1 = ~cond2;</span><br><span class="line">  <span class="keyword">return</span> (cond1 &amp; y) | (cond2 &amp; z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="islessorequal"><a class="markdownIt-Anchor" href="#islessorequal"></a> isLessOrEqual</h1>
-<p>函数原型：<code>int isLessOrEqual(int x,int y)</code></p>
-<p>题目要求：如果<code>x &lt;= y</code>，返回1，否则返回0</p>
-<p>思路：分情况讨论</p>
-<ul>
-<li>等于的判断：直接通过异或为0判断</li>
-<li>异号时小于的判断：判断x的最高位是否为1，为1则<code>x &lt; y</code></li>
-<li>同号时小于的判断：执行<code>x-y</code>，由于没有提供减号，所以将其等效于<code>x + ~y + 1</code>。判断差值的符号即可。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isLessOrEqual</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">  <span class="type">int</span> equal = !(x ^ y);</span><br><span class="line">  <span class="type">int</span> ndiff = !((x ^ y) &gt;&gt; <span class="number">31</span>);</span><br><span class="line">  <span class="type">int</span> sub = x + ~y + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> equal | (!ndiff &amp; (x &gt;&gt; <span class="number">31</span>)) | (ndiff &amp; (sub &gt;&gt; <span class="number">31</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="logicalneg"><a class="markdownIt-Anchor" href="#logicalneg"></a> logicalNeg</h1>
-<p>函数原型：<code>int logicalNeg(int x)</code></p>
-<p>题目要求：在不使用逻辑非<code>!</code>的情况下，实现逻辑非</p>
-<p>思路：逻辑非要求x为0时返回1，否则返回。我们需要先找到0的特殊性质，这里我使用的时0所有位做或运算之后仍为0。利用该性质进行变形，假设<code>y=~x</code>，若<code>x=0</code>时则有<code>y_31 &amp; y_30 &amp; ... &amp; y_0 = 1</code>，<code>x!=0</code>时<code>y_31 &amp; y_30 &amp; ... &amp; y_0 = 0</code>，与逻辑非的行为一致。而这一连串的与运算的计算我们可以使用和allOddBits中一样的二分思路解决，实现代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">logicalNeg</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> nx32 = ~x;</span><br><span class="line">  <span class="type">int</span> nx16 = nx32 &amp; (nx32 &gt;&gt; <span class="number">16</span>);</span><br><span class="line">  <span class="type">int</span> nx8 = nx16 &amp; (nx16 &gt;&gt; <span class="number">8</span>);</span><br><span class="line">  <span class="type">int</span> nx4 = nx8 &amp; (nx8 &gt;&gt; <span class="number">4</span>);</span><br><span class="line">  <span class="type">int</span> nx2 = nx4 &amp; (nx4 &gt;&gt; <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> nx2 &amp; (nx2 &gt;&gt; <span class="number">1</span>) &amp; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="howmanybits"><a class="markdownIt-Anchor" href="#howmanybits"></a> howManyBits</h1>
-<p>函数原型：<code>int howManyBits(int x)</code></p>
-<p>题目要求：求出x在使用补码表示的情况下最少所需的二进制位数</p>
-<p>思路：这个题目初看的时候会觉得非常绕，但追根溯源，我们只需要知道哪些位数是可以去掉的即可。分析补码的规律可以得知：补码最高位（符号位）后连续的与符号位相同的位均为可以去掉的。例如<code>00001001</code>的八位二进制数对应的十进制为5，去掉符号位后连续的与符号位相同的位后位<code>01001</code>的五位二进制数，其值仍为5。</p>
-<p>根据此规律，我们可以尝试使用通过算术右移解决该问题，我们知道算术右移会复制符号位到高位上，存在一个移动位数<code>n</code>，使整个数的二进制表示刚好变为全1或全0，此时这一移动位数便是有效的非符号位位数，再加上1得到总的最少位数。</p>
-<p>这里为了减少运算次数，依旧采用了二分的方法，每次尝试折半判断是否为全1或全0，如果折半后仍然<strong>不是</strong>全1或全0，则执行折半的操作（右移相应位数）。这样如果初始的x不是0或-1，则会得到一个高31位相同，但与最低位不同的数，最后统计结果再加1即可。实现代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">howManyBits</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> sign, a16, a8, a4, a2, a1, same;</span><br><span class="line">  sign = x &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  same = !!(x ^ sign);</span><br><span class="line"></span><br><span class="line">  a16 = (!!((x &gt;&gt; <span class="number">16</span>) ^ sign)) &lt;&lt; <span class="number">4</span>;</span><br><span class="line">  x &gt;&gt;= a16;</span><br><span class="line">  a8 = (!!((x &gt;&gt; <span class="number">8</span>) ^ sign)) &lt;&lt; <span class="number">3</span>;</span><br><span class="line">  x &gt;&gt;= a8;</span><br><span class="line">  a4 = (!!((x &gt;&gt; <span class="number">4</span>) ^ sign)) &lt;&lt; <span class="number">2</span>;</span><br><span class="line">  x &gt;&gt;= a4;</span><br><span class="line">  a2 = (!!((x &gt;&gt; <span class="number">2</span>) ^ sign)) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">  x &gt;&gt;= a2;</span><br><span class="line">  a1 = (!!((x &gt;&gt; <span class="number">1</span>) ^ sign));</span><br><span class="line">  x &gt;&gt;= a1;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span> + same + a1 + a2 + a4 + a8 + a16;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="floatscale2"><a class="markdownIt-Anchor" href="#floatscale2"></a> floatScale2</h1>
-<p>函数原型：<code>unsigned floatScale2(unsigned uf)</code></p>
-<p>题目要求：输入一个IEEE单精度浮点数<code>f</code>的二进制表示，输出<code>2*f</code>的二进制表示</p>
-<p>思路：针对不同类型的输入进行讨论</p>
-<ul>
-<li>输入为NaN：根据题目要求直接返回NaN</li>
-<li>输入为无穷大：直接返回无穷大</li>
-<li>输入为非规格化数：将其基数乘2，如果2后超过了23位，则将其转化为规格化数</li>
-<li>输入为规格化数：指数部分加一</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="title function_">floatScale2</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">  <span class="type">int</span> base, e, sign;</span><br><span class="line">  base = uf &amp; ((<span class="number">1</span> &lt;&lt; <span class="number">23</span>) - <span class="number">1</span>);</span><br><span class="line">  sign = uf &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  e = ((uf &gt;&gt; <span class="number">23</span>) &amp; <span class="number">0xff</span>);</span><br><span class="line">  <span class="keyword">if</span>(e == <span class="number">0xff</span>) <span class="keyword">return</span> uf;<span class="comment">//NaN</span></span><br><span class="line">  <span class="keyword">if</span>(e == <span class="number">0</span>)&#123;</span><br><span class="line">    base &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(base &amp; (<span class="number">1</span> &lt;&lt; <span class="number">23</span>))&#123;</span><br><span class="line">      base &amp;= ((<span class="number">1</span> &lt;&lt; <span class="number">23</span>) - <span class="number">1</span>);</span><br><span class="line">      e = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span> e++;</span><br><span class="line">  <span class="keyword">return</span> (sign &lt;&lt; <span class="number">31</span>) | (e &lt;&lt; <span class="number">23</span>) | base;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="floatfloat2int"><a class="markdownIt-Anchor" href="#floatfloat2int"></a> floatFloat2Int</h1>
-<p>函数原型：<code>int floatFloat2Int(unsigned uf)</code></p>
-<p>题目要求：实现浮点数对整数的转换，要求超出范围的数输出<code>0x80000000</code></p>
-<p>思路：由于int类型除去符号位以外还有31位，所以分情况讨论</p>
-<ul>
-<li>e &gt; 157：此时超出了int的表示范围，直接返回<code>0x80000000</code></li>
-<li>e &lt; 127：此时浮点数表示的数绝对值小于1，返回0</li>
-<li>127&lt;=e&lt;=157：此时根据基数和指数，使用移位运算得到结果</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">floatFloat2Int</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">  <span class="type">int</span> e,sign,base;</span><br><span class="line">  base = uf &amp; ((<span class="number">1</span> &lt;&lt; <span class="number">23</span>) - <span class="number">1</span>) | (<span class="number">1</span> &lt;&lt; <span class="number">23</span>);</span><br><span class="line">  sign = uf &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  e = ((uf &gt;&gt; <span class="number">23</span>) &amp; <span class="number">0xff</span>) - <span class="number">127</span>;</span><br><span class="line">  <span class="keyword">if</span>(e &gt; <span class="number">30</span>) <span class="keyword">return</span> <span class="number">1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">  <span class="keyword">if</span>(e &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>(e &gt; <span class="number">23</span>)</span><br><span class="line">    base = base &lt;&lt; (e<span class="number">-23</span>);</span><br><span class="line">  <span class="keyword">else</span> base = base &gt;&gt; (<span class="number">23</span>-e);</span><br><span class="line">  <span class="keyword">if</span>(sign) base = -base;</span><br><span class="line">  <span class="keyword">return</span> base;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="floatpower2"><a class="markdownIt-Anchor" href="#floatpower2"></a> floatPower2</h1>
-<p>函数原型：<code>unsigned floatPower2(int x)</code></p>
-<p>题目要求：输入x，输出 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.</mn><msup><mn>0</mn><mi>x</mi></msup></mrow><annotation encoding="application/x-tex">2.0^x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">.</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span> 的浮点表示</p>
-<p>思路：首先分析浮点数的表示范围，对该题而言基数部分为0，e的取值范围为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>255</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,255]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">5</span><span class="mclose">]</span></span></span></span> ，对应指数的范围为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>126</mn><mo separator="true">,</mo><mn>128</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-126,128]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">1</span><span class="mord">2</span><span class="mord">6</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mord">8</span><span class="mclose">]</span></span></span></span>，所以不在这一范围内的x可直接返回0或无穷大。对于在范围内的x，只需设置e=x+127，其余位为0即可。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="title function_">floatPower2</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">128</span>) <span class="keyword">return</span> <span class="number">0x7f800000</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; <span class="number">-126</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> (x + <span class="number">127</span>) &lt;&lt; <span class="number">23</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xQAQyn">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | xQAQyn's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/" class="post-title-link" itemprop="url">Computer Network(6):Review</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-11-25 19:29:35" itemprop="dateCreated datePublished" datetime="2023-11-25T19:29:35+08:00">2023-11-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-26 11:53:26" itemprop="dateModified" datetime="2023-11-26T11:53:26+08:00">2023-11-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="计算机网络与因特网"><a class="markdownIt-Anchor" href="#计算机网络与因特网"></a> 计算机网络与因特网</h1>
-<p>网络接入点(NAP)，互联网交换点(IXP)</p>
-<p>服务数据单元(SDU)，协议数据单元(PDU)</p>
-<p>传播时延和传输时延：</p>
-<ul>
-<li>传播时延：信息在链路上传播的时间</li>
-<li>传输时延：信息从路由器进入链路的时间，公式为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>L</mi><mi>R</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{L}{R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
-</ul>
-<h1 id="应用层协议"><a class="markdownIt-Anchor" href="#应用层协议"></a> 应用层协议</h1>
-<p>邮件系统构成：用户代理、邮件服务器、SMTP协议</p>
-<p>SMTP要求正文只能使用7bit ASCII码</p>
-<p>MIME扩展了SMTP，可以接受非ASCII码</p>
-<p>两种DNS解析方式：</p>
-<ul>
-<li>纯递归：只访问根DNS，根DNS再递归访问顶级域服务器、权威DNS服务器</li>
-<li>递归+迭代：访问根DNS获得顶级域服务器，然后访问顶级域服务器获得权威DNS服务器地址，…</li>
-</ul>
-<p>四种DNS资源记录：基本格式<code>&lt;name,value,type,ttl&gt;</code></p>
-<ul>
-<li>type=A：映射name(主机名)-&gt;value(IP地址)</li>
-<li>type=NS：映射name(域)-&gt;value(权威DNS服务器主机名)</li>
-<li>type=CNAME：映射name(别名)-&gt;value(主机名)</li>
-<li>type=MX：映射name(邮件服务器)-&gt;value(域名)</li>
-</ul>
-<p>P2P分发流程：</p>
-<ol>
-<li>A运行P2P客户端，告诉客户端所需资源，客户端显示拥有该资源的其它计算机</li>
-<li>A选择计算机B，然后资源通过网络B传输给A</li>
-<li>A使用P2P时，其它客户也对A进行上传/下载</li>
-</ol>
-<p>BitTorrent工作原理：</p>
-<ul>
-<li>最稀缺优先：对等方请求缺少的块，先请求邻居中最稀缺的块</li>
-<li>对换算法：决定对等方优先响应哪一个请求
-<ul>
-<li>每10s计算出4个最高速率对等方，优先响应</li>
-<li>每30s随机选择一个新邻居(有可能被它选中)</li>
-</ul>
-</li>
-</ul>
-<h1 id="运输层协议"><a class="markdownIt-Anchor" href="#运输层协议"></a> 运输层协议</h1>
-<p>UDP数据报结构</p>
-<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231029142306264.png" alt="UDP" /></p>
-<p>校验和计算：计算出所有16为比特字之和（高位溢出进行回卷），然后取反码</p>
-<p>序号位数k与滑动窗口大小的关系 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> ： <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>≤</mo><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">N\le2^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.13597em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></p>
-<p>确认方式：累积确认、选择确认、捎带确认（应该发ACK时稍微等一会儿，如果有新的一起发）</p>
-<p>TCP报文：</p>
-<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231121153525806.png" alt="TCP" /></p>
-<p>三次握手、四次挥手：均从客户端开始发送</p>
-<p>超时间隔计算：</p>
-<ul>
-<li>估计RTT：初值为第一次采样值，此后每次采样后更新 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>d</mi><mi>R</mi><mi>T</mi><mi>T</mi><mo>=</mo><mi>α</mi><mo>⋅</mo><mi>S</mi><mi>a</mi><mi>m</mi><mi>p</mi><mi>l</mi><mi>e</mi><mi>R</mi><mi>T</mi><mi>T</mi><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mi>E</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>d</mi><mi>R</mi><mi>T</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">EstimatedRTT=\alpha \cdot SampleRTT+(1-\alpha)EstimatedRTT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">m</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">a</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">m</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></li>
-<li>估计偏差：初值为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>S</mi><mi>a</mi><mi>m</mi><mi>p</mi><mi>l</mi><mi>e</mi><mi>R</mi><mi>T</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">\frac{1}{2}SampleRTT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">a</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span>，此后每次采样更新 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>e</mi><mi>v</mi><mi>R</mi><mi>T</mi><mi>T</mi><mo>=</mo><mi>α</mi><mo>⋅</mo><mi mathvariant="normal">∣</mi><mi>S</mi><mi>a</mi><mi>m</mi><mi>p</mi><mi>l</mi><mi>e</mi><mi>R</mi><mi>T</mi><mi>T</mi><mo>−</mo><mi>E</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>d</mi><mi>R</mi><mi>T</mi><mi>T</mi><mi mathvariant="normal">∣</mi><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mi>D</mi><mi>e</mi><mi>v</mi><mi>R</mi><mi>T</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">DevRTT=\alpha\cdot|SampleRTT-EstimatedRTT|+(1-\alpha)DevRTT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">a</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">m</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></li>
-<li>TCP使用的超时间隔： <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi><mi>v</mi><mi>a</mi><mi>l</mi><mo>=</mo><mi>E</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>m</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>d</mi><mi>R</mi><mi>T</mi><mi>T</mi><mo>+</mo><mn>4</mn><mo>∗</mo><mi>D</mi><mi>e</mi><mi>v</mi><mi>R</mi><mi>T</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">Interval=EstimatedRTT+4*DevRTT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">m</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></li>
-</ul>
-<p>拥塞控制：</p>
-<ul>
-<li>如果发生超时，门限值设为cwnd/2，cwnd=1，返回慢启动</li>
-<li>如果发生冗余ACK到达3个，门限值设为cwnd/2，cwnd设为门限值+3MSS，切换到快速恢复</li>
-<li>慢启动：初始门限值为64KB，超过门限值进入拥塞避免</li>
-<li>拥塞避免</li>
-<li>快速回复：收到非冗余的ACK切换到拥塞避免，cwnd设为门限值</li>
-</ul>
-<p>吞吐量：窗口大小 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span> ，</p>
-<ul>
-<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.75</mn><mfrac><mi>W</mi><mrow><mi>R</mi><mi>T</mi><mi>T</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">0.75\frac{W}{RTT}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">7</span><span class="mord">5</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
-<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.22</mn><mfrac><mrow><mi>M</mi><mi>S</mi><mi>S</mi></mrow><mrow><mi>R</mi><mi>T</mi><mi>T</mi><msqrt><mi>L</mi></msqrt></mrow></mfrac></mrow><annotation encoding="application/x-tex">1.22\frac{MSS}{RTT\sqrt L}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.410331em;vertical-align:-0.538em;"></span><span class="mord">1</span><span class="mord">.</span><span class="mord">2</span><span class="mord">2</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.537397em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord sqrt mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9322900000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal mtight" style="padding-left:0.833em;">L</span></span><span style="top:-2.89229em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail mtight" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
-c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
-c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
-c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
-s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
-c69,-144,104.5,-217.7,106.5,-221
-l0 -0
-c5.3,-9.3,12,-14,20,-14
-H400000v40H845.2724
-s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
-c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
-M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.10770999999999997em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.538em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
-</ul>
-<h1 id="网络层"><a class="markdownIt-Anchor" href="#网络层"></a> 网络层</h1>
-<h2 id="路由器"><a class="markdownIt-Anchor" href="#路由器"></a> 路由器</h2>
-<p>线头阻塞：交换结构前被阻塞</p>
-<p>三种交换结构：经内存交换（不能同时读写，读写性能为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> 时，吞吐量上限 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>B</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{B}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.217331em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>）、经总线交换（共享总线，所有端口接收，添加首部标签过滤）、经内联网络交换。</p>
-<p>分组调度策略：</p>
-<ul>
-<li>先进先出</li>
-<li>循环排队：分类，类别间无差别</li>
-<li>优先权排队：分类，高优先级先处理</li>
-<li>加权公平排队：各类有优先权，优先权所占比例为占带宽的比例</li>
-</ul>
-<p>丢弃策略：</p>
-<ul>
-<li>被动策略：弃尾、删除队列中的分组</li>
-<li>主动队列管理：在满之前就按概率丢弃分组</li>
-</ul>
-<h2 id="ip"><a class="markdownIt-Anchor" href="#ip"></a> IP</h2>
-<p>IPv4数据报格式</p>
-<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122161520854.png" alt="IPv4" /></p>
-<p>IPv6的数据报格式</p>
-<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122212616166.png" alt="IPv6" /></p>
-<p>传统分类：</p>
-<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122173441116.png" alt="ABCDE" /></p>
-<p>DHCP协议</p>
-<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122213930415.png" alt="DHCP" /></p>
-<p>NAT协议：</p>
-<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231122214617497.png" alt="NAT" /></p>
-<p>ICMP协议：处理差错报告、控制和请求/应答，会封装在IP数据报的数据部分</p>
-<p>IPv4迁移到IPv6：双栈技术、隧道技术</p>
-<p>路由选择算法：</p>
-<ul>
-<li>链路状态算法OSPF：形成拓扑图，运行Dijkstra</li>
-<li>距离向量算法RIP</li>
-</ul>
-<p>BGP：</p>
-<ul>
-<li>边界路由器：网关</li>
-<li>热土豆：多个可到达时，选择子网内路径最短的一个</li>
-</ul>
-<h1 id="链路层"><a class="markdownIt-Anchor" href="#链路层"></a> 链路层</h1>
-<p>CRC算法：补 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span></span></span> 位0后做除法，得到余数</p>
-<p>CDMA：1传原码、0传反码</p>
-<p>随机接入协议：</p>
-<ul>
-<li>时隙Aloha：同时开始发送，检测到碰撞后退避</li>
-<li>CSMA：信道空闲开始发送，否则推迟</li>
-<li>CSMA/CD：碰撞检测，检测到后二进制指数退避
-<ul>
-<li>强化碰撞：检测到后，继续发送若干比特认为干扰信号，让所有用户知道发生了碰撞</li>
-<li>争用期：端到端的往返时延。超过争用期则未发生碰撞</li>
-</ul>
-</li>
-</ul>
-<p>轮流协议：轮询、令牌传递</p>
-<p>ARP协议：构建局域网内IP-&gt;MAC的映射</p>
-<ul>
-<li>ARP请求：广播</li>
-<li>ARP应答：回复</li>
-</ul>
-<p>以太网帧：数据字段不得少于46字节(争用期长度为64比特长度)，不得多于1500字节(MTU)</p>
-<h1 id="web页面请求全流程"><a class="markdownIt-Anchor" href="#web页面请求全流程"></a> Web页面请求全流程</h1>
-<ol>
-<li>笔记本连接时，获得IP地址、网关、DNS服务器等信息：通过DHCP动态获得本机IP地址（DHCP发现、DHCP提供、DHCP请求、DHCP ACK）</li>
-<li>ARP协议获得子网内ip-&gt;mac</li>
-<li>DNS解析域名</li>
-<li>建立TCP连接，三次握手</li>
-<li>发送HTTP报文</li>
-<li>得到HTTP响应</li>
-<li>拆除TCP连接</li>
-</ol>
-<h1 id="无线网络"><a class="markdownIt-Anchor" href="#无线网络"></a> 无线网络</h1>
-<p>无基础设施无线网(AdHoc)</p>
-<p>无线链路特征：信号强度衰减、有其它源的干扰、多径传播、比特差错更为常见</p>
-<p>比特差错率BER、传输率、信噪比SNR</p>
-<p>隐蔽站问题（不可见终端）、暴露站问题（冲突但不影响，因为距离）</p>
-<p>BSS差不多BSA</p>
-<p>802.11</p>
-<p>CSMA/CA：</p>
-<p>移动节点路由选择</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/12/CSAPP/CSAPP-Lab-1-Data-Lab/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1208,6 +895,102 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Persistence/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Concurrency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Concurrency/" class="post-title-link" itemprop="url">Operating System: Concurrency</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-08-21 23:18:52" itemprop="dateCreated datePublished" datetime="2023-08-21T23:18:52+08:00">2023-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-12-12 19:09:30" itemprop="dateModified" datetime="2023-12-12T19:09:30+08:00">2023-12-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LectureNote/" itemprop="url" rel="index"><span itemprop="name">LectureNote</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LectureNote/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><em>based on <a target="_blank" rel="noopener" href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a></em></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Concurrency/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
