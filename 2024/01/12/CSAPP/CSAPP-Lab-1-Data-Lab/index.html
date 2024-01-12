@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="实验概述：使用位运算实现各类计算  bitXor 函数原型：int bitXor(int x,int y) 题目要求：使用~ &amp;实现异或运算 思路：直接使用逻辑运算得到x ^ y &#x3D; (x &amp; ~y) | (~x &amp; y)&#x3D;~(~(~x &amp; y) &amp; ~(x &amp; ~y))  123int bitXor(int x, int y) &amp;#123;  re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP Lab(1):Data Lab">
+<meta property="og:url" content="http://example.com/2024/01/12/CSAPP/CSAPP-Lab-1-Data-Lab/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="实验概述：使用位运算实现各类计算  bitXor 函数原型：int bitXor(int x,int y) 题目要求：使用~ &amp;实现异或运算 思路：直接使用逻辑运算得到x ^ y &#x3D; (x &amp; ~y) | (~x &amp; y)&#x3D;~(~(~x &amp; y) &amp; ~(x &amp; ~y))  123int bitXor(int x, int y) &amp;#123;  re">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-12T13:21:54.000Z">
+<meta property="article:modified_time" content="2024-01-12T14:45:54.730Z">
+<meta property="article:author" content="xQAQyn">
+<meta property="article:tag" content="System">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/01/12/CSAPP/CSAPP-Lab-1-Data-Lab/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/01/12/CSAPP/CSAPP-Lab-1-Data-Lab/","path":"2024/01/12/CSAPP/CSAPP-Lab-1-Data-Lab/","title":"CSAPP Lab(1):Data Lab"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSAPP Lab(1):Data Lab | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bitxor"><span class="nav-number">1.</span> <span class="nav-text"> bitXor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tmin"><span class="nav-number">2.</span> <span class="nav-text"> tmin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#istmax"><span class="nav-number">3.</span> <span class="nav-text"> isTmax</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#alloddbits"><span class="nav-number">4.</span> <span class="nav-text"> allOddBits</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#negate"><span class="nav-number">5.</span> <span class="nav-text"> negate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#isasciidigit"><span class="nav-number">6.</span> <span class="nav-text"> isAsciiDigit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conditional"><span class="nav-number">7.</span> <span class="nav-text"> conditional</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#islessorequal"><span class="nav-number">8.</span> <span class="nav-text"> isLessOrEqual</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#logicalneg"><span class="nav-number">9.</span> <span class="nav-text"> logicalNeg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#howmanybits"><span class="nav-number">10.</span> <span class="nav-text"> howManyBits</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#floatscale2"><span class="nav-number">11.</span> <span class="nav-text"> floatScale2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#floatfloat2int"><span class="nav-number">12.</span> <span class="nav-text"> floatFloat2Int</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#floatpower2"><span class="nav-number">13.</span> <span class="nav-text"> floatPower2</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/12/CSAPP/CSAPP-Lab-1-Data-Lab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CSAPP Lab(1):Data Lab | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSAPP Lab(1):Data Lab
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-01-12 21:21:54 / Modified: 22:45:54" itemprop="dateCreated datePublished" datetime="2024-01-12T21:21:54+08:00">2024-01-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>实验概述：使用位运算实现各类计算</p>
+<h1 id="bitxor"><a class="markdownIt-Anchor" href="#bitxor"></a> bitXor</h1>
+<p>函数原型：<code>int bitXor(int x,int y)</code></p>
+<p>题目要求：使用<code>~ &amp;</code>实现异或运算</p>
+<p>思路：直接使用逻辑运算得到<code>x ^ y = (x &amp; ~y) | (~x &amp; y)=~(~(~x &amp; y) &amp; ~(x &amp; ~y)) </code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">bitXor</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ~(~(~x &amp; y) &amp; ~(x &amp; ~y));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="tmin"><a class="markdownIt-Anchor" href="#tmin"></a> tmin</h1>
+<p>函数原型：<code>int tmin()</code></p>
+<p>题目要求：返回32位补码能够表示的最小整数</p>
+<p>思路：由补码的定义可知，最高位权重为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">-2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> ，其余位权重均为正 。所以最小整数的二进制表示即为<code>0x80000000</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">tmin</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="istmax"><a class="markdownIt-Anchor" href="#istmax"></a> isTmax</h1>
+<p>函数原型：<code>int isTmax(int x)</code></p>
+<p>题目要求：判断一个数是否为32位补码所能表示的最大整数，如果是则返回1，否则返回0</p>
+<p>思路：32位补码所能表示的最大整数为<code>0x7fffffff</code>，即最高位为0，其余位为1。由于不能直接使用大常数进行判断，所以我寻找了其特点：其满足<code>~(x^(x+1))=0</code>。但注意到满足这一条件的数还有<code>0xffffffff</code>，所以我再添加了一个条件<code>~x != 0</code>排除了它。最终实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isTmax</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> !(~(x ^ (x + <span class="number">1</span>))) &amp; !!(~x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="alloddbits"><a class="markdownIt-Anchor" href="#alloddbits"></a> allOddBits</h1>
+<p>函数原型：<code>int allOddBits(int x)</code></p>
+<p>题目要求：判断所有奇数位是否均为1，若是则返回1，否则返回0</p>
+<p>思路：不难想到可以将所有的奇数位取出并做与运算得到最后结果。但题目要求只能使用12个运算符，这样会超出题目的限制。可以使用二分的思路进行计算，每次将前半段和后半段数字相与，大大减少了运算次数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">allOddBits</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> x16 = x &amp; (x &gt;&gt; <span class="number">16</span>);</span><br><span class="line">  <span class="type">int</span> x8 = x16 &amp; (x16 &gt;&gt; <span class="number">8</span>);</span><br><span class="line">  <span class="type">int</span> x4 = x8 &amp; (x8 &gt;&gt; <span class="number">4</span>);</span><br><span class="line">  <span class="type">int</span> x2 = x4 &amp; (x4 &gt;&gt; <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> (x2 &amp; <span class="number">3</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="negate"><a class="markdownIt-Anchor" href="#negate"></a> negate</h1>
+<p>函数原型：<code>int negate(int x)</code></p>
+<p>题目要求：返回-x的补码</p>
+<p>思路：根据补码定义有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><msub><mo stretchy="false">)</mo><mtext>补</mtext></msub><mo>=</mo><mtext>～</mtext><msub><mi>x</mi><mtext>补</mtext></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">(-x)_补=～x_{补}+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">～</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，直接实现即可</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">negate</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ~x + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="isasciidigit"><a class="markdownIt-Anchor" href="#isasciidigit"></a> isAsciiDigit</h1>
+<p>函数原型：<code>int isAsciiDigit(int x)</code></p>
+<p>题目要求：判断x是否为数字<code>'0'-'9'</code>的ASCII码（范围为<code>[0x30,0x39]</code>）</p>
+<p>思路：我将这一判断拆分为两部分：</p>
+<ul>
+<li>判断高28位：高28位的值应等于<code>0x3</code>，通过异或运算判断相等</li>
+<li>判断低4位：第4位的取值范围为<code>0x0-0x9</code>，即不超过<code>0x9</code>，从0开始对二进制位进行编号，则该命题可以等效为第3位不可以和第2位或第1位同时出现。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isAsciiDigit</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> a1 = (x &gt;&gt; <span class="number">4</span>) ^ <span class="number">0x3</span>; <span class="comment">// check high 28bits should be 0x3. a1 should be 0</span></span><br><span class="line">  <span class="type">int</span> a2 = (x &gt;&gt; <span class="number">3</span>) &amp; ((x &gt;&gt; <span class="number">2</span>) | (x &gt;&gt; <span class="number">1</span>)) &amp; <span class="number">1</span>; <span class="comment">// check low 4bits is less than 0xa, should be 0</span></span><br><span class="line">  <span class="keyword">return</span> !a1 &amp; !a2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="conditional"><a class="markdownIt-Anchor" href="#conditional"></a> conditional</h1>
+<p>函数原型：<code>int conditional(int x,int y,int z)</code></p>
+<p>题目要求：实现C语言三元运算符<code>x ? y : z</code>的功能</p>
+<p>思路：设计类似掩码的方式进行计算。当<code>x!=0</code>时，<code>cond1=0xffffffff, cond2=0x0</code>，当<code>x==0</code>时，<code>cond1=0x0, cond2=0xffffffff</code>。最后只需返回<code>(cond1 &amp; y) | (cond2 &amp; z)</code>即可。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">conditional</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> &#123;</span><br><span class="line">  <span class="type">int</span> cond2 = ((!x) &lt;&lt; <span class="number">31</span>) &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  <span class="type">int</span> cond1 = ~cond2;</span><br><span class="line">  <span class="keyword">return</span> (cond1 &amp; y) | (cond2 &amp; z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="islessorequal"><a class="markdownIt-Anchor" href="#islessorequal"></a> isLessOrEqual</h1>
+<p>函数原型：<code>int isLessOrEqual(int x,int y)</code></p>
+<p>题目要求：如果<code>x &lt;= y</code>，返回1，否则返回0</p>
+<p>思路：分情况讨论</p>
+<ul>
+<li>等于的判断：直接通过异或为0判断</li>
+<li>异号时小于的判断：判断x的最高位是否为1，为1则<code>x &lt; y</code></li>
+<li>同号时小于的判断：执行<code>x-y</code>，由于没有提供减号，所以将其等效于<code>x + ~y + 1</code>。判断差值的符号即可。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isLessOrEqual</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">  <span class="type">int</span> equal = !(x ^ y);</span><br><span class="line">  <span class="type">int</span> ndiff = !((x ^ y) &gt;&gt; <span class="number">31</span>);</span><br><span class="line">  <span class="type">int</span> sub = x + ~y + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> equal | (!ndiff &amp; (x &gt;&gt; <span class="number">31</span>)) | (ndiff &amp; (sub &gt;&gt; <span class="number">31</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="logicalneg"><a class="markdownIt-Anchor" href="#logicalneg"></a> logicalNeg</h1>
+<p>函数原型：<code>int logicalNeg(int x)</code></p>
+<p>题目要求：在不使用逻辑非<code>!</code>的情况下，实现逻辑非</p>
+<p>思路：逻辑非要求x为0时返回1，否则返回。我们需要先找到0的特殊性质，这里我使用的时0所有位做或运算之后仍为0。利用该性质进行变形，假设<code>y=~x</code>，若<code>x=0</code>时则有<code>y_31 &amp; y_30 &amp; ... &amp; y_0 = 1</code>，<code>x!=0</code>时<code>y_31 &amp; y_30 &amp; ... &amp; y_0 = 0</code>，与逻辑非的行为一致。而这一连串的与运算的计算我们可以使用和allOddBits中一样的二分思路解决，实现代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">logicalNeg</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> nx32 = ~x;</span><br><span class="line">  <span class="type">int</span> nx16 = nx32 &amp; (nx32 &gt;&gt; <span class="number">16</span>);</span><br><span class="line">  <span class="type">int</span> nx8 = nx16 &amp; (nx16 &gt;&gt; <span class="number">8</span>);</span><br><span class="line">  <span class="type">int</span> nx4 = nx8 &amp; (nx8 &gt;&gt; <span class="number">4</span>);</span><br><span class="line">  <span class="type">int</span> nx2 = nx4 &amp; (nx4 &gt;&gt; <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> nx2 &amp; (nx2 &gt;&gt; <span class="number">1</span>) &amp; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="howmanybits"><a class="markdownIt-Anchor" href="#howmanybits"></a> howManyBits</h1>
+<p>函数原型：<code>int howManyBits(int x)</code></p>
+<p>题目要求：求出x在使用补码表示的情况下最少所需的二进制位数</p>
+<p>思路：这个题目初看的时候会觉得非常绕，但追根溯源，我们只需要知道哪些位数是可以去掉的即可。分析补码的规律可以得知：补码最高位（符号位）后连续的与符号位相同的位均为可以去掉的。例如<code>00001001</code>的八位二进制数对应的十进制为5，去掉符号位后连续的与符号位相同的位后位<code>01001</code>的五位二进制数，其值仍为5。</p>
+<p>根据此规律，我们可以尝试使用通过算术右移解决该问题，我们知道算术右移会复制符号位到高位上，存在一个移动位数<code>n</code>，使整个数的二进制表示刚好变为全1或全0，此时这一移动位数便是有效的非符号位位数，再加上1得到总的最少位数。</p>
+<p>这里为了减少运算次数，依旧采用了二分的方法，每次尝试折半判断是否为全1或全0，如果折半后仍然<strong>不是</strong>全1或全0，则执行折半的操作（右移相应位数）。这样如果初始的x不是0或-1，则会得到一个高31位相同，但与最低位不同的数，最后统计结果再加1即可。实现代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">howManyBits</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> sign, a16, a8, a4, a2, a1, same;</span><br><span class="line">  sign = x &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  same = !!(x ^ sign);</span><br><span class="line"></span><br><span class="line">  a16 = (!!((x &gt;&gt; <span class="number">16</span>) ^ sign)) &lt;&lt; <span class="number">4</span>;</span><br><span class="line">  x &gt;&gt;= a16;</span><br><span class="line">  a8 = (!!((x &gt;&gt; <span class="number">8</span>) ^ sign)) &lt;&lt; <span class="number">3</span>;</span><br><span class="line">  x &gt;&gt;= a8;</span><br><span class="line">  a4 = (!!((x &gt;&gt; <span class="number">4</span>) ^ sign)) &lt;&lt; <span class="number">2</span>;</span><br><span class="line">  x &gt;&gt;= a4;</span><br><span class="line">  a2 = (!!((x &gt;&gt; <span class="number">2</span>) ^ sign)) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">  x &gt;&gt;= a2;</span><br><span class="line">  a1 = (!!((x &gt;&gt; <span class="number">1</span>) ^ sign));</span><br><span class="line">  x &gt;&gt;= a1;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span> + same + a1 + a2 + a4 + a8 + a16;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="floatscale2"><a class="markdownIt-Anchor" href="#floatscale2"></a> floatScale2</h1>
+<p>函数原型：<code>unsigned floatScale2(unsigned uf)</code></p>
+<p>题目要求：输入一个IEEE单精度浮点数<code>f</code>的二进制表示，输出<code>2*f</code>的二进制表示</p>
+<p>思路：针对不同类型的输入进行讨论</p>
+<ul>
+<li>输入为NaN：根据题目要求直接返回NaN</li>
+<li>输入为无穷大：直接返回无穷大</li>
+<li>输入为非规格化数：将其基数乘2，如果2后超过了23位，则将其转化为规格化数</li>
+<li>输入为规格化数：指数部分加一</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="title function_">floatScale2</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">  <span class="type">int</span> base, e, sign;</span><br><span class="line">  base = uf &amp; ((<span class="number">1</span> &lt;&lt; <span class="number">23</span>) - <span class="number">1</span>);</span><br><span class="line">  sign = uf &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  e = ((uf &gt;&gt; <span class="number">23</span>) &amp; <span class="number">0xff</span>);</span><br><span class="line">  <span class="keyword">if</span>(e == <span class="number">0xff</span>) <span class="keyword">return</span> uf;<span class="comment">//NaN</span></span><br><span class="line">  <span class="keyword">if</span>(e == <span class="number">0</span>)&#123;</span><br><span class="line">    base &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(base &amp; (<span class="number">1</span> &lt;&lt; <span class="number">23</span>))&#123;</span><br><span class="line">      base &amp;= ((<span class="number">1</span> &lt;&lt; <span class="number">23</span>) - <span class="number">1</span>);</span><br><span class="line">      e = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span> e++;</span><br><span class="line">  <span class="keyword">return</span> (sign &lt;&lt; <span class="number">31</span>) | (e &lt;&lt; <span class="number">23</span>) | base;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="floatfloat2int"><a class="markdownIt-Anchor" href="#floatfloat2int"></a> floatFloat2Int</h1>
+<p>函数原型：<code>int floatFloat2Int(unsigned uf)</code></p>
+<p>题目要求：实现浮点数对整数的转换，要求超出范围的数输出<code>0x80000000</code></p>
+<p>思路：由于int类型除去符号位以外还有31位，所以分情况讨论</p>
+<ul>
+<li>e &gt; 157：此时超出了int的表示范围，直接返回<code>0x80000000</code></li>
+<li>e &lt; 127：此时浮点数表示的数绝对值小于1，返回0</li>
+<li>127&lt;=e&lt;=157：此时根据基数和指数，使用移位运算得到结果</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">floatFloat2Int</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">  <span class="type">int</span> e,sign,base;</span><br><span class="line">  base = uf &amp; ((<span class="number">1</span> &lt;&lt; <span class="number">23</span>) - <span class="number">1</span>) | (<span class="number">1</span> &lt;&lt; <span class="number">23</span>);</span><br><span class="line">  sign = uf &gt;&gt; <span class="number">31</span>;</span><br><span class="line">  e = ((uf &gt;&gt; <span class="number">23</span>) &amp; <span class="number">0xff</span>) - <span class="number">127</span>;</span><br><span class="line">  <span class="keyword">if</span>(e &gt; <span class="number">30</span>) <span class="keyword">return</span> <span class="number">1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">  <span class="keyword">if</span>(e &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>(e &gt; <span class="number">23</span>)</span><br><span class="line">    base = base &lt;&lt; (e<span class="number">-23</span>);</span><br><span class="line">  <span class="keyword">else</span> base = base &gt;&gt; (<span class="number">23</span>-e);</span><br><span class="line">  <span class="keyword">if</span>(sign) base = -base;</span><br><span class="line">  <span class="keyword">return</span> base;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="floatpower2"><a class="markdownIt-Anchor" href="#floatpower2"></a> floatPower2</h1>
+<p>函数原型：<code>unsigned floatPower2(int x)</code></p>
+<p>题目要求：输入x，输出 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.</mn><msup><mn>0</mn><mi>x</mi></msup></mrow><annotation encoding="application/x-tex">2.0^x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">.</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span> 的浮点表示</p>
+<p>思路：首先分析浮点数的表示范围，对该题而言基数部分为0，e的取值范围为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>255</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,255]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">5</span><span class="mclose">]</span></span></span></span> ，对应指数的范围为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>126</mn><mo separator="true">,</mo><mn>128</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-126,128]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">1</span><span class="mord">2</span><span class="mord">6</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mord">8</span><span class="mclose">]</span></span></span></span>，所以不在这一范围内的x可直接返回0或无穷大。对于在范围内的x，只需设置e=x+127，其余位为0即可。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="title function_">floatPower2</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">128</span>) <span class="keyword">return</span> <span class="number">0x7f800000</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; <span class="number">-126</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> (x + <span class="number">127</span>) &lt;&lt; <span class="number">23</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/System/" rel="tag"># System</a>
+              <a href="/tags/CSAPP/" rel="tag"># CSAPP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/25/Computer%20Network/ComputerNetwork-6-Review/" rel="prev" title="Computer Network(6):Review">
+                  <i class="fa fa-angle-left"></i> Computer Network(6):Review
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>

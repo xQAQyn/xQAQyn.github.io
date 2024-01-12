@@ -28,12 +28,15 @@
 <meta property="og:site_name" content="xQAQyn&#39;s Blog">
 <meta property="og:description" content="based on Operating Systems: Three Easy Pieces">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231211212442905.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231212184651836.png">
 <meta property="article:published_time" content="2023-08-21T15:18:52.000Z">
-<meta property="article:modified_time" content="2023-10-31T11:18:24.000Z">
+<meta property="article:modified_time" content="2023-12-12T11:09:30.430Z">
 <meta property="article:author" content="xQAQyn">
 <meta property="article:tag" content="Lecture Note">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231211212442905.png">
 
 
 <link rel="canonical" href="http://example.com/2023/08/21/Operating%20System%20-%20Three%20Easy%20Pieces/Operating%20System%20-%20Concurrency/">
@@ -115,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> 概述</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text"> 进程带来的问题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +131,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -139,7 +142,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -210,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-31 19:18:24" itemprop="dateModified" datetime="2023-10-31T19:18:24+08:00">2023-10-31</time>
+      <time title="Modified: 2023-12-12 19:09:30" itemprop="dateModified" datetime="2023-12-12T19:09:30+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -239,6 +242,21 @@
 <span id="more"></span>
 <h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
 <p>在这一部分，我们介绍一个对运行程序的新抽象：线程。与传统的情况下一个程序只有一个执行点不同，一个<strong>多线程</strong>程序可以有多个执行点。另一个理解的方法是，每一个线程都像是一个独立的进程，但属于一个程序的线程可以共享一个地址空间，即可以访问同样的数据。</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231211212442905.png" alt="image-20231211212442905" /></p>
+<p>使用线程的原因主要有：</p>
+<ul>
+<li>并行性：程序内部有很多可以并行执行的代码（例如矩阵乘法），这时候使用线程可以实现并行的方式进行处理，提高运行效率</li>
+<li>减少I/O带来的阻塞：使用线程可以在等待I/O的同时执行一些其它的代码</li>
+</ul>
+<h1 id="进程带来的问题"><a class="markdownIt-Anchor" href="#进程带来的问题"></a> 进程带来的问题</h1>
+<p>由于进程之间共享地址空间，这意味着它们可以同时使用同一个变量，可能会带来并发错误，例如在下面的程序中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;common.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;common_threads.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> max;</span><br><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> counter = <span class="number">0</span>; <span class="comment">// shared global variable</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">mythread</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">    <span class="type">char</span> *letter = arg;</span><br><span class="line">    <span class="type">int</span> i; <span class="comment">// stack (private per thread) </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s: begin [addr of i: %p]\n&quot;</span>, letter, &amp;i);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; max; i++) &#123;</span><br><span class="line">		counter = counter + <span class="number">1</span>; <span class="comment">// shared: only one</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s: done\n&quot;</span>, letter);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line">                                                                             </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> &#123;                    </span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;usage: main-first &lt;loopcount&gt;\n&quot;</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    max = atoi(argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="type">pthread_t</span> p1, p2;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;main: begin [counter = %d] [%x]\n&quot;</span>, counter, </span><br><span class="line">	   (<span class="type">unsigned</span> <span class="type">int</span>) &amp;counter);</span><br><span class="line">    Pthread_create(&amp;p1, <span class="literal">NULL</span>, mythread, <span class="string">&quot;A&quot;</span>); </span><br><span class="line">    Pthread_create(&amp;p2, <span class="literal">NULL</span>, mythread, <span class="string">&quot;B&quot;</span>);</span><br><span class="line">    <span class="comment">// join waits for the threads to finish</span></span><br><span class="line">    Pthread_join(p1, <span class="literal">NULL</span>); </span><br><span class="line">    Pthread_join(p2, <span class="literal">NULL</span>); </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;main: done\n [counter: %d]\n [should: %d]\n&quot;</span>, </span><br><span class="line">	   counter, max*<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输入一个极大的数作为参数(这里使用10000000)，观察两次运行的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">xqaqyn@xqaqyn-ROG-Zephyrus-M16-GU603HM-GU603HM:~/Projects/ostep-code/threads-intro$ ./t1 10000000</span><br><span class="line">main: begin [counter = 0] [9ec8a02c]</span><br><span class="line">A: begin [addr of i: 0x7fc2f93adedc]</span><br><span class="line">B: begin [addr of i: 0x7fc2f8bacedc]</span><br><span class="line">A: done</span><br><span class="line">B: done</span><br><span class="line">main: done</span><br><span class="line"> [counter: 10445006]</span><br><span class="line"> [should: 20000000]</span><br><span class="line">xqaqyn@xqaqyn-ROG-Zephyrus-M16-GU603HM-GU603HM:~/Projects/ostep-code/threads-intro$ ./t1 10000000</span><br><span class="line">main: begin [counter = 0] [1caa602c]</span><br><span class="line">A: begin [addr of i: 0x7f8897b02edc]</span><br><span class="line">B: begin [addr of i: 0x7f8897301edc]</span><br><span class="line">B: done</span><br><span class="line">A: done</span><br><span class="line">main: done</span><br><span class="line"> [counter: 10073336]</span><br><span class="line"> [should: 20000000]</span><br></pre></td></tr></table></figure>
+<p>可以看到，不仅counter的计数结果错误，甚至出现了多次运行结果不一致的情况。其本质原因是累加的操作并不是一个原子的操作，在x86环境下，它的汇编代码可能是这样(在counter内存地址为0x8049a1c时)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov 0x8049a1c, %eax</span><br><span class="line">add $0x1, %eax</span><br><span class="line">mov %eax, 0x8049a1c</span><br></pre></td></tr></table></figure>
+<p>如果在执行完第一个mov指令后进程A被调度器取消调度，并调度了进程B，此时进程A的累加结果还未写回到内存，导致进程B读取的为累加前的值，产生错误。下面是一种会出错的流程：</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20231212184651836.png" alt="image-20231212184651836" /></p>
 
     </div>
 
@@ -282,8 +300,8 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2023</span>
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
