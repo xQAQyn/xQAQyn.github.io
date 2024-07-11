@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Hello World">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java(1)：程序基本结构">
+<meta property="og:url" content="http://example.com/2024/07/11/BackendDev/Java/Java-1-%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="Hello World">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240711155159306.png">
+<meta property="article:published_time" content="2024-07-11T07:32:53.000Z">
+<meta property="article:modified_time" content="2024-07-11T10:08:30.488Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240711155159306.png">
+
+
+<link rel="canonical" href="http://example.com/2024/07/11/BackendDev/Java/Java-1-%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/07/11/BackendDev/Java/Java-1-%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/","path":"2024/07/11/BackendDev/Java/Java-1-：程序基本结构/","title":"Java(1)：程序基本结构"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java(1)：程序基本结构 | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hello-world"><span class="nav-number">1.</span> <span class="nav-text"> Hello World</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8Bprimitive-type"><span class="nav-number">2.</span> <span class="nav-text"> 基本类型(primitive type)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text"> 变量与常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.</span> <span class="nav-text"> 数值类型转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.</span> <span class="nav-text"> 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%99%A8"><span class="nav-number">5.1.</span> <span class="nav-text"> 构建器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">6.</span> <span class="nav-text"> 输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">6.1.</span> <span class="nav-text"> 标准输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">6.2.</span> <span class="nav-text"> 文件输入输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text"> 控制流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text"> 大数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">9.</span> <span class="nav-text"> 数组</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/11/BackendDev/Java/Java-1-%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java(1)：程序基本结构 | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java(1)：程序基本结构
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-07-11 15:32:53 / Modified: 18:08:30" itemprop="dateCreated datePublished" datetime="2024-07-11T15:32:53+08:00">2024-07-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="hello-world"><a class="markdownIt-Anchor" href="#hello-world"></a> Hello World</h1>
+<span id="more"></span>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello world.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译：<code>Main.java</code>-&gt;<code>Main.class</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac Main.java </span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java xxx</span><br></pre></td></tr></table></figure>
+<p>此时会直接运行该类中的main函数</p>
+<p><strong>注意</strong>：每个Java源文件中遵循命名规范：</p>
+<ul>
+<li>类名使用大驼峰命名法（例如CamelCase）</li>
+<li>源代码文件名必须与公共类的名字相同</li>
+</ul>
+<h1 id="基本类型primitive-type"><a class="markdownIt-Anchor" href="#基本类型primitive-type"></a> 基本类型(primitive type)</h1>
+<p>整型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>长度(Byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>4</td>
+</tr>
+<tr>
+<td>short</td>
+<td>2</td>
+</tr>
+<tr>
+<td>long</td>
+<td>8</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>整型常量前后缀：与C一致</p>
+<p>浮点类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>长度(Byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float</td>
+<td>4</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>（不建议使用，建议均使用字符串类型）char类型：代表一个UTF-16编码中的单元</p>
+<p>boolean类型：布尔值，且与整型不能相互转换</p>
+<h1 id="变量与常量"><a class="markdownIt-Anchor" href="#变量与常量"></a> 变量与常量</h1>
+<p>变量声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> number;</span><br><span class="line"><span class="type">int</span> x;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：对未初始化的变量的使用会出现编译错误</p>
+<p>常量声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="type">double</span> <span class="variable">pi</span> <span class="operator">=</span> <span class="number">3.1415</span>;</span><br></pre></td></tr></table></figure>
+<p>类常量声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Constant</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">pi</span> <span class="operator">=</span> <span class="number">3.1415</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举类型声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Size</span>&#123;</span><br><span class="line">    SMALL,</span><br><span class="line">    MEDIUM,</span><br><span class="line">    LARGE</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">Size</span> <span class="variable">s</span> <span class="operator">=</span> Size.MEDIUM</span><br></pre></td></tr></table></figure>
+<h1 id="数值类型转换"><a class="markdownIt-Anchor" href="#数值类型转换"></a> 数值类型转换</h1>
+<p>合法的隐式类型转换如下：</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240711155159306.png" alt="image-20240711155159306" /></p>
+<p>这里6个实现箭头代表无损的转换，而虚线箭头则是有精度损失的</p>
+<p>还可以使用强制类型转换完成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">e</span> <span class="operator">=</span> <span class="number">9.9</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> (<span class="type">int</span>)e;</span><br></pre></td></tr></table></figure>
+<h1 id="字符串"><a class="markdownIt-Anchor" href="#字符串"></a> 字符串</h1>
+<p>Java字符串为一个预定义类String，其本质为Unicode字符序列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">e</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">greeting</span> <span class="operator">=</span> <span class="string">&quot;Hello&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">str.equals(other); <span class="comment">// 判断两字符串是否相等</span></span><br><span class="line">str.compareTo(other); <span class="comment">// 比较字典序, str在other前则返回负数，相等为0，否则正数</span></span><br><span class="line"></span><br><span class="line">str.empty(); <span class="comment">// 是否为空</span></span><br><span class="line">str.length(); <span class="comment">// 字符串长度</span></span><br><span class="line"></span><br><span class="line">str.startsWith(prefix); <span class="comment">// str是否有前缀prefix</span></span><br><span class="line">str.endsWith(suffix); <span class="comment">// str是否有后缀suffix</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回从0/fromIndex位置开始匹配子串的第一个/最后一个位置，若不存在则返回</span></span><br><span class="line">str.indexOf(substr);</span><br><span class="line">str.indexOf(substr, fromIndex);</span><br><span class="line">str.lastIndexOf(substr);</span><br><span class="line">str.lastIndexOf(substr, fromIndex);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回子串</span></span><br><span class="line">str.substring(beginIndex);</span><br><span class="line">str.substring(beginIndex, endIndex);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回新字符串，完成大小写转换</span></span><br><span class="line">str.toLowerCase();</span><br><span class="line">str.toUpperCase();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回新字符串，去除首尾的指定字符</span></span><br><span class="line">str.trim(); <span class="comment">//去除小于U+0020的字符</span></span><br><span class="line">str.strip(); <span class="comment">//去除空格</span></span><br><span class="line"></span><br><span class="line">str.join(delimiter, other); <span class="comment">//返回以delimiter为分隔符，str连接other的字符串</span></span><br><span class="line"></span><br><span class="line">str.repeat(count); <span class="comment">//返回重复count次的字符串</span></span><br></pre></td></tr></table></figure>
+<h2 id="构建器"><a class="markdownIt-Anchor" href="#构建器"></a> 构建器</h2>
+<p>由于String是一个不可变对象，所以每次对其的连接都会创建一个新字符串，大量这样的操作会导致效率低。这时候用StringBuilder就可以解决该问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line">builder.append(s1);</span><br><span class="line">builder.append(s2);</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">completedString</span> <span class="operator">=</span> builder.toString();</span><br></pre></td></tr></table></figure>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">builder.length();</span><br><span class="line"></span><br><span class="line">builder.append(str);</span><br><span class="line">builder.insert(offset, str);</span><br><span class="line"></span><br><span class="line">builder.delete(startIndex, endIndex);</span><br><span class="line"></span><br><span class="line">builder.toString();</span><br></pre></td></tr></table></figure>
+<h1 id="输入输出"><a class="markdownIt-Anchor" href="#输入输出"></a> 输入输出</h1>
+<h2 id="标准输入输出"><a class="markdownIt-Anchor" href="#标准输入输出"></a> 标准输入输出</h2>
+<p>使用Scanner进行输入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line">...</span><br><span class="line"><span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> in.nextInt();</span><br></pre></td></tr></table></figure>
+<p>Scanner常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">in.nextLine(); <span class="comment">//读取一行</span></span><br><span class="line">in.nextInt();</span><br><span class="line">in.nextDouble();</span><br><span class="line">in.next(); <span class="comment">//读取一个单词</span></span><br><span class="line">in.hasNext(); <span class="comment">//判断是否结束</span></span><br></pre></td></tr></table></figure>
+<p>格式化的输出：</p>
+<ul>
+<li>System.out.printf，与C中的printf类似</li>
+<li>还可以用String.format()创建一个新的字符串，用法与printf一致</li>
+</ul>
+<h2 id="文件输入输出"><a class="markdownIt-Anchor" href="#文件输入输出"></a> 文件输入输出</h2>
+<p>文件输入仍通过Scanner实现，不过将标准输入流替换为文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(Path.of(<span class="string">&quot;input.txt&quot;</span>), StandardCharsets.UTF_8);</span><br></pre></td></tr></table></figure>
+<p>输出通过PrintWriter对象实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintWriter</span>(<span class="string">&quot;output.txt&quot;</span>, StandardCharsets.UTF_8);</span><br></pre></td></tr></table></figure>
+<p>这个out有printf、println等方法可以直接使用</p>
+<h1 id="控制流程"><a class="markdownIt-Anchor" href="#控制流程"></a> 控制流程</h1>
+<p>if语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(expr)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>while循环：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(expr)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>do-while循环：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">while</span>(expr)</span><br></pre></td></tr></table></figure>
+<p>for循环：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>switch语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(number)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        ...;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        ...;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        ...;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>带标签的break：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...;</span><br><span class="line">read_data:</span><br><span class="line"><span class="keyword">while</span>(expr)&#123;</span><br><span class="line">    <span class="keyword">for</span>(expr)&#123;</span><br><span class="line">        ...;</span><br><span class="line">        <span class="keyword">break</span> read_data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将会break到此处</span></span><br></pre></td></tr></table></figure>
+<h1 id="大数"><a class="markdownIt-Anchor" href="#大数"></a> 大数</h1>
+<p>java.math包提供了两个大数类BigInteger和BigDecimal，前者处理任意精度的整数运算，后者处理任意精度的浮点数运算</p>
+<p>声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigInteger</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigInteger</span>(<span class="string">&quot;165165164164164164164165446&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>计算：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigInteger</span> <span class="variable">b</span> <span class="operator">=</span> a.add(BigInteger.ValueOf(<span class="number">100</span>));</span><br><span class="line"><span class="type">BigInteget</span> <span class="variable">c</span> <span class="operator">=</span> a.add(b);</span><br></pre></td></tr></table></figure>
+<h1 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h1>
+<p>数组是存储同一类型值的集合，通过整型的下标访问。</p>
+<p>声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
+<p>for each循环：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> ele: a)&#123;</span><br><span class="line">    System.out.println(ele);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>数组浅拷贝：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a = Arrays.copyOf(b, b.length);</span><br><span class="line"><span class="comment">// 第二个参数为新数组长度</span></span><br><span class="line"><span class="comment">// 小于原数组时进行截取</span></span><br><span class="line"><span class="comment">// 大于原数组时向后填充对应类型零值</span></span><br><span class="line"><span class="comment">// 浅拷贝原理为俩指针指向同一位置</span></span><br></pre></td></tr></table></figure>
+<p>数组排序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(a);</span><br></pre></td></tr></table></figure>
+<p>二分查找：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Arrays.binarySearch(a, v);</span><br><span class="line"><span class="comment">// 查找v找到返回下标，否则返回负数r, -r-1是v应当插入的位置</span></span><br></pre></td></tr></table></figure>
+<p>多维数组的声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[][] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>][];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    a[i] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，java并没有真正的实现多维数组，这被解释为数组的数组，所以多维数组在不一定每一行有同样多的元素</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/07/10/BackendDev/SQL/SQL-1-%EF%BC%9A%E6%9F%A5%E8%AF%A2/" rel="prev" title="SQL(1)：查询">
+                  <i class="fa fa-angle-left"></i> SQL(1)：查询
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>
