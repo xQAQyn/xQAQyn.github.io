@@ -196,7 +196,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-07-12 14:19:38 / Modified: 16:44:12" itemprop="dateCreated datePublished" datetime="2024-07-12T14:19:38+08:00">2024-07-12</time>
+      <time title="Created: 2024-07-12 14:19:38 / Modified: 20:50:22" itemprop="dateCreated datePublished" datetime="2024-07-12T14:19:38+08:00">2024-07-12</time>
     </span>
 
   
@@ -210,47 +210,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="面向对象的程序设计"><a class="markdownIt-Anchor" href="#面向对象的程序设计"></a> 面向对象的程序设计</h1>
-<p>类之间的关系：</p>
-<ul>
-<li>依赖：“use-a”关系，一个类的方法使用或操纵另一个类的对象
-<ul>
-<li>依赖会导致类之间的耦合，现代软件工程认为应当尽量减少类之间的依赖</li>
-</ul>
-</li>
-<li>聚合：“has-a”关系，一个类包含另一个类的一些对象</li>
-<li>继承：“is-a”关系，一个更特殊类与一个更一般的类的关系</li>
-</ul>
-<p>一般通过UML图描述类之间的关系</p>
-<h1 id="用户自定义类"><a class="markdownIt-Anchor" href="#用户自定义类"></a> 用户自定义类</h1>
-<p>一个自定义类的基本结构为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ClassName</span>&#123;</span><br><span class="line">    field1;</span><br><span class="line">    field2;</span><br><span class="line">    ...;</span><br><span class="line">    constructor1;</span><br><span class="line">    constructor2;</span><br><span class="line">    ...;</span><br><span class="line">    method1;</span><br><span class="line">    method2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>后面以Employee类为例，写出该类的代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Employee</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> salary;</span><br><span class="line">    <span class="keyword">private</span> LocalDate hireDay;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="构造器"><a class="markdownIt-Anchor" href="#构造器"></a> 构造器</h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">Employee</span><span class="params">(String n, <span class="type">double</span> s, <span class="type">int</span> year, <span class="type">int</span> day)</span>&#123;</span><br><span class="line">    name = n;</span><br><span class="line">    salary = s;</span><br><span class="line">    hireDay = LocalDate.of()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>构造器与类同名，且没有类型、没有返回值，其功能为初始化对象。</p>
-<p>同时，一个类可以有多个参数不同的构造器。</p>
-<h2 id="声明对象变量"><a class="markdownIt-Anchor" href="#声明对象变量"></a> 声明对象变量</h2>
-<p>调用构造器可以直接声明变量，同时Java10之后支持从初始值推断变量类型，所以只需使用var进行声明即可：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">harry</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="string">&quot;Harry&quot;</span>, <span class="number">50000</span>, <span class="number">1990</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-<p>注意var关键字只能用于方法中的局部变量。</p>
-<p><strong>注意</strong>：Java中的对象变量类似于C++中的对象指针，只有在new的时候能初始化，而之间对类似于<code>A=B</code>的对象赋值，实则为两个指针指向同一个对象。</p>
-<p>类似对象指针的，Java中也可以设置null引用，对null引用执行方法会导致NullPointerException异常：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDate</span> <span class="variable">birthday</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> birthday.toString(); <span class="comment">// NullPointerException</span></span><br></pre></td></tr></table></figure>
-<p>注意到我们的Employee成员中也存在其它类对象的字段，所以我们需要清楚的知道哪些字段可能出现null，并正确的处理，常用处理方式：</p>
-<ul>
-<li>
-<p>宽容型：在构造器中将null转换为一个默认值，可以使用if-else语句实现，但在Java9起Objects类提供了一个更便利的方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = Objects.requireNonNullElse(n, <span class="string">&quot;unknown&quot;</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>严格型：直接拒绝null参数，在出现null时直接产生NullPointerException异常</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Objects.requireNonNull(n, <span class="string">&quot;The name cannot be null&quot;</span>);</span><br><span class="line">name = n;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="方法的隐式参数与显示参数"><a class="markdownIt-Anchor" href="#方法的隐式参数与显示参数"></a> 方法的隐式参数与显示参数</h2>
-<p>方法用于操作对象以及存取示例中的</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/07/12/BackendDev/Java/Java-2-%EF%BC%9A%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
