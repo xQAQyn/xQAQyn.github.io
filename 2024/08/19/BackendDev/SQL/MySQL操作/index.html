@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述 基本语法规则：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL操作">
+<meta property="og:url" content="http://example.com/2024/08/19/BackendDev/SQL/MySQL%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="概述 基本语法规则：">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-08-19T06:01:38.000Z">
+<meta property="article:modified_time" content="2024-11-09T12:38:48.691Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/08/19/BackendDev/SQL/MySQL%E6%93%8D%E4%BD%9C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/08/19/BackendDev/SQL/MySQL%E6%93%8D%E4%BD%9C/","path":"2024/08/19/BackendDev/SQL/MySQL操作/","title":"MySQL操作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MySQL操作 | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ddl"><span class="nav-number">2.</span> <span class="nav-text"> DDL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text"> 数据库定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.</span> <span class="nav-text"> 表结构定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dml"><span class="nav-number">3.</span> <span class="nav-text"> DML</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dql"><span class="nav-number">4.</span> <span class="nav-text"> DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.1.</span> <span class="nav-text"> 基本查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.2.</span> <span class="nav-text"> 条件查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.2.1.</span> <span class="nav-text"> 比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.2.2.</span> <span class="nav-text"> 逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95"><span class="nav-number">4.2.3.</span> <span class="nav-text"> 查询语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.3.</span> <span class="nav-text"> 分组查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.1.</span> <span class="nav-text"> 聚合函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.3.2.</span> <span class="nav-text"> 查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">4.4.</span> <span class="nav-text"> 排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-number">4.5.</span> <span class="nav-text"> 分页</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text"> 多表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%94%AE"><span class="nav-number">5.1.</span> <span class="nav-text"> 外键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.2.</span> <span class="nav-text"> 多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.2.1.</span> <span class="nav-text"> 连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.2.2.</span> <span class="nav-text"> 子查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text"> 事务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">7.</span> <span class="nav-text"> 性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">7.1.</span> <span class="nav-text"> 索引</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/19/BackendDev/SQL/MySQL%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MySQL操作 | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL操作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-19 14:01:38" itemprop="dateCreated datePublished" datetime="2024-08-19T14:01:38+08:00">2024-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-09 20:38:48" itemprop="dateModified" datetime="2024-11-09T20:38:48+08:00">2024-11-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
+<p>基本语法规则：</p>
+<span id="more"></span>
+<ul>
+<li>SQL语句可以单行或多行书写，以分号结尾</li>
+<li>SQL语句不区分大小写</li>
+</ul>
+<p>单行注释：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- xxx</span></span><br></pre></td></tr></table></figure>
+<p>多行注释：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">xxx</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>SQL语句分类：</p>
+<ul>
+<li>DDL： Data Definition Language，负责数据定义</li>
+<li>DML： Data Manipulating Language，负责数据的增删改</li>
+<li>DQL： Data Query Language，负责数据查询</li>
+<li>DCL： Data Control Language，负责管理数据库访问权限等操作</li>
+</ul>
+<p>PostgreSQL常用命令：</p>
+<ul>
+<li>
+<p>启动与停止：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service postgresql status <span class="comment"># check the status of postgresql</span></span><br><span class="line">$ sudo service postgresql start</span><br><span class="line">$ sudo service postgresql start</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>指定用户并进入psql shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo -u postgres psql</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="ddl"><a class="markdownIt-Anchor" href="#ddl"></a> DDL</h1>
+<h2 id="数据库定义"><a class="markdownIt-Anchor" href="#数据库定义"></a> 数据库定义</h2>
+<p>数据库创建：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database [if <span class="keyword">not</span> <span class="keyword">exists</span>] db_name;</span><br></pre></td></tr></table></figure>
+<p>切换数据库：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use db_name;</span><br></pre></td></tr></table></figure>
+<p>删除数据库：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> database [if <span class="keyword">exists</span>] db_name;</span><br></pre></td></tr></table></figure>
+<p>查询所有/当前数据库：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"><span class="keyword">select</span> database();</span><br></pre></td></tr></table></figure>
+<h2 id="表结构定义"><a class="markdownIt-Anchor" href="#表结构定义"></a> 表结构定义</h2>
+<p>查询当前数据库内所有表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> tables;</span><br></pre></td></tr></table></figure>
+<p>查询单个表的结构：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">desc</span> table_name;</span><br></pre></td></tr></table></figure>
+<p>表创建：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">    field1 field1_type [constraint1],</span><br><span class="line">    field2 field2_type [constraint2],</span><br><span class="line">    ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>其中数据类型有：</p>
+<ul>
+<li>
+<p>数值类型：（均可在前面加unsigned作为无符号类型使用）</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>大小(Byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tinyint</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>bigint</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>decimal</code>（高精度小数）</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>其中float、double和decimal均通过类似<code>decimal(5,2)</code>的形式声明，这里代表总长度5位，小数部分2位</li>
+</ul>
+</li>
+<li>
+<p>字符类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>char</code></td>
+<td>定长字符串</td>
+<td><code>char(n)</code></td>
+</tr>
+<tr>
+<td><code>varchar</code></td>
+<td>变长字符串</td>
+<td><code>varchar(n)</code></td>
+</tr>
+<tr>
+<td><code>blob</code></td>
+<td>二进制文本</td>
+<td></td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>长文本</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>时间类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>date</code></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>HH:MM:SS</td>
+</tr>
+<tr>
+<td><code>datetime</code></td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>其中常用的约束有：</p>
+<ul>
+<li><code>not null</code>：不能为空</li>
+<li><code>unique</code>：唯一</li>
+<li><code>primary key</code>：主键</li>
+<li><code>foreign key</code>：外键</li>
+<li><code>default xxx</code>：默认值为xxx</li>
+<li><code>auto_increament</code>：自动增长，一般用于id</li>
+</ul>
+<p>表结构修改：</p>
+<ul>
+<li>
+<p>添加字段：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">add</span> field_name field_type [field_constraints];</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>修改字段：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name modify field_name [new_type];</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>删除字段：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">drop</span> <span class="keyword">column</span> field_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>修改表名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename <span class="keyword">table</span> old_name <span class="keyword">to</span> new_name;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>删除表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [if <span class="keyword">exists</span>] table_name;</span><br></pre></td></tr></table></figure>
+<h1 id="dml"><a class="markdownIt-Anchor" href="#dml"></a> DML</h1>
+<p>insert插入只提供指定字段的数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_name(field1, field2, ...) <span class="keyword">values</span> (value1_1, value1_2, ...) , (value2_1, value2_2, ...),...;</span><br></pre></td></tr></table></figure>
+<p>insert插入提供全部字段的数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_name <span class="keyword">values</span> (value1_1, value1_2, ...) , (value2_1, value2_2, ...),...;</span><br></pre></td></tr></table></figure>
+<p>update修改数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> table_name <span class="keyword">set</span> field1<span class="operator">=</span>value1, field2<span class="operator">=</span>value2,...</span><br><span class="line">[<span class="keyword">where</span> ...];</span><br></pre></td></tr></table></figure>
+<p>delete删除数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> table_name [<span class="keyword">where</span> ...];</span><br></pre></td></tr></table></figure>
+<h1 id="dql"><a class="markdownIt-Anchor" href="#dql"></a> DQL</h1>
+<h2 id="基本查询"><a class="markdownIt-Anchor" href="#基本查询"></a> 基本查询</h2>
+<p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> field1, field2, ... <span class="keyword">from</span> table_name;</span><br></pre></td></tr></table></figure>
+<p>查询所有字段可以使用通配符替换字段列表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> table_name;</span><br></pre></td></tr></table></figure>
+<p>还可以为查询返回值的字段设置别名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> field1 [<span class="keyword">as</span> name1], field2 [<span class="keyword">as</span> name2], ... <span class="keyword">from</span> table_name;</span><br></pre></td></tr></table></figure>
+<p>使用<code>distinct</code>可以去除重复记录：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> field1, field2, ... <span class="keyword">from</span> table_name;</span><br></pre></td></tr></table></figure>
+<h2 id="条件查询"><a class="markdownIt-Anchor" href="#条件查询"></a> 条件查询</h2>
+<h3 id="比较运算符"><a class="markdownIt-Anchor" href="#比较运算符"></a> 比较运算符</h3>
+<p>数值比较：<code>&gt;</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&lt;=</code>、<code>=</code>（注意只有一个等号）、<code>&lt;&gt;</code>（不等于）</p>
+<p>范围比较：<code>between L and R</code>，判断数值/日期是否在闭区间<code>[L,R]</code>内</p>
+<p>集合：<code>in(...)</code>，括号内为一个值列表，判断值是否属于该列表</p>
+<p>模糊匹配：<code>like ...</code>，字符串模糊匹配，like后接带占位符的字符串，<code>_</code>代表单个字符，<code>%</code>代表任意个字符</p>
+<p>空比较：<code>is null</code>，是否为null</p>
+<h3 id="逻辑运算符"><a class="markdownIt-Anchor" href="#逻辑运算符"></a> 逻辑运算符</h3>
+<p>可以连接多个比较的式子：<code>and</code>或<code>&amp;&amp;</code>、<code>or</code>或<code>||</code>、<code>not</code>或<code>!</code></p>
+<h3 id="查询语法"><a class="markdownIt-Anchor" href="#查询语法"></a> 查询语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ... <span class="keyword">where</span> expr;</span><br></pre></td></tr></table></figure>
+<h2 id="分组查询"><a class="markdownIt-Anchor" href="#分组查询"></a> 分组查询</h2>
+<h3 id="聚合函数"><a class="markdownIt-Anchor" href="#聚合函数"></a> 聚合函数</h3>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> func(field) <span class="keyword">from</span> table_name;</span><br></pre></td></tr></table></figure>
+<p>常用聚合函数：<code>count</code>、<code>max</code>、<code>min</code>、<code>avg</code>（平均值）、<code>sum</code></p>
+<p><strong>注意</strong>：聚合函数会直接跳过所有null</p>
+<h3 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h3>
+<p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ... [<span class="keyword">where</span> ...] <span class="keyword">group</span> <span class="keyword">by</span> field1, field2,... [<span class="keyword">having</span> expr]</span><br></pre></td></tr></table></figure>
+<p>分组时，能够返回的字段只有分组字段和聚合函数字段</p>
+<p>having后的条件也是针对分组字段或聚合函数字段，筛选符合条件的组</p>
+<p>where与having区别：where在分组前执行，having在分组后执行</p>
+<h2 id="排序"><a class="markdownIt-Anchor" href="#排序"></a> 排序</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ... [<span class="keyword">where</span> ...] [<span class="keyword">group</span> <span class="keyword">by</span> ...] <span class="keyword">order</span> <span class="keyword">by</span> field1 type1, field2 type2, ...</span><br></pre></td></tr></table></figure>
+<p>其中type可以为<code>ASC</code>（升序，没有type时默认升序）、<code>DESC</code>（降序）</p>
+<p>多个字段排序时，即按顺序为第一关键字、第二关键字……，只有上一个关键字相同时才会比较下一个关键字</p>
+<h2 id="分页"><a class="markdownIt-Anchor" href="#分页"></a> 分页</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ... [<span class="keyword">where</span> ...] [<span class="keyword">group</span> <span class="keyword">by</span> ...] [<span class="keyword">order</span> <span class="keyword">by</span>] limit index, count</span><br></pre></td></tr></table></figure>
+<p>index代表起始索引（从0开始编号），count代表查询记录数，即查询从index开始的count个记录</p>
+<h1 id="多表操作"><a class="markdownIt-Anchor" href="#多表操作"></a> 多表操作</h1>
+<h2 id="外键"><a class="markdownIt-Anchor" href="#外键"></a> 外键</h2>
+<p>添加物理外键：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> ...(</span><br><span class="line">	[<span class="keyword">constraint</span>] [foreign_key_name] <span class="keyword">foreign</span> key (field_name) <span class="keyword">references</span> table_name(field_name); </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">add</span> <span class="keyword">constraint</span> foreign_key_name <span class="keyword">foreign</span> key (field_name) <span class="keyword">references</span> table_name(field_name); </span><br></pre></td></tr></table></figure>
+<p>物理外键缺点：影响修改效率（执行需检查外键关系）、仅适用于单节点数据库、容易引发死锁</p>
+<h2 id="多表查询"><a class="markdownIt-Anchor" href="#多表查询"></a> 多表查询</h2>
+<h3 id="连接查询"><a class="markdownIt-Anchor" href="#连接查询"></a> 连接查询</h3>
+<p>根据笛卡尔积进行查询：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> table1, table2, ...;</span><br></pre></td></tr></table></figure>
+<p>内连接（查询交集）查询：</p>
+<ul>
+<li>
+<p>使用where实现</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> table1, table2 <span class="keyword">where</span> table1.id <span class="operator">=</span> table2.id;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>使用inner join实现：(expr为连接条件)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> table1 [<span class="keyword">inner</span>] <span class="keyword">join</span> table2 <span class="keyword">on</span> expr;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>外连接“：保留一个表的所有信息（左外连接则保留左表，右外连接保留右表），如果另一张表没有符合连接条件的条目，则返回值中另一张表对应列设为null：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> table1 <span class="keyword">left</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> table2 <span class="keyword">on</span> expr;</span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> table1 <span class="keyword">right</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> table2 <span class="keyword">on</span> expr;</span><br></pre></td></tr></table></figure>
+<h3 id="子查询"><a class="markdownIt-Anchor" href="#子查询"></a> 子查询</h3>
+<p>标量子查询：子查询返回单个值，可以使用比较运算符进行操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> employee_name <span class="keyword">in</span> employee_table <span class="keyword">where</span> department_id <span class="operator">=</span> (<span class="keyword">select</span> id <span class="keyword">from</span> department_table <span class="keyword">where</span> name<span class="operator">=</span><span class="string">&#x27;Dev&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>列子查询：子查询返回一列的若干个值，此时常用in或not in进行操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">in</span> employee_table <span class="keyword">where</span> department_id <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> department_table <span class="keyword">where</span> name<span class="operator">=</span><span class="string">&#x27;Dev&#x27;</span> <span class="operator">||</span> name<span class="operator">=</span><span class="string">&#x27;Front&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>行子查询：子查询返回一行若干列，此时常用比较运算符，与标量类似</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">in</span> employee_table <span class="keyword">where</span> (job, gender) <span class="operator">=</span> (<span class="keyword">select</span> job, gender <span class="keyword">from</span> ...);</span><br></pre></td></tr></table></figure>
+<p>表子查询：子查询放回若干行若干列，常用in或not in进行操作</p>
+<h1 id="事务"><a class="markdownIt-Anchor" href="#事务"></a> 事务</h1>
+<p>概念：一组操作的集合，且为一个不可分割的工作单位，一个事务内的所有操作要么同时成功，要么同时失败。</p>
+<p>事务相关语句：</p>
+<ul>
+<li>开启事务：<code>start transaction;</code>/<code>begin;</code></li>
+<li>提交事务：<code>commit;</code></li>
+<li>回滚事务：<code>rollback;</code></li>
+</ul>
+<p>四大特性：（ACID）</p>
+<ul>
+<li>原子性：要么同时成功，要么同时失败</li>
+<li>一致性：事务完成时所有数据保持一致状态</li>
+<li>隔离性：事务在不受外部并发操作影响的独立环境中运行</li>
+<li>持久性：事务一旦提交或回滚，它对数据的修改就是永久的</li>
+</ul>
+<h1 id="性能优化"><a class="markdownIt-Anchor" href="#性能优化"></a> 性能优化</h1>
+<h2 id="索引"><a class="markdownIt-Anchor" href="#索引"></a> 索引</h2>
+<p>索引的实现：B+树</p>
+<p>优点：效率高、IO成本低</p>
+<p>缺点：占磁盘空间、降低增删改效率</p>
+<p>创建索引：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index index_name <span class="keyword">on</span> table_name(column_name);</span><br></pre></td></tr></table></figure>
+<p>注意：数据库默认会自动为<code>unique</code>和<code>primary key</code>创建索引，无需再创建</p>
+<p>删除索引：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> index index_name <span class="keyword">on</span> table_name;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/18/BackendDev/Algorithm/%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF-Java/" rel="prev" title="常用算法模板(Java)">
+                  <i class="fa fa-angle-left"></i> 常用算法模板(Java)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/20/BackendDev/SpringBoot/SpringBoot-2-%EF%BC%9AMybatis/" rel="next" title="SpringBoot(2)：MyBatis">
+                  SpringBoot(2)：MyBatis <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>

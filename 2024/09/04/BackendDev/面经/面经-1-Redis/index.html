@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="缓存  缓存穿透 概念：查询不存在的数据，每次都需要穿过缓存查询数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经(1):Redis">
+<meta property="og:url" content="http://example.com/2024/09/04/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-1-Redis/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="缓存  缓存穿透 概念：查询不存在的数据，每次都需要穿过缓存查询数据库">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240907153439383.png">
+<meta property="article:published_time" content="2024-09-04T07:32:26.000Z">
+<meta property="article:modified_time" content="2024-11-09T12:38:02.061Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240907153439383.png">
+
+
+<link rel="canonical" href="http://example.com/2024/09/04/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-1-Redis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/09/04/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-1-Redis/","path":"2024/09/04/BackendDev/面经/面经-1-Redis/","title":"面经(1):Redis"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>面经(1):Redis | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text"> 缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">1.1.</span> <span class="nav-text"> 缓存穿透</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-number">1.2.</span> <span class="nav-text"> 缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%881%E4%BA%92%E6%96%A5%E9%94%81"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 解决方案1：互斥锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882%E9%80%BB%E8%BE%91%E8%BF%87%E6%9C%9F"><span class="nav-number">1.2.2.</span> <span class="nav-text"> 解决方案2：逻辑过期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.3.</span> <span class="nav-text"> 缓存雪崩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text"> 双写一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text"> 持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%881rdb"><span class="nav-number">1.5.1.</span> <span class="nav-text"> 方案1：RDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%882aof"><span class="nav-number">1.5.2.</span> <span class="nav-text"> 方案2：AOF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5"><span class="nav-number">1.6.</span> <span class="nav-text"> 数据过期策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="nav-number">1.7.</span> <span class="nav-text"> 数据淘汰策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">2.</span> <span class="nav-text"> 分布式锁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text"> Redis集群方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="nav-number">3.1.</span> <span class="nav-text"> 主从复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> 哨兵模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4"><span class="nav-number">3.3.</span> <span class="nav-text"> 分片集群</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text"> Redis单线程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/04/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-1-Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="面经(1):Redis | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面经(1):Redis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-04 15:32:26" itemprop="dateCreated datePublished" datetime="2024-09-04T15:32:26+08:00">2024-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-09 20:38:02" itemprop="dateModified" datetime="2024-11-09T20:38:02+08:00">2024-11-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="缓存"><a class="markdownIt-Anchor" href="#缓存"></a> 缓存</h1>
+<h2 id="缓存穿透"><a class="markdownIt-Anchor" href="#缓存穿透"></a> 缓存穿透</h2>
+<p>概念：查询不存在的数据，每次都需要穿过缓存查询数据库</p>
+<span id="more"></span>
+<p>解决方案：</p>
+<ol>
+<li>对空结果进行缓存
+<ol>
+<li>优点：简单</li>
+<li>缺点：消耗内存，可能造成一致性问题</li>
+</ol>
+</li>
+<li>布隆过滤器
+<ol>
+<li>流程：查询先经过布隆过滤器，再查询redis，布隆过滤器可以直接拦截不存在数据的查询</li>
+<li>实现：不同过滤器维护一个bitmap，当数据存在时，对应键的hash值对应的bitmap对应位为1，反之为0</li>
+<li>hash可能带来误判，数组越大误判率越低</li>
+<li>实现方案：Redisson、Guava</li>
+</ol>
+</li>
+</ol>
+<h2 id="缓存击穿"><a class="markdownIt-Anchor" href="#缓存击穿"></a> 缓存击穿</h2>
+<p>概念：当key过期时，这时候对这个key有大量的并发请求时，会都由数据库处理，导致数据库压力过大</p>
+<h3 id="解决方案1互斥锁"><a class="markdownIt-Anchor" href="#解决方案1互斥锁"></a> 解决方案1：互斥锁</h3>
+<p>查询缓存之前先获取互斥锁，写入缓存后释放锁</p>
+<p>优点：强一致性</p>
+<p>缺点：性能差</p>
+<h3 id="解决方案2逻辑过期"><a class="markdownIt-Anchor" href="#解决方案2逻辑过期"></a> 解决方案2：逻辑过期</h3>
+<p>不直接设置redis条目的过期日期，而是设置一个expire字段，在过期后进行逻辑处理</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240907153439383.png" alt="image-20240907153439383" /></p>
+<p>优点：高可用、高性能</p>
+<p>缺点：一致性不一定能够保证</p>
+<h2 id="缓存雪崩"><a class="markdownIt-Anchor" href="#缓存雪崩"></a> 缓存雪崩</h2>
+<p>概念：同一时间段内大量redis缓存同时失效或Redis服务宕机，导致大量请求同时到达数据库</p>
+<p>解决方案1：TTL随机化</p>
+<p>解决方案2：使用Redis集群防止宕机，提高可用性</p>
+<p>解决方案3：给缓存业务添加降级限流策略（ngxin、Spring cloud gateway）</p>
+<p>解决方案4：给业务添加多级缓存（Guava、Caffeine）</p>
+<h2 id="双写一致性"><a class="markdownIt-Anchor" href="#双写一致性"></a> 双写一致性</h2>
+<p>概念：数据库的数据与缓存中数据的一致性</p>
+<p>读实现方法：缓存命中时直接返回，缓存未命中时，写入缓存并设定超市时间</p>
+<p>写：</p>
+<ul>
+<li>延迟双删，即先删除缓存，然后修改数据库，延时后（用于分布式数据库的同步）删除缓存，以防止脏数据的出现（缺陷：延时过程中仍可能出现脏数据被读取）</li>
+<li>使用共享锁（读锁）和排他锁（写锁）：强一致</li>
+<li>基于异步通知：
+<ul>
+<li>canal伪装为一个MySQL节点监听MySQL的二进制日志（BINLOG，记录DDL和DML语句），然后通知数据变更情况，更新缓存</li>
+<li>MQ中间件在更新数据后，通知缓存删除</li>
+</ul>
+</li>
+</ul>
+<h2 id="持久化"><a class="markdownIt-Anchor" href="#持久化"></a> 持久化</h2>
+<h3 id="方案1rdb"><a class="markdownIt-Anchor" href="#方案1rdb"></a> 方案1：RDB</h3>
+<p>RDB(Redis Database Backup File，Redis数据备份文件)，是一份数据快照</p>
+<p>用法1：在命令行中手动执行备份（命令为<code>save</code>）</p>
+<p>用法2：在<code>redis.conf</code>文件中配置触发备份的机制，格式为<code>save seconds count</code>，代表在seconds秒内有count次修改时触发<code>bgsave</code></p>
+<p>执行原理：bgsave时fork得到子进程，子进程将内存数据写入磁盘</p>
+<h3 id="方案2aof"><a class="markdownIt-Anchor" href="#方案2aof"></a> 方案2：AOF</h3>
+<p>AOF(Append Only File)，Redis处理的每一个写命令都记录在AOF文件中，即记录一个日志（该功能默认关闭，需要在redis.conf中配置）</p>
+<h2 id="数据过期策略"><a class="markdownIt-Anchor" href="#数据过期策略"></a> 数据过期策略</h2>
+<p>概念：数据过期后，从内存中删除数据的策略</p>
+<p>惰性删除：过期后不删除，在查询时再进行过期检查，检查时如果过期则删除</p>
+<ul>
+<li>优点：CPU友好</li>
+<li>缺点：浪费内存</li>
+</ul>
+<p>定期删除：定期检查部分key，删除其中过期的key</p>
+<p>Redis实际上结合了两种方法进行数据过期删除</p>
+<h2 id="数据淘汰策略"><a class="markdownIt-Anchor" href="#数据淘汰策略"></a> 数据淘汰策略</h2>
+<p>Redis支持的淘汰策略：</p>
+<ul>
+<li>（默认）noeviction：不淘汰，在内存满时不允许写入</li>
+<li>volatile-ttl：先淘汰TTL小的数据</li>
+<li>allkeys-random：随机淘汰</li>
+<li>volatile-random：随机淘汰有TTL的数据</li>
+<li>allkeys-lru：LRU淘汰（淘汰上次访问时间最早）</li>
+<li>volatile-lru：对有TTL的数据LRU淘汰</li>
+<li>allkeys-lfu：LFU淘汰（淘汰频率最低）</li>
+<li>volatile-lfu：对有TTL的数据LFU淘汰</li>
+</ul>
+<h1 id="分布式锁"><a class="markdownIt-Anchor" href="#分布式锁"></a> 分布式锁</h1>
+<p>setnx命令：即set if not exist</p>
+<p>实现逻辑：使用setnx获取锁</p>
+<p>框架：redisson实现分布式锁（底层为setnx和lua脚本）</p>
+<p>锁的有效时长：通过watchdog续期</p>
+<p>主从一致性：主节点和从节点的数据一致</p>
+<ul>
+<li>通过RedLock保证（RedLock会在过半的节点上创建锁），但这样会导致性能变差</li>
+<li>zookeeper实现：通过zookeeper维护公平锁，实现强一致性</li>
+</ul>
+<p>redisson锁可重入，同一个线程内可重复获取锁</p>
+<h1 id="redis集群方案"><a class="markdownIt-Anchor" href="#redis集群方案"></a> Redis集群方案</h1>
+<p>主节点完成写，从节点负责读，提高并发性能</p>
+<h2 id="主从复制"><a class="markdownIt-Anchor" href="#主从复制"></a> 主从复制</h2>
+<h2 id="哨兵模式"><a class="markdownIt-Anchor" href="#哨兵模式"></a> 哨兵模式</h2>
+<p>哨兵（Sentinel）模式实现主从集群的自动故障恢复，其功能如下：</p>
+<ul>
+<li>监控：检查master和slave是否正常工作
+<ul>
+<li>机制：心跳机制，每秒给集群中每个实例发送ping命令，此时sentinel发现某实例未在规定时间响应，则认为是主观下线，超过指定数量的sentinel认为实例主观下线，则实例客观下线</li>
+</ul>
+</li>
+<li>自动故障恢复：master故障时，sentinel将一个slave提升为master，选主规则：
+<ul>
+<li>首先排除与原主节点断开时间超过指定值的节点（丢失数据较多）</li>
+<li>然后通过slave-priority判断，选出优先级更高的节点（数值越小）</li>
+<li>如果slave-priority一样，则比较offset吗，选择offset更大的一个</li>
+<li>最后判断slave节点的运行id大小，越小优先级越高</li>
+</ul>
+</li>
+<li>通知：sentinel通知redis客户端master变换的信息</li>
+</ul>
+<p>集群脑裂：由于网络原因sentinel没有感知到主节点，所以产生了多个master</p>
+<p>解决：设置最少从节点数量、缩短主从数据同步的延迟时间</p>
+<h2 id="分片集群"><a class="markdownIt-Anchor" href="#分片集群"></a> 分片集群</h2>
+<p>解决高并发写和海量数据存储问题</p>
+<p>结构：</p>
+<ul>
+<li>集群中有多个master，每个master保存不同数据，</li>
+<li>master之间通过ping检测健康状态</li>
+<li>master之间实现路由处理操作</li>
+</ul>
+<p>哈希槽：Redis集群维护16384个哈希槽，每个key通过CRC16校验后对16384取模得到哈希槽。每个节点负责一部分哈希槽</p>
+<h1 id="redis单线程"><a class="markdownIt-Anchor" href="#redis单线程"></a> Redis单线程</h1>
+<p>Redis性能好的原因：</p>
+<ul>
+<li>Redis是纯内存操作，执行速度快</li>
+<li>采用单线程，避免不必要的上下文切换</li>
+<li>使用IO多路复用模型，非阻塞IO</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/22/BackendDev/SpringBoot/SpringBoot-4-%EF%BC%9A%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/" rel="prev" title="SpringBoot(4)：SpringBoot(4)：AOP">
+                  <i class="fa fa-angle-left"></i> SpringBoot(4)：SpringBoot(4)：AOP
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/10/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-2-MySQL/" rel="next" title="面经(2):MySQL">
+                  面经(2):MySQL <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>

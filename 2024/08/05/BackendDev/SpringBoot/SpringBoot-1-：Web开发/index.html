@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Tomcat服务器 Tomcat是Apache的一个核心项目，是一个开源免费的轻量级Web服务器，支持Servlet&#x2F;JSP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot(1)：Web开发">
+<meta property="og:url" content="http://example.com/2024/08/05/BackendDev/SpringBoot/SpringBoot-1-%EF%BC%9AWeb%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="Tomcat服务器 Tomcat是Apache的一个核心项目，是一个开源免费的轻量级Web服务器，支持Servlet&#x2F;JSP">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/2454350-20230207151711540-56325622.png">
+<meta property="article:published_time" content="2024-08-05T07:01:41.000Z">
+<meta property="article:modified_time" content="2024-11-09T12:36:57.535Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/2454350-20230207151711540-56325622.png">
+
+
+<link rel="canonical" href="http://example.com/2024/08/05/BackendDev/SpringBoot/SpringBoot-1-%EF%BC%9AWeb%E5%BC%80%E5%8F%91/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/08/05/BackendDev/SpringBoot/SpringBoot-1-%EF%BC%9AWeb%E5%BC%80%E5%8F%91/","path":"2024/08/05/BackendDev/SpringBoot/SpringBoot-1-：Web开发/","title":"SpringBoot(1)：Web开发"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SpringBoot(1)：Web开发 | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text"> Tomcat服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text"> SpringBoot处理请求流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text"> 请求处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%8F%82%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text"> 简单参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text"> 实体参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text"> 数组集合参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%8F%82%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text"> 日期时间类参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json%E5%8F%82%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text"> json参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0"><span class="nav-number">3.6.</span> <span class="nav-text"> 路径参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%93%8D%E5%BA%94"><span class="nav-number">4.</span> <span class="nav-text"> 设置响应</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">5.</span> <span class="nav-text"> 分层架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%ACioc%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5di"><span class="nav-number">5.1.</span> <span class="nav-text"> 控制反转IOC&amp;依赖注入DI</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/05/BackendDev/SpringBoot/SpringBoot-1-%EF%BC%9AWeb%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SpringBoot(1)：Web开发 | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot(1)：Web开发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-05 15:01:41" itemprop="dateCreated datePublished" datetime="2024-08-05T15:01:41+08:00">2024-08-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-09 20:36:57" itemprop="dateModified" datetime="2024-11-09T20:36:57+08:00">2024-11-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="tomcat服务器"><a class="markdownIt-Anchor" href="#tomcat服务器"></a> Tomcat服务器</h1>
+<p>Tomcat是Apache的一个核心项目，是一个开源免费的轻量级Web服务器，支持Servlet/JSP</p>
+<span id="more"></span>
+<p>Servlet程序需要依赖于Tomcat运行</p>
+<p>部署方法：将应用程序放置在Tomcat的webapp目录下即可</p>
+<p>对SpringBoot项目，由于Tomcat本身为<code>springboot-starter-web</code>的依赖，所以直接内嵌进了项目中，Tomcat作为DispatcherServlet的容器运行程序</p>
+<h1 id="springboot处理请求流程"><a class="markdownIt-Anchor" href="#springboot处理请求流程"></a> SpringBoot处理请求流程</h1>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/2454350-20230207151711540-56325622.png" alt="img" /></p>
+<p>Spring MVC中实现了前端控制器DispatcherServlet，具体工作如上图所示</p>
+<h1 id="请求处理"><a class="markdownIt-Anchor" href="#请求处理"></a> 请求处理</h1>
+<h2 id="简单参数"><a class="markdownIt-Anchor" href="#简单参数"></a> 简单参数</h2>
+<p>只需要声明对应形参即可接收，注意形参名需与参数名完全一致</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(String name, Integer age)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>上述方法为简写形式，如果参数未成功接收会导致形参为<code>null</code>。</p>
+<p>完整形式为使用注解<code>@RequestParam</code>，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(<span class="meta">@RequestParam(name = &quot;name&quot;)</span>String name, <span class="meta">@RequestParam(name = &quot;age&quot;, required = false)</span>Integer age)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>name指定参数名，此时参数名无需保证与变量名相同，只需要说明即可</li>
+<li>required默认为true，为true时无该参数会报错</li>
+</ul>
+<h2 id="实体参数"><a class="markdownIt-Anchor" href="#实体参数"></a> 实体参数</h2>
+<p>参数过多时，一般会封装进一个实体中接收，此时需要保证参数名与实体的属性名一致才可以成功接收：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ?name=xxx&amp;age=xxx</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...;</span><br><span class="line"><span class="meta">@RequestMapping(&quot;/simplePojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simplePojo</span><span class="params">(User user)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>如果涉及嵌套实体，则使用<code>xxx.xxx</code>的参数名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ?name=xxx&amp;age=xxx&amp;address.province=xxx&amp;address.city=xxx</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Address addr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String province;</span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...;</span><br><span class="line"><span class="meta">@RequestMapping(&quot;/complexPojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">complexPojo</span><span class="params">(User user)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组集合参数"><a class="markdownIt-Anchor" href="#数组集合参数"></a> 数组集合参数</h2>
+<p>可以使用同名数组进行接收：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ?hobby=xxx&amp;hobby=xxx&amp;hobby=xxx</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam</span><span class="params">(String[] hobby)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以使用<code>@RequestParam</code>注解进行绑定，通过集合接收：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ?hobby=xxx&amp;hobby=xxx&amp;hobby=xxx</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam</span><span class="params">(List&lt;String&gt; hobby)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="日期时间类参数"><a class="markdownIt-Anchor" href="#日期时间类参数"></a> 日期时间类参数</h2>
+<p>添加注解<code>@DateTimeFormat</code>指定格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ?date=2024-08-18 15:49:03</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/dateParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">dateParam</span><span class="params">(<span class="meta">@DateTimeFormat(pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;)</span> LocalDateTime time)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="json参数"><a class="markdownIt-Anchor" href="#json参数"></a> json参数</h2>
+<p>json参数也通过实体（要求实体的类为static）进行接收，需要注解<code>@RequestBody</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/jsonParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">jsonParam</span><span class="params">(<span class="meta">@RequestBody</span> student stu)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="路径参数"><a class="markdownIt-Anchor" href="#路径参数"></a> 路径参数</h2>
+<p>使用<code>@PathVariable</code>注解接收</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/pathParam/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">pathParam</span><span class="params">(<span class="meta">@PathVariable</span> Integer id)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="设置响应"><a class="markdownIt-Anchor" href="#设置响应"></a> 设置响应</h1>
+<p>给控制器类类添加<code>@RestController</code>，然后类中的方法如果返回对象/集合会默认以json形式返回</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ResponseController</span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;...&quot;)</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在实际项目中，往往需要统一响应结果格式，一般如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Result</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer code; <span class="comment">// 0 for success, other for failure</span></span><br><span class="line">    <span class="keyword">private</span> String msg; <span class="comment">// hint</span></span><br><span class="line">    <span class="keyword">private</span> Object data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="分层架构"><a class="markdownIt-Anchor" href="#分层架构"></a> 分层架构</h1>
+<p>三层结构：</p>
+<ul>
+<li>Controller：控制层，接收前端的请求，对请求处理，并响应数据</li>
+<li>Service：业务逻辑层，处理具体业务逻辑</li>
+<li>DAO（Data Access Object）：持久层，负责数据的增删改查</li>
+</ul>
+<h2 id="控制反转ioc依赖注入di"><a class="markdownIt-Anchor" href="#控制反转ioc依赖注入di"></a> 控制反转IOC&amp;依赖注入DI</h2>
+<p>SpringBoot中实现三层架构解耦的方式：</p>
+<ul>
+<li>Service层与Dao层的实现类交给IOC容器管理</li>
+<li>Controller层与Service层运行时注入依赖的对象</li>
+</ul>
+<p>将类交给IOC容器，成为一个bean，只需要添加注解<code>@Component</code>。但更好的实现是对service层的类添加注解<code>@Service</code>，对dao层的类添加注解<code>@Repository</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxxDaoA</span> <span class="keyword">implements</span> <span class="title class_">xxxDao</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>而依赖注入则需要在对应对象声明时添加注解<code>@Autowired</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxController</span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> xxxService xxsrv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Autowired会自动寻找IOC容器中自动寻找相同类型的对象，如果有多个相同类型的对象会直接报错，可以通过添加更多的注解解决。</p>
+<p>添加<code>@Primary</code>注解可以设置优先级进行解决：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> class ....</span><br></pre></td></tr></table></figure>
+<p>通过<code>@Qualifier</code>或<code>@Resource</code>指定绑定的bean的名字：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier(beanName)</span></span><br><span class="line"><span class="comment">// @Resource(name = beanName)</span></span><br><span class="line"><span class="keyword">public</span> class...</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/07/21/BackendDev/Java/Java-8-%EF%BC%9A%E5%B9%B6%E5%8F%91/" rel="prev" title="Java(8)：并发">
+                  <i class="fa fa-angle-left"></i> Java(8)：并发
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/11/BackendDev/HTTP/HTTP%E5%8D%8F%E8%AE%AE/" rel="next" title="HTTP协议">
+                  HTTP协议 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Restful REST风格：REpresentational State Transfer，表述型状态转换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot(3)：SpringBoot项目开发规范">
+<meta property="og:url" content="http://example.com/2024/08/21/BackendDev/SpringBoot/SpringBoot-3-%EF%BC%9ASpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="Restful REST风格：REpresentational State Transfer，表述型状态转换">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240822145119604.png">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240822154242466.png">
+<meta property="article:published_time" content="2024-08-21T07:42:14.000Z">
+<meta property="article:modified_time" content="2024-11-09T12:37:02.909Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240822145119604.png">
+
+
+<link rel="canonical" href="http://example.com/2024/08/21/BackendDev/SpringBoot/SpringBoot-3-%EF%BC%9ASpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/08/21/BackendDev/SpringBoot/SpringBoot-3-%EF%BC%9ASpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/","path":"2024/08/21/BackendDev/SpringBoot/SpringBoot-3-：SpringBoot项目开发规范/","title":"SpringBoot(3)：SpringBoot项目开发规范"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SpringBoot(3)：SpringBoot项目开发规范 | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#restful"><span class="nav-number">1.</span> <span class="nav-text"> Restful</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA"><span class="nav-number">2.</span> <span class="nav-text"> 日志输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%86%85%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">3.</span> <span class="nav-text"> 表单内文件上传</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text"> 参数管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yaml"><span class="nav-number">4.1.</span> <span class="nav-text"> yaml</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text"> 登录认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF"><span class="nav-number">5.1.</span> <span class="nav-text"> 会话技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%BB%B4%E6%8A%A4cookie"><span class="nav-number">5.1.1.</span> <span class="nav-text"> 客户端维护：Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E7%BB%B4%E6%8A%A4session"><span class="nav-number">5.1.2.</span> <span class="nav-text"> 服务器端维护：Session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E6%8B%A6%E6%88%AA"><span class="nav-number">5.2.</span> <span class="nav-text"> 统一拦截</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A4%E7%89%8C"><span class="nav-number">5.2.1.</span> <span class="nav-text"> 令牌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">5.2.2.</span> <span class="nav-text"> Filter过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interceptor%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">5.2.3.</span> <span class="nav-text"> Interceptor拦截器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text"> 全局异常处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text"> Spring事务管理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/21/BackendDev/SpringBoot/SpringBoot-3-%EF%BC%9ASpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SpringBoot(3)：SpringBoot项目开发规范 | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot(3)：SpringBoot项目开发规范
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-21 15:42:14" itemprop="dateCreated datePublished" datetime="2024-08-21T15:42:14+08:00">2024-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-09 20:37:02" itemprop="dateModified" datetime="2024-11-09T20:37:02+08:00">2024-11-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="restful"><a class="markdownIt-Anchor" href="#restful"></a> Restful</h1>
+<p>REST风格：REpresentational State Transfer，表述型状态转换</p>
+<span id="more"></span>
+<p>核心：通过url定位资源，通过HTTP动词描述操作：</p>
+<ul>
+<li>GET：查询</li>
+<li>POST：增加</li>
+<li>PUT：修改</li>
+<li>DELETE：删除</li>
+</ul>
+<p>在SpringBoot中，可以在<code>@RequestMapping</code>添加method参数指定动词：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/depts&quot;, method=RequestMethod.GET)</span></span><br></pre></td></tr></table></figure>
+<h1 id="日志输出"><a class="markdownIt-Anchor" href="#日志输出"></a> 日志输出</h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxxController</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加注解<code>@Slf4j</code>，可以自动生成<code>log</code>日志对象，后续可以直接使用<code>log.info()</code>生成日志</p>
+<h1 id="表单内文件上传"><a class="markdownIt-Anchor" href="#表单内文件上传"></a> 表单内文件上传</h1>
+<p>前端在表单中指定编码方式为<code>multipart-form-data</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;url_here&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart-form-data&quot;</span>&gt;</span></span><br><span class="line">    姓名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    年龄：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    头像：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;image&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>后端使用<code>MultipartFile</code>接收表单中的文件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxxController</span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/upload&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">upload</span><span class="params">(String username, Integer age, MultipartFile image)</span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接收原理：MultipartFile会自动创建临时文件进行保存，对象中存储了文件的路径，在对象被释放时临时文件也被删除</p>
+<p>如果想要持久化的存储，可以将临时文件转存至磁盘某处，通过<code>transferTo</code>方法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image.transferTo(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;path/&quot;</span>+image.getOriginalFilename()));<span class="comment">//按照原始名字存储</span></span><br></pre></td></tr></table></figure>
+<p>但按照原始名称可能会导致名称冲突，所以一般采用uuid：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">originalFileName</span> <span class="operator">=</span> image.getOriginalFilename();</span><br><span class="line"><span class="type">String</span> <span class="variable">extFileName</span> <span class="operator">=</span> originalFileName.substring(originalFileName.lastIndexOf(<span class="string">&quot;.&quot;</span>));</span><br><span class="line"><span class="type">String</span> <span class="variable">newFileName</span> <span class="operator">=</span> UUID.randomUUID().toString() + extName;</span><br><span class="line">image.transferTo(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;path/&quot;</span>+newFileName));</span><br></pre></td></tr></table></figure>
+<p>此外，SpringBoot默认上传单个文件的大小限制为1MB，如果需要更大的文件上传则需要配置，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.servlet.multipart.max-file-size=10MB</span><br><span class="line">spring.servlet.multipart.max-request-size=100MB</span><br></pre></td></tr></table></figure>
+<h1 id="参数管理"><a class="markdownIt-Anchor" href="#参数管理"></a> 参数管理</h1>
+<p>所有的参数可以放置于<code>application.properties</code>内，便于统一管理。</p>
+<p>在程序中使用<code>@Value</code>即可将属性值注入成员中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxx</span>&#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;xxx.xxx.prop&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String prop</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果一个类中所用到的属性都是在同一个层级下的，可以使用<code>@ConfigurationProperties</code>设置前缀，后续注入会自动完成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix=&quot;xxx.xxx&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxx</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String prop</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="yaml"><a class="markdownIt-Anchor" href="#yaml"></a> yaml</h2>
+<p>除了properties配置文件，SpringBoot还支持yml/yaml配置，一般使用<code>application.yml</code></p>
+<p>yaml注意事项：</p>
+<ul>
+<li>值前需要有空格作为分隔符</li>
+<li>缩进只接受空格，空格数量不重要，但同级元素左侧对齐</li>
+<li>#代表注释</li>
+<li>大小写敏感</li>
+</ul>
+<p>yaml数据格式：</p>
+<ul>
+<li>
+<p>对象：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">user:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">xxx</span></span><br><span class="line">  <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">xxxxxx</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>集合：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hobby:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">java</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">C</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="登录认证"><a class="markdownIt-Anchor" href="#登录认证"></a> 登录认证</h1>
+<h2 id="会话技术"><a class="markdownIt-Anchor" href="#会话技术"></a> 会话技术</h2>
+<p>概念：用户打开浏览器访问资源时，会话建立，直到有一方断开使会话结束。一次会话中可以包含多条请求与响应</p>
+<p>会话跟踪：服务器维护状态的方法，服务器识别多次请求是否来源于同一浏览器，以便在同一会话的多次请求中共享数据</p>
+<h3 id="客户端维护cookie"><a class="markdownIt-Anchor" href="#客户端维护cookie"></a> 客户端维护：Cookie</h3>
+<p>服务器通过响应头中的<code>Set-Cookie</code>让客户端浏览器自动设置cookie：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;</span><br></pre></td></tr></table></figure>
+<p>而后续客户端发送请求时，请求头中都会自动带上该服务器所设置的所有cookie：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: name1=value1; name2=value2;...</span><br></pre></td></tr></table></figure>
+<p>在SpringBoot中，想要添加Cookie，需要先通过参数获得响应对象，然后添加，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/xxx&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">xxx</span><span class="params">(HttpServletResponse response)</span>&#123;</span><br><span class="line">    response.addCookie(<span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;cookie_name&quot;</span>, <span class="string">&quot;cookie_vale&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而想要读取请求中的Cookie，则是先获取请求对象，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/xxx&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">xxx</span><span class="params">(HttpServletRequest request)</span>&#123;</span><br><span class="line">    Cookie[] cookies = request.getCookies();</span><br><span class="line">    <span class="keyword">for</span>(Cookie cookie : cookies)&#123;</span><br><span class="line">        <span class="comment">// cookie.getName() returns the name(String)</span></span><br><span class="line">        <span class="comment">// cookie.getValue() returns the value(String)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点：HTTP协议支持的技术</p>
+<p>缺点：</p>
+<ul>
+<li>非浏览器环境无法使用Cookie</li>
+<li>不安全</li>
+<li>Cookie不能跨域</li>
+</ul>
+<h3 id="服务器端维护session"><a class="markdownIt-Anchor" href="#服务器端维护session"></a> 服务器端维护：Session</h3>
+<p>在服务器端可以直接根据请求自动获取到session对象，并通过<code>setAttribute</code>和<code>getAttribute</code>存取状态：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/xxx&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">xxx</span><span class="params">(HttpSession session)</span>&#123;</span><br><span class="line">    session.setAttribute(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;value&quot;</span>);</span><br><span class="line">    session.getAttribute(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现原理：第一次请求响应时服务器会向客户端以cookie的形式返回<code>JSESSIONID</code>，后续会继续随cookie传递这一id</p>
+<p>优点：数据存储在服务端，更为安全</p>
+<p>缺点：</p>
+<ul>
+<li>无法支持服务器集群</li>
+<li>Cookie的缺点都有</li>
+</ul>
+<h2 id="统一拦截"><a class="markdownIt-Anchor" href="#统一拦截"></a> 统一拦截</h2>
+<h3 id="令牌"><a class="markdownIt-Anchor" href="#令牌"></a> 令牌</h3>
+<p>JWT令牌组成：三个部分<code>.</code>分隔，每部分都使用base64进行编码</p>
+<ul>
+<li>Header：记录令牌类型、签名算法等信息</li>
+<li>Payload：自定义信息</li>
+<li>Signature：数字签名将Header、Payload，加入指定密钥，利用头中指定的签名算法得到的签名</li>
+</ul>
+<p>利用JWT令牌进行登录校验：</p>
+<ul>
+<li>登录成功后生成令牌返回给客户端</li>
+<li>此后所有请求携带令牌（在请求头中，key为token），系统处理请求前先校验令牌，通过后再进行处理</li>
+</ul>
+<p>在SpringBoot项目中，需要先引入依赖<code>jjwt</code>进行后续操作</p>
+<p>生成令牌：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String, Object&gt; claims = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(); <span class="comment">// store the payload</span></span><br><span class="line">claims.put(<span class="string">&quot;...&quot;</span>,...);</span><br><span class="line"><span class="type">String</span> <span class="variable">jwtToken</span> <span class="operator">=</span> Jwts.builder()</span><br><span class="line">                .signWith(SignatureAlgorithm.HS256, <span class="string">&quot;key&quot;</span>)</span><br><span class="line">                .setClaims(claims)</span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + <span class="number">3600</span>*<span class="number">1000</span>)) <span class="comment">// expire after 1h</span></span><br><span class="line">                .compact();</span><br></pre></td></tr></table></figure>
+<p>解析令牌：解析过程中会自动判断是否被篡改，如果被篡改会直接抛出Exception</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Claims</span> <span class="variable">claim</span> <span class="operator">=</span> Jwts.parser()</span><br><span class="line">    .setSigningKey(<span class="string">&quot;key&quot;</span>)</span><br><span class="line">    .parseClaimsJws(jwtToken)</span><br><span class="line">    .getBody();</span><br></pre></td></tr></table></figure>
+<h3 id="filter过滤器"><a class="markdownIt-Anchor" href="#filter过滤器"></a> Filter过滤器</h3>
+<p>Filter能够将对资源的请求拦截，并执行一些操作，可以通过Filter实现登录校验、统一编码处理、敏感字符处理等</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240822145119604.png" alt="image-20240822145119604" /></p>
+<p>Filter本身是JavaWeb的组件，为了使用需要先在启动类上添加<code>@ServletComponentScan</code>注解</p>
+<p>Filter实现的基本结构：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(urlPatterns = &quot;/*&quot;)</span> <span class="comment">//*代表通配符，也可以使用/login/*拦截login目录下所有</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">		...;</span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);<span class="comment">//放行</span></span><br><span class="line">        ...;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行流程：</p>
+<ol>
+<li>放行前逻辑</li>
+<li>doFilter放行，开始执行访问web资源</li>
+<li>放行后逻辑</li>
+</ol>
+<p>FilterChain：多个Filter组成Filter链，其顺序为过滤器类名的字典序</p>
+<h3 id="interceptor拦截器"><a class="markdownIt-Anchor" href="#interceptor拦截器"></a> Interceptor拦截器</h3>
+<p>定义Interceptor</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要实现三个方法：</p>
+<ul>
+<li>preHandle：放行前执行，如果返回true则放行，返回false不放行</li>
+<li>postHandle：放行后执行</li>
+<li>afterCompletion：视图渲染完毕后运行</li>
+</ul>
+<p>注册拦截器：实现配置类并添加，同时可以配置拦截路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DemoInterceptor demoInterceptor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        registry.addInterceptor(demoInterceptor).addPathPatterns(<span class="string">&quot;/**&quot;</span>).excludePathPatterns(<span class="string">&quot;/login&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时通配符的含义发生变化，<code>/*</code>只匹配一级路径，而<code>/**</code>匹配任意级路径</p>
+<p>执行流程：</p>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240822154242466.png" alt="image-20240822154242466" /></p>
+<h1 id="全局异常处理器"><a class="markdownIt-Anchor" href="#全局异常处理器"></a> 全局异常处理器</h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalExceptionHandler</span> &#123;</span><br><span class="line">    <span class="meta">@ExceptionHandler(Exception.class)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">exceptionHandler</span><span class="params">(Exception e)</span> &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">return</span> e.getMessage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="spring事务管理"><a class="markdownIt-Anchor" href="#spring事务管理"></a> Spring事务管理</h1>
+<p>使用注解<code>@Transactional</code>（可以作用于方法、类或者接口）即可自动进行事务管理（即方法开始前开启事务；成功执行完毕提交事务；出现异常则回滚事务），一般在service层较为复杂的逻辑上添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxxServiceImpl</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但在默认情况下，Spring的事务管理只会在出现<code>RuntimeException</code>时才会进行回滚，可以对注解添加<code>rollbackFor</code>进行限定：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span> <span class="comment">//Exception下的所有class，即所有异常</span></span><br></pre></td></tr></table></figure>
+<p>同时，一个事务方法可能会调用另一个事务方法，这时候涉及到新方法事务的行为，可以通过propagation控制：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(propagation = Propagation.REQUIRED)</span></span><br></pre></td></tr></table></figure>
+<p>可以取的值常见的有：</p>
+<ul>
+<li>（默认值）REQUIRED：调用时如果已经有事务了，则加入原有事务，没有时创建新事务</li>
+<li>REQUIRES_NEW：无论如何调用时都创建新事务</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/20/BackendDev/SpringBoot/SpringBoot-2-%EF%BC%9AMybatis/" rel="prev" title="SpringBoot(2)：MyBatis">
+                  <i class="fa fa-angle-left"></i> SpringBoot(2)：MyBatis
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/22/BackendDev/SpringBoot/SpringBoot-4-%EF%BC%9A%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/" rel="next" title="SpringBoot(4)：SpringBoot(4)：AOP">
+                  SpringBoot(4)：SpringBoot(4)：AOP <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>

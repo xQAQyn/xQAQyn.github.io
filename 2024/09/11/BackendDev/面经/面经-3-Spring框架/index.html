@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Bean  线程安全性 Spring中的Bean默认为单例，其本身不保证线程安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经(3):Spring框架">
+<meta property="og:url" content="http://example.com/2024/09/11/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-3-Spring%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="xQAQyn&#39;s Blog">
+<meta property="og:description" content="Bean  线程安全性 Spring中的Bean默认为单例，其本身不保证线程安全">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240911172445094.png">
+<meta property="article:published_time" content="2024-09-11T06:28:04.000Z">
+<meta property="article:modified_time" content="2024-11-09T12:38:09.232Z">
+<meta property="article:author" content="xQAQyn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240911172445094.png">
+
+
+<link rel="canonical" href="http://example.com/2024/09/11/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-3-Spring%E6%A1%86%E6%9E%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/09/11/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-3-Spring%E6%A1%86%E6%9E%B6/","path":"2024/09/11/BackendDev/面经/面经-3-Spring框架/","title":"面经(3):Spring框架"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>面经(3):Spring框架 | xQAQyn's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">xQAQyn's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bean"><span class="nav-number">1.</span> <span class="nav-text"> Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text"> 线程安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.2.</span> <span class="nav-text"> 生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96"><span class="nav-number">1.3.</span> <span class="nav-text"> 循环依赖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springmvc%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> SpringMVC原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text"> 自动配置原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text"> 常见注解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#aop"><span class="nav-number">5.</span> <span class="nav-text"> AOP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text"> 事务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis"><span class="nav-number">7.</span> <span class="nav-text"> MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD"><span class="nav-number">7.1.</span> <span class="nav-text"> 延迟加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98"><span class="nav-number">7.2.</span> <span class="nav-text"> 缓存</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xQAQyn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xQAQyn" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xQAQyn" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xqaqyn@gmail.com" title="E-Mail → mailto:xqaqyn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/11/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-3-Spring%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xQAQyn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="面经(3):Spring框架 | xQAQyn's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面经(3):Spring框架
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-11 14:28:04" itemprop="dateCreated datePublished" datetime="2024-09-11T14:28:04+08:00">2024-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-09 20:38:09" itemprop="dateModified" datetime="2024-11-09T20:38:09+08:00">2024-11-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="bean"><a class="markdownIt-Anchor" href="#bean"></a> Bean</h1>
+<h2 id="线程安全性"><a class="markdownIt-Anchor" href="#线程安全性"></a> 线程安全性</h2>
+<p>Spring中的Bean默认为单例，其本身不保证线程安全</p>
+<span id="more"></span>
+<p>如果bean对象是无状态的，则其线程安全；若是有状态的bean对象则需要使用多例或加锁</p>
+<h2 id="生命周期"><a class="markdownIt-Anchor" href="#生命周期"></a> 生命周期</h2>
+<ul>
+<li>构造函数：将xml封装的bean信息（其中包括类名、构造方法名等）封装成一个BeanDefinition对象，然后Spring根据BeanDefinition创建对象</li>
+<li>依赖注入</li>
+<li>Aware接口：BeanNameAware（获取bean名称）、BeanFactoryAware（工厂）、ApplicationContextAware</li>
+<li>BeanPostProcessor#before：初始化之前的调用</li>
+<li>初始化方法：InitializingBean、自定义初始化方法</li>
+<li>BeanPostProcessor#after：涉及AOP</li>
+<li>使用过程</li>
+<li>销毁Bean对象</li>
+</ul>
+<p>可以通过注解实现生命周期的各个部分，例如<code>@PostConstruct</code>、<code>@PreDestroy</code></p>
+<h2 id="循环依赖"><a class="markdownIt-Anchor" href="#循环依赖"></a> 循环依赖</h2>
+<p>Spring的解决方案是三级缓存：</p>
+<ul>
+<li>一级缓存-singletonObjects：单例池，存放已经完成初始化的bean对象</li>
+<li>二级缓存-earluSingletonObjects：缓存早期的bean对象（尚未完整执行生命周期）</li>
+<li>三级缓存-singletonFactories：缓存对象工厂</li>
+</ul>
+<p>如果是在构造阶段出现循环依赖（这本身并不是生命周期之内），则需要手动添加<code>@Lazy</code>解决</p>
+<h1 id="springmvc原理"><a class="markdownIt-Anchor" href="#springmvc原理"></a> SpringMVC原理</h1>
+<p><img src="https://picgo-xqaqyn.oss-cn-shanghai.aliyuncs.com/img/image-20240911172445094.png" alt="image-20240911172445094" /></p>
+<h1 id="自动配置原理"><a class="markdownIt-Anchor" href="#自动配置原理"></a> 自动配置原理</h1>
+<p>原理：</p>
+<ul>
+<li>引导类中有注解<code>@SpringBootApplication</code>，其包含<code>@EnableAutoConfiguration</code>注解</li>
+<li><code>@EnableAutoConfiguration</code>通过<code>@Import</code>注解导入对应的配置选择器</li>
+<li><code>@ConditionalOnClass</code>判断是否有对应的class文件，如果有则加载该类，将该类的bean放入spring容器中</li>
+</ul>
+<h1 id="常见注解"><a class="markdownIt-Anchor" href="#常见注解"></a> 常见注解</h1>
+<p>Spring常见注解：</p>
+<ul>
+<li>实例化Bean：<code>@Component</code>、<code>@Controller</code>、<code>@Service</code>、<code>@Repository</code></li>
+<li>依赖注入：<code>@Autowired</code>，配合使用<code>@Qualifier</code></li>
+<li>Bean作用范围：<code>@Scope</code></li>
+<li>指定配置类：<code>@Configuration</code></li>
+<li>扫描bean：<code>@ComponentScan</code></li>
+<li>保存返回值到Spring容器：<code>@Bean</code></li>
+<li>导入类到IOC容器：<code>@Import</code></li>
+<li>AOP：<code>@Aspect</code>、<code>@Around</code>、<code>@Before</code>、<code>@After</code>、<code>@Pointcut</code></li>
+</ul>
+<p>SpringMVC常见注解：</p>
+<ul>
+<li>路径映射：<code>@RequestMapping</code>、<code>@GetMapping</code>、…</li>
+<li><code>@RestController</code>：包含<code>@Controller</code>和<code>@ResponseBody</code></li>
+<li>参数解析：<code>@RequestBody</code>、<code>@RequestParam</code>、<code>@RequestHeader</code>、<code>@PathParam</code></li>
+</ul>
+<p>SpringBoot常见注解：</p>
+<ul>
+<li>配置文件：<code>@Configuration</code>、<code>@SpringBootConfiguration</code></li>
+<li>自动配置：<code>@AutoConfiguration</code></li>
+<li>组件扫描：<code>@ComponentScan</code></li>
+</ul>
+<h1 id="aop"><a class="markdownIt-Anchor" href="#aop"></a> AOP</h1>
+<p>常见使用场景：</p>
+<ul>
+<li>记录操作日志</li>
+<li>缓存处理</li>
+<li>Spring内置的事务处理</li>
+</ul>
+<p>Spring事务处理实现：通过AOP对方法前后进行拦截</p>
+<h1 id="事务"><a class="markdownIt-Anchor" href="#事务"></a> 事务</h1>
+<p>事务失效的场景：</p>
+<ul>
+<li>
+<p>异常捕获处理：事务内部如果处理了异常，事务管理就收不到异常，就不会执行回滚。如果需要捕获，那么也需要在处理是再抛出这个异常</p>
+</li>
+<li>
+<p>抛出检查异常：如果方法抛出检查异常，事务管理默认只处理非检查异常，所以不会回滚。解决方法为指定rollbackFor：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transaction(rollbackFor=Exception.class)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>非public导致：非public方法无法创建代理</p>
+</li>
+</ul>
+<h1 id="mybatis"><a class="markdownIt-Anchor" href="#mybatis"></a> MyBatis</h1>
+<p>执行流程：</p>
+<ul>
+<li>先读取MyBatis的xml配置文件</li>
+<li>根据配置文件生成会话工厂SqlSessionFactory，用于全局创建会话</li>
+<li>创建会话SqlSession</li>
+<li>调用操作数据库的接口Executor执行器，该执行器会负责查询缓存的维护</li>
+<li>Executor中有MappedStatement类型的参数，负责将输入从java类型映射为数据库类型，将输出的数据库类型转换为java类型</li>
+</ul>
+<h2 id="延迟加载"><a class="markdownIt-Anchor" href="#延迟加载"></a> 延迟加载</h2>
+<p>延迟加载：即按需加载，在处理1-n关系时，n这一侧可使用延迟加载，需要时进行查询</p>
+<p>MyBatis支持延迟加载，但默认不开启，开启需要在xml中配置fetchType</p>
+<p>原理：</p>
+<ul>
+<li>使用CGLIB创建目标的代理对象</li>
+<li>当读取时，进入拦截器的invoke方法，此时如果发现列表为null则执行sql查询</li>
+<li>将查询结果保存，再返回读取的值</li>
+</ul>
+<h2 id="缓存"><a class="markdownIt-Anchor" href="#缓存"></a> 缓存</h2>
+<p>MyBatis本地缓存基于PerpetualCache，本质为HashMap，分为两级：</p>
+<ul>
+<li>一级缓存：作用域是一个session，在session执行flush或close后清空</li>
+<li>二级缓存：作用域是一个namespace和mapper，其默认关闭，需要通过配置开启</li>
+</ul>
+<p>缓存更新机制：在作用域内执行增删改操作时，缓存全部qing’k</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/10/BackendDev/%E9%9D%A2%E7%BB%8F/%E9%9D%A2%E7%BB%8F-2-MySQL/" rel="prev" title="面经(2):MySQL">
+                  <i class="fa fa-angle-left"></i> 面经(2):MySQL
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/10/18/BackendDev/SpringCloud/MyBatisPlus/MyBatisPlus/" rel="next" title="MyBatisPlus">
+                  MyBatisPlus <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">xQAQyn</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+
+</body>
+</html>
